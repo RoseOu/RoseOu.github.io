@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>理解 python 面向对象 | Rose&#39;s blog</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="Fighting!">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="理解 python 面向对象 | Rose&#39;s blog">
+    <meta name="twitter:description" content="Fighting!">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="理解 python 面向对象 | Rose&#39;s blog">
+    <meta property="og:description" content="Fighting!">
+
+    
+    <meta name="author" content="Rose Ou">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/favicon.ico">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="Rose&#39;s blog" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2015/11/13/python 面向对象总结/"/>
+
+    
+</head>
+
+<body class="home-template no-js">
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/1.JPG)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Rose&#39;s blog 的主页"><img src="/images/4.JPG" width="80" alt="Rose&#39;s blog logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Rose&#39;s blog">Rose&#39;s blog</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">Work hard!</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">Fighting!</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/RoseOu" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-green"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2015-11-13T14:35:12.000Z" class="post-list__meta--date date">2015-11-13</time> &#8226; <span class="post-meta__tags tags">于&nbsp;</span>
+    </div>
+    <h1 class="post-title">理解 python 面向对象</h1>
+  </header>
+
+  <section class="post">
+    <h2 id="对象"><a href="#对象" class="headerlink" title="对象:"></a>对象:</h2><p><strong>对象是要研究的任何事物,它不仅能表示具体的事物，还能表示抽象的东西。类是在对象之上的抽象，对象则是类的具体化，是类的实例。</strong><br>1.一个对象用数据值来描述它的状态。<br>2.用于改变对象的状态，对象及其操作就是对象的行为。</p>
+<hr>
+<h2 id="类："><a href="#类：" class="headerlink" title="类："></a>类：</h2><blockquote>
+<p>类可以对具有相同数据和方法的对象（即属性相近的对象）描述或定义。类是现实世界的抽象的实体以编程形式出现，实例是这些对象的具体化。</p>
+</blockquote>
+<p>类，实际上也是一种数据结构，像元组，列表那些。当我们定义了一个类，实际上相当于<strong>自己创建一个数据类型</strong>。而元组、列表等，这些数据类型其实相当于python内建的数据类型。</p>
+<p>就像函数那样，python也有许多内建函数，但往往我们还要自己定义函数。</p>
+<p>所以这就是面向对象编程和函数编程。面向对象编程就是新建一些封装了行为的对象（类型），函数编程就是新定义一些封装了对象（类型）的行为。</p>
+<p>1.定义类：</p>
+<pre><code>class ClassName(bases):           #类定义也和函数定义类似
+    &apos;class documentation string&apos;
+    class_suite  #类体。包含所有声明语句、类成员定义、数据属性、和函数。
+</code></pre><p>当一个类定义完之后，就产生了一个类对象。而实例化是产生出一个类对象的实例，称作实例对象。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>基类就是一个或多个用于继承的父类的集合。</li>
+<li>类通常在一个模块的顶层进行定义。想想，如果它相当于元组、列表这些数据类型，那肯定要早早定义才能像‘内建数据类型’（元组等）那样正常使用。</li>
+<li>声明和定义的区别：看上面那串伪代码，含class关键字的头行和第二行类文档字符串就是声明，类体就是定义。</li>
+</ul>
+<p>2.类定义完成后可通过类对象来访问类的属性和方法。实例化后，可以通过实例对象来访问属性和方法，栗子：</p>
+<pre><code>class bird:
+    name = &apos;Jack&apos;
+    age = 18
+b = bird()
+print b.name,b.age`
+</code></pre><p>这里定义了一个鸟类。有姓名、年龄属性。<br>b=bird()实例化了一个对象b，然后就可通过b来读取属性。(这里的name和age是公有的，可在类外通过对象名直接访问，如果想定义成私有的，需在前面加2个下划线。)</p>
+<p>为了更好地理解实例化，举一个列表的栗子：（上面说过类和它们一样是一种数据类型）</p>
+<pre><code>a = []
+</code></pre><p>这里大概谁都能看得懂发生了什么，就是创建了一个列表‘a’，也就相当于:</p>
+<pre><code>a = list()
+</code></pre><p>这样看起来就和类的实例化很像了吧，所以实例化其实也就是这么个意思。其实只要把类想象成像列表那样的‘内建数据类型’，一切关于类的东西就很好理解了。</p>
+<p>所以才说：</p>
+<blockquote>
+<p>在python中，一切皆对象。</p>
+</blockquote>
+<p>类是对象，列表、元组等也是对象。类定义完后产生了一个类对象，于是你也可以把元组看成‘元组对象’，把列表看成‘列表对象’。</p>
+<p>2.类属性</p>
+<blockquote>
+<p>属性就是属于另一个对象的数据或者函数元素，可以通过句点属性标识法来访问。</p>
+</blockquote>
+<p>类属性仅仅与其被定义的类相绑定，类属性分为数据属性和函数属性（方法）。</p>
+<ul>
+<li>数据属性</li>
+</ul>
+<p><strong>数据属性就是所定义的类的变量。</strong>它们像其他变量一样在类创建后被使用，它们可以由类中的方法更新，也可以在主程序的其他地方更新。</p>
+<p>这种变量也叫静态变量，或者是静态数据，它们与它们所属的类对象绑定，不依赖与任何类实例。</p>
+<pre><code>&gt;&gt;&gt; class C(object):
+...    foo = 100
+&gt;&gt;&gt; print C.foo
+100
+&gt;&gt;&gt; C.foo = C.foo + 1
+&gt;&gt;&gt; print C.foo
+101
+</code></pre><ul>
+<li>函数属性</li>
+</ul>
+<p>在类中也可以定义函数，这些函数就是方法。不难理解，像列表那些类型也有许多方法，那么这个自己创建的类型自然也能自己定义方法。</p>
+<p>方法是作为类定义的一部分，在类中定义的函数，这使得方法也成为类的属性。即这些方法也仅能应用于所属的类型的对象的实例上。</p>
+<p>方法通过句点属性标识法与它的实例绑定。注意：它是一个方法，属于一个类，而不是全局空间中的名字。</p>
+<pre><code>&gt;&gt;&gt; class MyClass(object):
+        def myNoActionMethod(self):
+            pass
+
+&gt;&gt;&gt; mc = Myclass()
+&gt;&gt;&gt; mc.myNoActionMethod()    
+</code></pre><p>注意：</p>
+<ul>
+<li>没有实例，方法是不能被调用的。方法必须绑定（到一个实例）才能直接被调用。即上面的栗子不能通过Myclass.myNoActionMethod()调用，这也不难理解，就像你不会list.append()来调用append()方法，而是会先创建一个列表实例。</li>
+<li>方法的第一个参数必须是self，无论是否用到。</li>
+<li><p>方法是与类对象或实例对象进行绑定了的，而函数没有与对象绑定。</p>
+</li>
+<li><p>类的内置方法:</p>
+</li>
+</ul>
+<blockquote>
+<p>__init__ :构造方法（ 初始化对象）<br>__del__:析构方法（释放对象）<br>__new__:生成实例<br>__getattr__: 获取属性的值<br>__setattr__:设置属性的值<br>__delattr__:删除name属性<br>__getitem__: 获取序列的索引对应的值<br>__cmp__:比较两个对象<br>__call__:把实例对象作为函数调用     等等等等….</p>
+</blockquote>
+<p>3.特殊的类属性</p>
+<blockquote>
+<p>C.__name__: 类C的名字（字符串形式）<br>C.<em>\</em>\doc__:类C的文档字符串<br>C.<em>\</em>\bases__:类C的所有父类构成的元组<br>C.<em>\</em>\dict__:类C的属性<br>C.<em>\</em>\module__:类C定义所在的模块<br>C.<em>\</em>\class__:实例C对应的类（仅新式类中）</p>
+</blockquote>
+<p>4.实例/实例属性(待加)</p>
+<ul>
+<li>类属性和实例属性:(待加)</li>
+</ul>
+<p>类属性是类对象所拥有的，被所有类对象的实例对象所共有,另外可通过类对象和实例对象访问。在类外修改类属性，须通过类对象去引用后再修改。如通过实例对象去引用，会产生一个同名的实例属性，修改的是实例属性非类属性。如果通过实例对象去引用该名称的属性，实例属性会强制屏蔽类属性（即引用的是实例属性)。</p>
+<hr>
+<h3 id="继承：-待改"><a href="#继承：-待改" class="headerlink" title="继承：(待改)"></a>继承：(待改)</h3><p>类别本身还可以进一步细分成子类，子类通过继承享有了父类的所有属性（数据属性和方法）。通过继承，减少了程序中的重复信息和重复语句。另外，子类也可以覆盖父类同名的变量和方法。<br>1.子类继承父类所有的公有属性和方法，可在子类中通过父类名来调用，而对于私有的属性和方法，子类不进行继承，因此在子类中无法通过父类名来访问。<br>2.继承的特点：<br>（1）如果父类和子类都重新定义了构造方法__init__，在进行子类实例化的时候，子类的构造方法不会自动调用父类的构造方法，必须在子类中显示调用。<br>（2）在调用基类的方法时，需要加上基类的类名前缀（以 父类名.方法 这种方式调用），且需要带上self参数变量。而在类中调用普通函数时并不需要带上self参数<br>（3）Python总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）。<br>3.在传统类中，如果子类和父类中同名的方法或者属性，在查找的时候基本遵循自左到右，深度优先的原则。新式类中，则采用“广度优先”的方式去查找属性。<br>4.在类层次中，子类继承了多个父类的数据结构和方法，那么它就被称作”多重继承”（如果有多个父类，多个父类名之间用逗号隔开）。<br>5.关于继承的构造函数：<br>（1）若子类没有定义自己的构造函数，父类的构造函数会被默认调用，但是此时如果要实例化子类的对象，则只能传入父类的构造函数对应的参数。<br>（2）若子类定义了自己的构造函数，而没有显示调用父类的构造函数，则父类的属性不会被初始化。<br>（3）若子类定义了自己的构造函数，显示调用父类，子类和父类的属性都会被初始化。</p>
+<hr>
+<h3 id="多态：-待改"><a href="#多态：-待改" class="headerlink" title="多态：(待改)"></a>多态：(待改)</h3><p>不同的对象，收到同一消息可以产生不同的结果，每个对象以适合自身的方式去响应共同的消息。允许将父对象设置成为和它的子对象相等，使得能够利用同一类(基类)类型的指针来引用不同类的对象,以及根据所引用对象的不同,以不同的方式执行相同的操作并获得不同的结果.</p>
+<hr>
+<h3 id="封装：-信息隐藏-待改"><a href="#封装：-信息隐藏-待改" class="headerlink" title="封装：(信息隐藏) (待改)"></a>封装：(信息隐藏) (待改)</h3><p>把类的属性和方法封装在类中，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。就是只提供调用接口，但是不公布实现细节。</p>
+<hr>
+<h3 id="新式类和经典类：待改"><a href="#新式类和经典类：待改" class="headerlink" title="新式类和经典类：待改)"></a>新式类和经典类：待改)</h3><p>1.新型类默认的元类为type，经典类默认类型为types.ClassType<br>2.新型类是在Python2.2中引入的，所有的新式类必须继承至少一个父类，如果类没有继承任何其他父类，则object将作为默认的父类。</p>
+
+  </section>
+
+</article>
+
+
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2016 - 本站由 <a href="/">@Longbo Ma</a> 创建,
+        使用<a href="https://github.com/lenbo-ma/hexo-theme-vno">hexo-theme-vno</a>主题,
+        修改自<a href="http://github.com/onevcat/vno" target="_blank">Vno</a>
+    </span>
+</footer>
+
+        </div>
+    </div>
+
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-42596364-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
