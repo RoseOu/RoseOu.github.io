@@ -1,1 +1,1464 @@
-@charset "UTF-8";/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */button,hr{overflow:visible}img,legend{border:0}body,ul{margin:0}legend,ul{padding:0}a,body{color:#34495e}.copyright,.paginator,.social-icon,.tagcloud{text-align:center}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a:active,a:hover{outline:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre,textarea{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{font:inherit;margin:0}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}button:-moz-focusring,input:-moz-focusring{outline:ButtonText dotted 1px}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}optgroup{font-weight:700}@font-face{font-family:'Apple Chancery';src:url(../fonts/apple-chancery/apple-chancery-webfont.eot);src:url(../fonts/apple-chancery/apple-chancery-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/apple-chancery/apple-chancery-webfont.woff) format('woff'),url(../fonts/apple-chancery/apple-chancery-webfont.ttf) format('truetype'),url(../fonts/apple-chancery/apple-chancery-webfont.svg#apple-chancery) format('svg');font-weight:lighter;font-style:normal}@-webkit-keyframes move{0%{right:0}50%{right:65px}100%{right:130px}}@keyframes move{0%{right:0}50%{right:65px}100%{right:130px}}@-webkit-keyframes rotate{0%{-webkit-transform:none;transform:none}50%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate{0%{-webkit-transform:none;transform:none}50%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}body{font-size:16px;line-height:1.6;font-family:Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif}h1,h2,h3,h4,h5,h6,header{font-family:'PT Serif',STZhongsong,'Microsoft Yahei',serif}ul{list-style-type:none}a{background-color:transparent;margin:2px 0;border-color:#34495e;text-decoration:none}code{margin:0 2px;padding:3px 5px;white-space:inherit}iframe,video{max-width:100%;margin:1rem auto;display:block}table{width:100%}table thead{background-color:#ddd}table tbody td,table thead th{padding:5px}table tbody tr:nth-child(2n){background-color:#eee}.fa{margin:0 5px}.icon-email{background:url(../img/iconfont/iconfont-email.png);background-size:100%}.icon-zhihu{background:url(../img/iconfont/iconfont-zhihu.png);background-size:100%}.icon-github{background:url(../img/iconfont/iconfont-github.png);background-size:100%}.icon-twitter{background:url(../img/iconfont/iconfont-twitter.png);background-size:100%}.icon-facebook{background:url(../img/iconfont/iconfont-facebook.png);background-size:100%}.icon-weibo{background:url(../img/iconfont/iconfont-weibo.png);background-size:100%}.icon-rss{background:url(../img/iconfont/iconfont-rss.png);background-size:100%}header{height:60px}header .nav{float:right;left:80px}header .logo-link{float:left;font-size:2.6em;font-family:'Apple Chancery',cursive,LiSu,sans-serif}header .nav-list-item{display:inline-block;padding:19px 10px}header .nav-list-item .nav-list-link{font-size:17px;line-height:1.4}header .nav-list-item .nav-list-link:hover{border-bottom:2px solid #c05b4d;transition:.1s ease-out}.home.post-list{margin-top:2em;margin-bottom:2em}.home.post-list .post-list-item{padding-top:1em;padding-bottom:2em;border-bottom:1px solid #ddd}.home.post-list .read-more{color:#c05b4d}.home.post-list .read-more:hover{border-bottom:1px solid #c05b4d}.archive{max-width:500px;margin:5em auto}.archive .post-item{padding-top:5px;padding-left:10px;border-left:1px solid #ddd}.archive .post-item:hover{padding-left:13px;border-left:3px solid #c05b4d;transition:.2s ease-out}.archive .post-time{display:inline-block;width:60px;margin-right:10px;margin-left:10px;color:#7f8c8d}.archive .post-time.tag{width:100px}.archive .post-title-link{color:#c05b4d}.archive .post-title-link:hover{border-bottom:0}.archive .post-item,.archive .post-title-link{font-size:1rem}.post{padding-top:1em}.post .post-block .post-title,.post-list .post-block .post-title{margin:0;font-size:26px}.post .post-block .post-title .post-title-link:hover,.post-list .post-block .post-title .post-title-link:hover{border-bottom:2px solid #c05b4d;transition:.1s}.post .post-block .post-time,.post-list .post-block .post-time{color:#7f8c8d;margin:1.2em 0}.post .post-content h2,.post-list .post-content h2{font-size:24px}.post .post-content h3,.post .post-content h4,.post-list .post-content h3,.post-list .post-content h4{font-size:20px}.post .post-content h5,.post .post-content h6,.post-list .post-content h5,.post-list .post-content h6{font-size:16px}.post .post-content .headerlink:hover,.post-list .post-content .headerlink:hover{border-bottom:none}.post .post-content a:hover,.post-list .post-content a:hover,.tagcloud .tags-total p{border-bottom:1px solid #c05b4d}.post .post-content .headerlink::before,.post-list .post-content .headerlink::before{content:"#";position:relative;top:2px;margin-right:5px;font-size:1.3em}.post .post-content a,.post-list .post-content a{color:#c05b4d}.post .post-content blockquote,.post-list .post-content blockquote{margin-top:2em;margin-bottom:2em;padding-left:20px;border-left:4px solid #c05b4d}.post .post-content img,.post-list .post-content img{display:block;max-width:100%;margin:1em auto}.post .post-content ul,.post-list .post-content ul{list-style:inside}code{color:#c7254e;border-radius:4px}code,pre{background-color:rgba(0,0,0,.04);font-size:.8em;font-family:"Source Code Pro",Consolas,Monaco,Menlo,Consolas,monospace}.copyright,.paginator .next,.paginator .prev,.tagcloud,.tags,aside .author .author-name,aside .friends,aside .post-toc .toc-title,aside .social{font-family:'PT Serif',STZhongsong,'Microsoft Yahei',serif}.highlight{position:relative;margin:1em 0;border-radius:2px;line-height:1.1em;background-color:#f8f5ec;overflow-x:auto}.highlight table,.highlight td,.highlight tr{width:100%;border-collapse:collapse;padding:0;margin:0}.highlight .gutter{display:none}.highlight .code pre{padding:30px 14px 14px;line-height:1.5em;background-color:rgba(0,0,0,0);margin:0}.highlight::after{position:absolute;top:0;right:0;left:0;padding:3px 7px;font-size:12px;font-weight:700;color:#c2c0bc;background-color:#f1ede4;content:"Code"}.back2top,.sidebar-menu{right:20px;z-index:10;position:fixed}pre .constant,pre .function .keyword{color:#0092db}pre .attribute,pre .keyword{color:#a71d5d}pre .literal,pre .number{color:#ae81ff}pre .change,pre .clojure .built_in,pre .flow,pre .lisp .title,pre .nginx .title,pre .tag,pre .tag .title,pre .tex .special,pre .winutils{color:#2973b7}pre .regexp,pre .symbol,pre .symbol .string,pre .value{color:#0047ab}pre .title{color:#795da3}pre .addition,pre .apache .cbracket,pre .apache .tag,pre .attr_selector,pre .built_in,pre .django .filter .argument,pre .django .template_tag,pre .django .variable,pre .envvar,pre .haskell .type,pre .javadoc,pre .prompt,pre .pseudo,pre .ruby .class .parent,pre .smalltalk .array,pre .smalltalk .class,pre .smalltalk .localvars,pre .sql .aggregate,pre .stream,pre .string,pre .subst,pre .tag .value,pre .tex .command{color:#0047ab}pre .apache .sqbracket,pre .comment,pre .doctype,pre .java .annotation,pre .pi,pre .preprocessor,pre .python .decorator,pre .shebang,pre .template_comment,pre .tex .formula{color:#969896}#comments #ds-thread #ds-reset .ds-sort a.ds-current,#comments #ds-thread #ds-reset .ds-sort a:active,.paginator a:hover,.tagcloud,.tagcloud a:hover,.tags a{color:#c05b4d}.tags{margin-top:35px;padding-top:20px;border-top:1px solid #ddd}.tags a{margin-right:10px}.tags a::before{content:'#';margin:0 1px}.tagcloud{margin:5em 1em}.tagcloud .tags-total p{width:90px;margin:auto}.tagcloud a{display:inline-block;margin:5px;word-wrap:break-word}.paginator{margin-top:2em;margin-bottom:4em;padding:1em 0;display:block}.paginator .next,.paginator .prev{display:inline-block;font-weight:700;font-size:18px}#comments #ds-thread #ds-reset .ds-login-buttons .ds-more-services,#comments #ds-thread #ds-reset .ds-service-link.ds-renren,#comments #ds-thread #ds-reset .ds-sync,#comments #ds-thread #ds-reset li.ds-tab .ds-comments-tab-duoshuo{display:none}.paginator a.prev{float:left}.paginator a.next{float:right}#comments #ds-thread #ds-reset li.ds-tab a.ds-current{background-color:#fff}#comments #ds-thread #ds-reset .ds-service-link{background:#fff;padding:0}#comments #ds-thread #ds-reset .ds-service-link.ds-weixin{color:#348903}#comments #ds-thread #ds-reset .ds-service-link.ds-weibo{color:#fa7d3c}#comments #ds-thread #ds-reset .ds-service-link.ds-qq{color:#12b7f5}#comments #ds-thread #ds-reset .ds-login-buttons .ds-service-list li{width:auto}.social-icon{margin:0;display:block;font-size:30px}.social-icon .icon{width:30px;height:30px;display:inline-block;margin:0 5px}.copyright{margin:0}.copyright a,.copyright p{color:#aaa;font-size:14px;font-weight:100}.copyright a:hover,aside .friends .links .link-item a:hover,aside .post-toc .toc-title::before,aside .post-toc ol a:hover,aside .social .links .link-item a:hover{color:#c05b4d}.sidebar-menu{bottom:50px}.sidebar-menu .menu{width:16px;height:16px;background:url(../img/menu.png);background-size:100%}.back2top{bottom:20px}.back2top .arrow{width:16px;height:16px;background:url(../img/top.png);background-size:100%}#sidebar-toggle{display:none}#sidebar-toggle:checked+aside{right:0;transition:.2s right ease-out}#sidebar-toggle:checked~.main{-webkit-animation:.2s move forwards steps(20);animation:.2s move forwards steps(20)}#sidebar-toggle:checked~.sidebar-menu>.menu{background:url(../img/close.png);background-size:100%}aside{position:fixed;top:0;bottom:0;right:-260px;width:260px;transition:.2s right ease-out;background-color:#F8F5F3;border-left:1px solid #ddd;overflow-y:auto}aside .author{padding-top:50px;padding-bottom:10px}aside .author .author-img{width:80px;height:80px;display:block;margin:0 auto;background-color:#fff;border:1px solid #bbb;border-radius:100%}aside .friends::before,aside .post-toc::before,aside .social::before{width:84%;border-bottom:1px solid #ddd;left:8%;display:block;position:relative}aside .author .author-img:hover{-webkit-animation:1.5s rotate infinite steps(20);animation:1.5s rotate infinite steps(20)}aside .author .author-name{font-size:20px;text-align:center;margin:10px 0}aside .post-toc::before{content:""}aside .post-toc .toc-title{font-size:18px;display:block;margin:15px 24px}aside .post-toc .toc-title::before{content:"#";margin:0 5px;font-weight:700}aside .post-toc ol{font-size:15px;list-style:disc;padding-left:20px}aside .post-toc ol.toc{padding-left:60px}aside .friends::before,aside .social::before{content:""}aside .friends .title,aside .social .title{font-size:18px;display:block;margin:15px 24px}aside .friends .title::before,aside .social .title::before{content:"#";color:#c05b4d;font-weight:700;margin:0 5px}aside .friends .links,aside .social .links{padding-left:50px;list-style:none;font-size:15px}aside .friends .links .icon,aside .social .links .icon{display:inline-block;position:relative;top:5px;width:20px;height:20px;margin:auto 5px}aside .friends .links .link-item a,aside .social .links .link-item a{line-height:20px;text-transform:capitalize}section.container{margin:2em 10px}@media screen and (min-width:800px){body .main{width:800px;margin:0 auto;position:relative}header{padding:20px 100px}}@media screen and (max-width:800px){body .main{width:100%}header{padding:20px 0}header a.logo-link,header ul.nav.nav-list{float:none;display:block;text-align:center}header a.logo-link .nav-list-item,header ul.nav.nav-list .nav-list-item{padding:15px 8px}.post-content h2,.post-content h3,.post-content h4,.post-content h5,.post-content h6{max-width:300px}.archive .post-time{margin:0;width:auto;font-size:13px;display:block}.back2top{display:none}#disqus_thread,.ds-thread{margin:2em 10px}#comments #ds-thread.ds-narrow #ds-reset .ds-avatar img{margin:0 -10px}}@media screen and (max-width:1060px){body #sidebar-toggle:checked+aside{right:-260px;transition:.2s right ease-in}body #sidebar-toggle:checked~.main{-webkit-animation:.2s move forwards reverse steps(20);animation:.2s move forwards reverse steps(20)}body .sidebar-menu{display:none}}
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  box-sizing: content-box; /* 2 */
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+  border: 0; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+* {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    font-family: "Segoe UI", "Lucida Grande", Helvetica,
+    "Microsoft YaHei", FreeSans, Arimo, "Droid Sans",
+    "wenquanyi micro hei","Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+}
+
+* {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    -webkit-text-size-adjust: 100%;
+}
+
+::-moz-selection {
+    color: #fff;
+    background-color: #f79292;
+}
+
+::selection {
+    color: #fff;
+    background-color: #f79292;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 1rem 0;
+    font-weight: bolder;
+    font-size: 100%;
+    line-height: 1.2;
+    font-family: "Open Sans", "Lato", "Helvetica Neue", "Arial", serif;
+}
+
+h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
+    margin-top: 1rem !important;
+}
+
+* + h1, * + h2, * + h3, * + h4, * + h5, * + h6 {
+    margin-top: 3rem;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+h3 {
+    font-size: 1.15em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h6 {
+    font-size: 1em;
+}
+
+p {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+ul, ol {
+    padding-left: 2em;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+    margin: .5em 0 1em 0;
+}
+
+dt {
+    font-weight: bolder;
+}
+
+dt + dd {
+    margin-top: .5em;
+}
+
+dd {
+    margin-left: 0;
+}
+
+dd + dt {
+    margin-top: 1em;
+}
+
+hr {
+    display: block;
+    padding: 0;
+    border: 0;
+    height: 0;
+    border-top: 1px solid #E0E0E0;
+    box-sizing: content-box;
+}
+
+
+table {
+    max-width: 100%;
+    width: 100%;
+}
+
+table caption {
+    padding: 5px;
+    color: #333;
+    background-color: #e5e5e5;
+}
+
+table th, table td {
+    text-align: left;
+    padding: .6em;
+    vertical-align: top;
+}
+
+table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+table tbody + tbody {
+    border-top: 2px solid #e5e5e5;
+}
+
+table .table {
+    background-color: #fff;
+}
+
+.table-bordered {
+    border: 1px solid #e5e5e5;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+
+img {
+    vertical-align: bottom;
+}
+
+figure {
+    margin: 0;
+}
+
+textarea {
+    vertical-align: top;
+    resize: vertical;
+}
+
+a {
+    color: #F03838;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e41111;
+}
+
+em {
+    font-style: normal;
+}
+
+strong {
+    font-weight: bold;
+}
+
+
+code {
+    padding: 2px 4px;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: #c7254e;
+    white-space: nowrap;
+    border-radius: 0;
+}
+
+pre {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 3px;
+}
+
+ins, mark {
+    background: #ffa;
+    color: #333;
+}
+
+abbr, dfn {
+    font-style: normal;
+    border-bottom: 1px dotted;
+}
+
+small {
+    font-size: 80%;
+}
+
+address {
+    font-style: normal;
+}
+
+blockquote {
+    margin: 6rem 2rem;
+    padding-left: 15px;
+    line-height: 1.4;
+    border-left: 4px solid #F03838;
+}
+
+blockquote p {
+    margin: 0 0 .7em 0;
+}
+
+blockquote small,
+blockquote cite {
+    display: block;
+    font-size: 80%;
+    color: #616161;
+    margin-top: .5em;
+}
+
+blockquote cite:before {
+    content: '- ';
+}
+
+blockquote p:last-of-type {
+    margin-bottom: 0;
+}
+
+iframe {
+    border: 0;
+}
+
+#page {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#primary {
+    max-width: 770px;
+    width: 100%;
+    padding: 80px 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+body #page {
+    max-width: 1170px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+body {
+    font-family: "Open Sans", "Lato", "Helvetica Neue", "Arial", serif;
+    font-size: 1.6rem;
+    color: #424242;
+    line-height: 1.8;
+    background-color: #fff;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+    .article {
+        padding: 8rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    #primary {
+        padding-top: 20px;
+    }
+    .article {
+        padding: 2.5rem 0 !important;
+    }
+}
+.entry .gist {
+  background: #eee;
+  border: 1px solid color-border;
+  margin-top: 15px;
+  padding: 7px 15px;
+  border-radius: 2px;
+  text-shadow: 0 0 1px #fff;
+  line-height: 1.6;
+  overflow: auto;
+  color: #666;
+}
+.entry .gist .gist-file {
+  border: none;
+  font-family: inherit;
+  margin: 0;
+  font-size: 0.9em;
+}
+.entry .gist .gist-file .gist-data {
+  background: none;
+  border-bottom: none;
+}
+.entry .gist .gist-file .gist-data pre {
+  padding: 0 !important;
+  font-family: font-mono;
+}
+.entry .gist .gist-file .gist-meta {
+  background: none;
+  color: color-meta;
+  margin-top: 5px;
+  padding: 0;
+  text-shadow: 0 0 1px #fff;
+  font-size: 100%;
+}
+.entry .gist .gist-file .gist-meta a {
+  color: color-link;
+}
+.entry .gist .gist-file .gist-meta a:visited {
+  color: color-link;
+}
+figure.highlight {
+  background: #eee;
+  border: 1px solid color-border;
+  margin-top: 15px;
+  padding: 7px 15px;
+  border-radius: 2px;
+  text-shadow: 0 0 1px #fff;
+  line-height: 1.6;
+  overflow: auto;
+  position: relative;
+  font-size: 0.9em;
+}
+figure.highlight figcaption {
+  color: color-meta;
+  margin-bottom: 5px;
+  text-shadow: 0 0 1px #fff;
+}
+figure.highlight figcaption a {
+  position: absolute;
+  right: 15px;
+}
+figure.highlight pre {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+figure.highlight table {
+  margin-top: 0;
+  border-spacing: 0;
+}
+figure.highlight .gutter {
+  color: color-meta;
+  padding-right: 15px;
+  border-right: 1px solid color-border;
+  text-align: right;
+}
+figure.highlight .code {
+  padding-left: 15px;
+  border-left: 1px solid #fff;
+  color: #666;
+}
+figure.highlight .line {
+  height: 20px;
+}
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .doctype,
+pre .pi,
+pre .lisp .string,
+pre .javadoc {
+  color: #93a1a1;
+  font-style: italic;
+}
+pre .keyword,
+pre .winutils,
+pre .method,
+pre .addition,
+pre .css .tag,
+pre .request,
+pre .status,
+pre .nginx .title {
+  color: #859900;
+}
+pre .number,
+pre .command,
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula,
+pre .regexp,
+pre .hexcolor {
+  color: #2aa198;
+}
+pre .title,
+pre .localvars,
+pre .chunk,
+pre .decorator,
+pre .built_in,
+pre .identifier,
+pre .vhdl,
+pre .literal,
+pre .id {
+  color: #268bd2;
+}
+pre .attribute,
+pre .variable,
+pre .lisp .body,
+pre .smalltalk .number,
+pre .constant,
+pre .class .title,
+pre .parent,
+pre .haskell .type {
+  color: #b58900;
+}
+pre .preprocessor,
+pre .preprocessor .keyword,
+pre .shebang,
+pre .symbol,
+pre .symbol .string,
+pre .diff .change,
+pre .special,
+pre .attr_selector,
+pre .important,
+pre .subst,
+pre .cdata,
+pre .clojure .title {
+  color: #cb4b16;
+}
+pre .deletion {
+  color: #dc322f;
+}
+.gutter {
+  width: 50px;
+}
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+.site-branding {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    font-family: "Open Sans", arial, sans-serif;
+    letter-spacing: .1em;
+}
+
+.site-branding .site-title {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.site-branding .site-logo {
+    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    background-color: #ccc;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.site-branding .site-description {
+    color: #9e9e9e;
+    font-size: 1.3rem;
+    margin: 1rem 0 0;
+}
+
+.site-branding a {
+    display: inline-block;
+    color: #fff !important;
+    font-weight: bolder;
+    background-color: #F03838;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 0 1rem;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.site-branding a:hover {
+    color: #fff !important;
+    padding: 0 1.5rem;
+}
+
+.main-navigation {
+    text-align: center;
+}
+
+.main-navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.6rem;
+}
+
+.main-navigation ul li {
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.main-navigation ul a {
+    display: block;
+    color: #F03838;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+}
+
+
+.site-branding {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    font-family: "Open Sans", arial, sans-serif;
+    letter-spacing: .1em;
+}
+
+.site-branding .site-title {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.site-branding .site-logo {
+    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    background-color: #ccc;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.site-branding .site-description {
+    color: #9e9e9e;
+    font-size: 1.3rem;
+    margin: 1rem 0 0;
+}
+.site-branding a {
+    display: inline-block;
+    color: #fff !important;
+    font-weight: bolder;
+    background-color: #F03838;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 0 1rem;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.site-branding a:hover {
+    color: #fff !important;
+    padding: 0 1.5rem;
+}
+
+.main-navigation {
+    text-align: center;
+}
+
+.main-navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.6rem;
+}
+
+.main-navigation ul li {
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.main-navigation ul a {
+    display: block;
+    color: #F03838;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+}
+.site-footer {
+    position: relative;
+    text-align: center;
+    padding-top: 1rem;
+    color: #9e9e9e;
+}
+
+.site-footer .site-info {
+    color: #9e9e9e;
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+}
+.archive-post {
+    text-align: left;
+    margin: 2em auto;
+}
+
+.archive-post .archive-title {
+    font-size: 1.8em;
+    line-height: 1;
+}
+
+.archive-post time {
+    font-style: italic;
+}
+
+.archive-post time a {
+    color: #9e9e9e;
+}
+
+.archive-post a:hover {
+    color: #F03838;
+}
+
+.archive-post time a:before {
+    content: '#';
+}
+
+.archive-title {
+    position: relative;
+    color: #212121;
+    font-size: 2.4rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.archive-title a {
+    color: black;
+}
+
+.archive-title a:hover {
+    color: #212121;
+}
+
+.archive-title a:hover span {
+    box-shadow: inset 0 -2px 0 rgba(240, 56, 56, 0.4);
+}
+
+.archive-title a span {
+    padding-bottom: 3px;
+    -webkit-transition: 150ms;
+    transition: 150ms;
+    box-shadow: inset 0 -2px 0 rgba(240, 56, 56, 0);
+}
+.article {
+    position: relative;
+}
+
+.article:not(:first-child):before {
+    content: '';
+    width: 150px;
+    height: 1px;
+    background-color: #e0e0e0;
+    position: absolute;
+    top: 0;
+    left: calc(50% - 75px);
+}
+
+.article-title {
+    position: relative;
+    color: #212121;
+    font-size: 2.4rem;
+    line-height: 1.3;
+    text-align: center;
+    margin: 0;
+    padding: 0 2rem;
+}
+
+.article-title a {
+    display: block;
+    color: #212121;
+}
+
+.article-title a:hover {
+    color: #212121;
+}
+
+.article-title a:hover span {
+    box-shadow: inset 0 -2px 0 rgba(240, 56, 56, 0.4);
+}
+
+.article-title a span {
+    padding-bottom: 3px;
+    -webkit-transition: 150ms;
+    transition: 150ms;
+    box-shadow: inset 0 -2px 0 rgba(240, 56, 56, 0);
+}
+
+.article-top-meta {
+    position: relative;
+    color: #9e9e9e;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.article-top-meta > span {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.article-top-meta a {
+    color: #9e9e9e;
+}
+
+.article-top-meta a:hover {
+    color: #F03838;
+}
+
+.article-top-meta .post-edit-link {
+    color: #F03838;
+}
+
+.article-top-meta .post-edit-link:hover {
+    color: #e41111;
+}
+
+.article-top-meta time {
+    font-style: italic;
+}
+
+.article-excerpt {
+    margin: 4rem 0;
+    font-size: 1.6rem;
+    color: #616161;
+}
+
+.article-footer:before, .article-footer:after {
+    content: " ";
+    display: table;
+}
+
+.article-footer:after {
+    clear: both;
+}
+
+.article-meta {
+    font-size: 1.3rem;
+    color: #9e9e9e;
+}
+
+.article-meta > span:not(:last-child) {
+    margin-right: 3rem;
+}
+
+.article-meta > span {
+    display: inline-block;
+}
+
+.article-meta > span > span {
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.article-meta a {
+    color: #9e9e9e;
+}
+
+.article-meta a:hover {
+    color: #F03838;
+}
+
+.article-meta i {
+    vertical-align: middle;
+    color: #9e9e9e;
+    margin-right: .5rem;
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.link-url {
+    color: #616161;
+    font-size: 75%;
+    font-style: italic;
+    font-weight: normal;
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sticky-mark {
+    position: absolute;
+    right: 0;
+    top: .1em;
+    display: block;
+    width: 12px;
+    height: 11px;
+    background-color: #F03838;
+}
+
+.sticky-mark:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0 0;
+    border-color: #F03838 transparent transparent transparent;
+}
+
+.sticky-mark:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 6px 6px 0;
+    border-color: transparent #F03838 transparent transparent;
+}
+
+.page-links {
+    position: relative;
+    text-align: center;
+}
+
+.page-links .page-links-title {
+    margin-right: 5px;
+}
+
+.page-links a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.posts-loop .article.format-quote .article-content > blockquote:first-child {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    color: #212121;
+    font-size: 2.4rem;
+    border-left: 0;
+}
+
+.posts-loop .article.format-quote .article-content > blockquote:first-child cite {
+    font-size: 1.3rem;
+}
+
+.posts-loop .article.format-quote .article-content > blockquote:first-child cite:before {
+    content: '- ';
+}
+
+.post-tags a {
+    position: relative;
+}
+
+.post-tags a:before {
+    content: '#';
+}
+
+.post-tags a:not(:last-of-type):after {
+    padding-right: 5px;
+}
+
+.tags-list {
+    text-align: center;
+}
+
+.tags-list a {
+    display: inline-block;
+    color: #616161;
+    padding: 5px;
+    margin: 5px 10px;
+}
+
+.tags-list a:before {
+    content: '#';
+}
+
+.tags-list a:hover {
+    color: #e41111;
+}
+.icon-meta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.icon-bookmark {
+    display: inline-block;
+    width: 13px;
+    height: 19px;
+    background-color: #F03838;
+    -webkit-mask: url(../../images/icon-bookmark-fill.svg) center top no-repeat;
+    mask: url(../../images/icon-bookmark-fill.svg) center top no-repeat;
+}
+
+.icon-comments {
+    display: inline-block;
+    width: 18px;
+    height: 19px;
+    background: url(../../images/icon-bubble.svg) center top no-repeat;
+    background-size: 18px 18px;
+}
+
+
+.icon-tags {
+    display: inline-block;
+    width: 19px;
+    height: 16px;
+    background: url(../../images/icon-tags.svg) center center no-repeat;
+    background-size: 19px 16px;
+}
+
+.icon-categories {
+    display: inline-block;
+    width: 19px;
+    height: 16px;
+    background: url(../../images/icon-bookmark-fill.svg) center center no-repeat;
+    background-size: 19px 16px;
+}
+
+.pagination {
+    position: relative;
+    margin: 30px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: space-around;
+    -ms-flex-pack: space-around;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+.comment-navigation {
+    position: relative;
+    margin: 30px 0;
+}
+
+.comment-navigation:before, .comment-navigation:after {
+    content: " ";
+    display: table;
+}
+
+.comment-navigation:after {
+    clear: both;
+}
+
+.comment-navigation .nav-previous {
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+
+.comment-navigation .nav-next {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.comment-navigation a {
+    display: inline-block;
+}
+
+.comment-navigation a,
+.pagination-prev,
+.pagination-next {
+    border: 1px solid #e0e0e0;
+    line-height: 30px;
+    height: 32px;
+    padding: 0 20px;
+    border-radius: 16px;
+    -webkit-transition-duration: 400ms;
+    transition-duration: 400ms;
+}
+
+.comment-navigation a:hover,
+.pagination-prev:hover,
+.pagination-next:hover {
+    color: #fff;
+    background-color: #F03838;
+    border-color: #F03838;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+.video-container iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.featured-media {
+    margin-bottom: 1.5rem;
+}
+
+.featured-media img {
+    width: 100%;
+    height: auto;
+}
