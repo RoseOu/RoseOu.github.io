@@ -1,144 +1,97 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    
-    <title>python 函数的参数 | Rose&#39;s blog</title>
-    <meta name="renderer" content="webkit">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  
+  <title>python 函数的参数 | Rose&#39;s blog</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta name="description" content="Fighting!">
+  <meta property="og:title" content="python 函数的参数"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="python 函数的参数 | Rose&#39;s blog">
-    <meta name="twitter:description" content="Fighting!">
+  
+    <meta property="og:image" content="undefined"/>
+  
 
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="python 函数的参数 | Rose&#39;s blog">
-    <meta property="og:description" content="Fighting!">
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11520870-2']);
+  _gaq.push(['_trackPageview']);
 
-    
-    <meta name="author" content="Rose Ou">
-    
-    <link rel="stylesheet" href="/css/vno.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 
-    
-    <link rel="icon" href="/favicon.ico">
-    
-
-    <meta name="generator" content="hexo"/>
-    
-    <link rel="alternate" type="application/rss+xml" title="Rose&#39;s blog" href="/atom.xml">
-    
-
-    <link rel="canonical" href="http://yoursite.com/2016/03/16/python-函数的参数/"/>
-
-    
 </head>
 
-<body class="home-template no-js">
 
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-list btn-mobile-menu__icon"></i>
-        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
-    </span>
-
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Rose&#39;s blog</a></h1>
+  <h2><a href="/">Work hard!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
     
-<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/1.JPG)">
-  <div class="panel-main">
-    <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
-
-        <a href="/" title="前往 Rose&#39;s blog 的主页"><img src="/images/4.JPG" width="80" alt="Rose&#39;s blog logo" class="panel-cover__logo logo" /></a>
-        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Rose&#39;s blog">Rose&#39;s blog</a></h1>
-        
-        <span class="panel-cover__subtitle panel-subtitle">Work hard!</span>
-        
-        <hr class="panel-cover__divider" />
-        <p class="panel-cover__description">Fighting!</p>
-        <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
-        <div class="navigation-wrapper">
-          <div>
-          <nav class="cover-navigation cover-navigation--primary">
-            <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
-            
-            </ul>
-          </nav>
-          </div>
-          <div>
-          <nav class="cover-navigation navigation--social">
-  <ul class="navigation">
-
-  <!-- Weibo-->
-  
-
-  <!-- Github -->
-  
-  <li class="navigation__item">
-    <a href="https://github.com/RoseOu" title="查看我的GitHub主页" target="_blank">
-      <i class='social fa fa-github'></i>
-      <span class="label">Github</span>
-    </a>
-  </li>
-
-
-<!-- Stack Overflow -->
-        
-
-  <!-- Google Plus -->
-  
-
-<!-- Facebook -->
-
-  
-<!-- Twitter -->
-
-  
-
-  <li class="navigation__item">
-    <a href="/atom.xml" title="RSS" target="_blank">
-      <i class='social fa fa-rss'></i>
-      <span class="label">RSS</span>
-    </a>
-  </li>
-
-
-
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/links">友链</a></li>
+    
+      <li><a href="https://github.com/RoseOu">GitHub</a></li>
+    
+      <li><a href="">Twitter</a></li>
+    
+      <li><a href="/about-me">关于我</a></li>
+    
   </ul>
+  <div class="clearfix"></div>
 </nav>
-
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="panel-cover--overlay cover-green"></div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
   </div>
-</header>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div> 
+        <time datetime="2016-03-16T15:22:27.000Z"><a href="/2016/03/16/python-函数的参数/">2016-03-16</a></time>
+      
+      
+  
+    <h1 class="title">python 函数的参数</h1>
+  
 
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner">
-            <article class="post-container post-container--single">
-
-  <header class="post-header">
-    <div class="post-meta">
-      <time datetime="2016-03-16T15:22:27.000Z" class="post-list__meta--date date">2016-03-16</time> &#8226; <span class="post-meta__tags tags">于&nbsp;</span>
-    </div>
-    <h1 class="post-title">python 函数的参数</h1>
-  </header>
-
-  <section class="post">
-    <p><strong>因为一直不是很理解函数的参数，然后复习的时候就总结了一下，免得以后又忘记…</strong></p>
+    </header>
+    <div class="entry">
+      
+        <p><strong>因为一直不是很理解函数的参数，然后复习的时候就总结了一下，免得以后又忘记…</strong></p>
 <h2 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h2><p><strong>调用函数时，传入函数的参数的位置（顺序）一一对应着定义函数时参数的位置，且传入函数的参数与函数声明时的参数数目必须一致,不然会报错。看看栗子：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y,z)</span>:</span></span><br><span class="line"><span class="meta">... </span>   <span class="keyword">return</span> x,y,z</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> f(x,y,z)</span><br><span class="line">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(x,y,z)</span>:</span></span><br><span class="line"><span class="meta">... </span>   <span class="keyword">return</span> x,z,y</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> g(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">(<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>第二个函数中，先返回z，再返回y。因为声明函数时参数名的位置，与调用时所传参数位置是相对应的，所以其实在两个函数中，都是x=1，y=2，z=3，而输出的结果是由return的顺序来决定的。</strong></p>
@@ -189,41 +142,70 @@
 </ul>
 <p><strong>所以这些参数的定义顺序为：位置参数，关键字参数，非关键字可变长参数，关键字变量参数。</strong></p>
 
-  </section>
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
 </article>
 
+</div></div>
+  <!--  <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+</aside> -->
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Rose Ou
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
 
 
-            <footer class="footer">
-    <span class="footer__copyright">
-        本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
-    </span>
-    <span class="footer__copyright">
-        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
-    </span>
-    <span class="footer__copyright">
-        &copy; 2016 - 本站由 <a href="/">@Longbo Ma</a> 创建,
-        使用<a href="https://github.com/lenbo-ma/hexo-theme-vno">hexo-theme-vno</a>主题,
-        修改自<a href="http://github.com/onevcat/vno" target="_blank">Vno</a>
-    </span>
-</footer>
 
-        </div>
-    </div>
 
-    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
-
-     
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-42596364-1', 'auto');
-	ga('send', 'pageview');
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
 </body>
