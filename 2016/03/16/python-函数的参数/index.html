@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python 函数的参数 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="python 函数的参数"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>python 函数的参数</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/16/python-函数的参数/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-16T15:22:27.000Z">
+          2016-03-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><strong>因为一直不是很理解函数的参数，然后复习的时候就总结了一下，免得以后又忘记…</strong></p>
+<h2 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h2><p><strong>调用函数时，传入函数的参数的位置（顺序）一一对应着定义函数时参数的位置，且传入函数的参数与函数声明时的参数数目必须一致,不然会报错。看看栗子：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;def f(x,y,z):</span><br><span class="line">...    return x,y,z</span><br><span class="line">&gt;&gt;&gt;print f(x,y,z)</span><br><span class="line">(1,2,3)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;def g(x,y,z):</span><br><span class="line">...    return x,z,y</span><br><span class="line">&gt;&gt;&gt;print g(1,2,3)</span><br><span class="line">(1,3,2)</span><br></pre></td></tr></table></figure>
+<p><strong>第二个函数中，先返回z，再返回y。因为声明函数时参数名的位置，与调用时所传参数位置是相对应的，所以其实在两个函数中，都是x=1，y=2，z=3，而输出的结果是由return的顺序来决定的。</strong></p>
+<h2 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h2><p><strong>关键字参数其实就是给参数起一个名字。调用函数的时候就是通过参数的名字来区分参数，而不是它们的位置、顺序。于是，调用函数时，参数的数目和顺序都不一定要对应定义函数时的参数数目和顺序（即允许参数缺失和不按顺序）。</strong></p>
+<ul>
+<li>首先你可以直接按照函数声明中参数定义的顺序来调用它（这样看起来就跟位置函数没什么区别了..）：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;def f(name,age):</span><br><span class="line">...    return &apos;%s is %s years old.&apos; % (name,age)</span><br><span class="line">&gt;&gt;&gt;print f(&apos;Rose&apos;,&apos;eighteen&apos;)</span><br><span class="line">Rose is eighteen years old.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再来看看如何不按顺序地调用它（这样就稍微看出来一点区别了..）：**</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;print f(age=&apos;eighteen&apos;,name=&apos;Rose&apos;)</span><br><span class="line">Rose is eighteen years old.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后来看看如何数目不对应地调用它：</li>
+</ul>
+<p><strong>关键字参数可以在定义函数时设置关键字参数默认值，也就是默认参数。上面提到过允许参数缺失，这个就是和默认参数有关了。</strong><br><strong>默认参数就是，在函数声明中就给参数提供一个值。这样在调用函数时，如果没有为参数传递一个值，那么这个参数就会取默认值。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;def f(name=&apos;Rose&apos;,age=&apos;eighteen&apos;)</span><br><span class="line">...    return &apos;%s is %s years old.&apos; % (name,age)</span><br><span class="line">&gt;&gt;&gt;print f()</span><br><span class="line">Rose is eighteen years old.</span><br></pre></td></tr></table></figure>
+<p><strong>你也可以在调用函数时传入新参数：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;print f(&apos;Jack&apos;)</span><br><span class="line">Jack is eighteen years old.</span><br><span class="line">&gt;&gt;&gt;print f(&apos;Jack&apos;,&apos;nineteen&apos;)</span><br><span class="line">Jack is nineteen years old.</span><br></pre></td></tr></table></figure>
+<p><strong>可是如果想name使用默认参数，而age传入新参数该怎么办？别忘了它可是关键字参数！（虽然上面这个例子按顺序传入参数让它看起来就像位置参数..）</strong><br><strong>所以可以这样：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;print f(age=&apos;nineteen&apos;)</span><br><span class="line">   Rose is nineteen years old.</span><br></pre></td></tr></table></figure>
+<p><strong>注意：声明函数时，所有的位置参数都必须出现在任何一个默认参数前面。否则会报错。而且在调用函数的时候，一定要给位置参数提供值。</strong></p>
+<h2 id="可变长度的参数"><a href="#可变长度的参数" class="headerlink" title="可变长度的参数"></a>可变长度的参数</h2><p><strong>调用函数时，有时候可能会需要处理可变数量的参数。这种参数在函数声明中不是显式命名的，因为在调用函数之前，参数的数目是未知的。于是我们可以将参数放在一个元组（非关键字参数）或字典中（关键字参数），作为一个参数组传递给函数。</strong></p>
+<h3 id="非关键字可变长参数（元组）"><a href="#非关键字可变长参数（元组）" class="headerlink" title="非关键字可变长参数（元组）"></a>非关键字可变长参数（元组）</h3><p><strong>当函数被调用时，所有的形参（位置参数和默认参数）都将值赋给了在函数声明时相对应的部分参数，然后剩下那部分非关键字参数就会按顺序插入到一个元组。这个元组是以一个*号开头的。</strong><br><strong>*号操作符后的形参会作为元组传递给函数，元组保存了调用函数时所有传递给函数的“额外”的参数（匹配了所有位置参数和关键字参数剩余的）。而如果没有额外的参数，这个元组就为空元祖。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def f(x,*args):</span><br><span class="line">... 	print x</span><br><span class="line">... 	print args</span><br><span class="line">&gt;&gt;&gt; f(a)</span><br><span class="line">1</span><br><span class="line">()</span><br><span class="line">&gt;&gt;&gt; f(1,2,&apos;a&apos;,&apos;b&apos;)</span><br><span class="line">1</span><br><span class="line">(2,&apos;a&apos;,&apos;b&apos;)</span><br></pre></td></tr></table></figure>
+<p><strong>第一个位置参数被赋了1的值，剩下的参数全部保存在*args这个元组里。于是我们就可以处理当超出数目的参数被传入函数的情形。</strong></p>
+<ul>
+<li>注意：所有形式参数必须放在非关键字可变长参数的前面。</li>
+<li>先来举个栗子：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def f(x,y=&apos;1&apos;,*args):</span><br><span class="line">	print &apos;x:&apos;, x</span><br><span class="line">	print &apos;y:&apos;, y</span><br><span class="line">	for i in args:    #遍历元组中参数</span><br><span class="line">		print &apos;args:&apos;, i</span><br></pre></td></tr></table></figure>
+<p><strong>好，调用这个函数试试看。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f(&apos;abc&apos;)</span><br><span class="line">x:abc</span><br><span class="line">y:1</span><br><span class="line">&gt;&gt;&gt; f(11,22)</span><br><span class="line">x:11</span><br><span class="line">y:22</span><br><span class="line">&gt;&gt;&gt; f(123,&apos;abc&apos;,&apos;xyz&apos;,456)</span><br><span class="line">x:123</span><br><span class="line">y:abc</span><br><span class="line">args:xyz</span><br><span class="line">args:456</span><br></pre></td></tr></table></figure>
+<h3 id="关键字变量参数（字典）"><a href="#关键字变量参数（字典）" class="headerlink" title="关键字变量参数（字典）"></a>关键字变量参数（字典）</h3><p><strong>它就是保存“额外”的关键字参数的字典，这个字典以**开头。其参数名是字典的键。（关键字参数有着参数名和参数值，所以元组没法满足它，于是要用字典。）</strong></p>
+<ul>
+<li>栗子：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def f(x,y,*args,**kwargs):</span><br><span class="line">	print &apos;x:&apos;, x</span><br><span class="line">	print &apos;y:&apos;, y</span><br><span class="line">	for m in args:</span><br><span class="line">		print &apos;non-keyword arg:&apos;, m</span><br><span class="line">	for n in kwargs.keys():         #遍历字典的键，因为参数名是字典的键</span><br><span class="line">		print &quot;keyword arg &apos;%s&apos;: %s&quot; % (n,kwargs[n])</span><br></pre></td></tr></table></figure>
+<p><strong>好，来调用它。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;f(1,2,&apos;abc&apos;,&apos;xyz&apos;,q=123,w=456)</span><br><span class="line">x:1</span><br><span class="line">y:2</span><br><span class="line">non-keyword arg:abc</span><br><span class="line">non-keyword arg:xyz</span><br><span class="line">keyword arg &apos;q&apos;:123</span><br><span class="line">keyword arg &apos;w&apos;:456</span><br></pre></td></tr></table></figure>
+<p><strong>还可以这样调用：</strong>    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;f(1,2,*(3,4),**&#123;&apos;a&apos;:5,&apos;b&apos;:6&#125;)</span><br><span class="line">x:1</span><br><span class="line">y:2</span><br><span class="line">non-keyword arg:3</span><br><span class="line">non-keyword arg:4</span><br><span class="line">keyword arg &apos;a&apos;:5</span><br><span class="line">keyword arg &apos;b&apos;:6</span><br></pre></td></tr></table></figure>
+<p><strong>还有这样：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tuple = (6,7)</span><br><span class="line">&gt;&gt;&gt; dict = &#123;&apos;a&apos;:8&#125;</span><br><span class="line">&gt;&gt;&gt; f(1,2,3,b=4,*tuple,**dict)</span><br><span class="line">x:1</span><br><span class="line">y:2</span><br><span class="line">non-keyword arg:3</span><br><span class="line">non-keyword arg:6</span><br><span class="line">non-keyword arg:7</span><br><span class="line">keyword arg &apos;a&apos;:8</span><br><span class="line">keyword arg &apos;b&apos;:4</span><br></pre></td></tr></table></figure>
+<p><strong>这里很奇怪的是，调用函数时，对于元组，先将3传入并返回，然后再将元组里的元素作为参数传入并返回；而对于字典，顺序刚好相反，这是为什么呢？不知道..没想出来..</strong></p>
+<ul>
+<li>注意：关键字参数应为函数定义的最后一个参数。</li>
+</ul>
+<p><strong>所以这些参数的定义顺序为：位置参数，关键字参数，非关键字可变长参数，关键字变量参数。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
