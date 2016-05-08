@@ -79,7 +79,7 @@
 <li>Werkzeug:它是一个Python的WSGI规范的实用函数库。提供了路由、调试和Web服务器网关接口（WSGI）子系统。详情到<a href="http://werkzeug-docs-cn.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">Werkzeug中文官方文档</a>和<a href="http://werkzeug.pocoo.org/docs/0.11/" target="_blank" rel="external">Werkzeug英文官方文档</a></li>
 </ul>
 <p>Flask并不支持数据库访问、Web表单验证和用户认证等高级功能。这些功能都要通过扩展实现。</p>
-<h3 id="Flask-安装"><a href="#Flask-安装" class="headerlink" title="Flask 安装"></a>Flask 安装</h3><p>一个又方便又整洁的方法就是使用虚拟环境安装啦。虚拟环境用一个叫virtualenv的工具创建。（详情可到<a href="https://virtualenv.pypa.io/en/latest/index.html" target="_blank" rel="external">virtualenv官网</a>）可以先看看自己的系&gt;统中有没有virtualenv：</p>
+<h3 id="Flask-安装"><a href="#Flask-安装" class="headerlink" title="Flask 安装"></a>Flask 安装</h3><p>一个又方便又整洁的方法就是使用虚拟环境安装啦。虚拟环境用一个叫virtualenv的工具创建（详情可到<a href="https://virtualenv.pypa.io/en/latest/index.html" target="_blank" rel="external">virtualenv官网</a>）.可以先看看自己的系统中有没有virtualenv：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
 <p>如果没有显示版本号，就乖乖去安装吧。</p>
 <p>Mac OS X系统下：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo easy_install virtualenv</span><br></pre></td></tr></table></figure></p>
@@ -87,21 +87,15 @@
 <p>Windows下：</p>
 <ul>
 <li>方法一：换mac</li>
-<li><ul>
 <li>方法二：换linux系统</li>
-</ul>
-</li>
-<li><ul>
 <li>方法三：比较麻烦，自行百度吧。</li>
-</ul>
-</li>
 </ul>
 <p>安装好virtulaenv了，接着创建一个文件夹来放‘教程’的实例代码。这里我创建了一个叫playwithflask的文件夹，然后进入到这个文件夹中。<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> playwithflask</span><br><span class="line">$ <span class="built_in">cd</span> playwithflask</span><br></pre></td></tr></table></figure></p>
 <p>接下来就要使用virtualenv命令来创建Python虚拟环境了。<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>virtualenv venv</span><br></pre></td></tr></table></figure></p>
 <p>virtulenv命令后只有一个必须的参数，就是虚拟环境的名字，一般命名为venv。也可以叫其它名字，只要你喜欢。</p>
 <p>如果这样显示：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>rose<span class="regexp">/rose/</span>playwithflask<span class="regexp">/venv/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
 <p>就证明你创建好了。并且可以看到用virtualenv创建虚拟环境时还自动安装了setuptools、pip和wheel。</p>
-<p>创建完虚拟环境后，playwithflask文件夹里就会出现一个venv文件夹(或者是你起的其它名字)。和虚&gt;拟环境相关的文件都会保存在这个文件夹中，它保存一个全新的虚拟环境，其中还有一个私有的Python解释器。</p>
+<p>创建完虚拟环境后，playwithflask文件夹里就会出现一个venv文件夹(或者是你起的其它名字)。和虚拟环境相关的文件都会保存在这个文件夹中，它保存一个全新的虚拟环境，其中还有一个私有的Python解释器。</p>
 <p>每次使用这个虚拟环境前，都要先激活：</p>
 <p>Mac OS X 和 Linux 下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">source</span> venv<span class="regexp">/bin/</span>activate</span><br></pre></td></tr></table></figure></p>
 <p>Windows下：</p>
