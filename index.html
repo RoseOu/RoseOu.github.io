@@ -54,6 +54,140 @@
 
   
   
+    <h3 class="article-title"><a href="/2016/05/08/flaskroute/"><span>Flask学习教程 Part1 Chapter2:路由和试图函数</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/08/flaskroute/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-08T03:47:48.000Z">
+          2016-05-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>首先我们来看一个最小的应用，hello.py:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span>                               ＃这里是python定义函数的语法</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/user/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello, %s!&lt;/h1&gt;'</span> % name    ＃这里是python中使用格式转换符的语法</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
+<p>前端的同学，你们看不懂是吧？没关系，现在来解释一下这段python代码是什么意思，做了什么。</p>
+<p>1.首先，我们之前下载安装了flask，现在就从flask包里导入Flask这个类，因为接下来要用到。这里涉及到python面向对象的知识，Flask类定义在flask里，它有着许多属性和方法（属性可以理解为一些特质，就像人类有眼耳口鼻，方法可以理解为行为，就像人类会说话会走路一样），现在你只要知道这些就够了。</p>
+<p>2.然后，我们就创建一个Flask类的实例，它叫app。因为app是Flask类，所以它有着Flask类的属性和方法。Flask类里有着一个构造函数，当我们实例化Flask类创造app的时候，这个构造函数就会被调用，这个函数里有一个必须要传入的参数，就是程序主模块或包的名称。这个参数决定着程序的根目录。如果你使用单一的模块，你应该使用<strong>name</strong> ，因为模块的名称将会因其作为单独应用启动还是作为模块导入而有不同（也就是‘<strong>main</strong>’或实际的导入名）。这里的hello.py就是一个单一的模块，所以使用<strong>name</strong>就好了。</p>
+<p>3.接下来这两段代码就叫做<strong>路由</strong>。这里使用到了app实例里的route装饰器。装饰器又是什么？装饰器实际上也是一个函数，它是一个接受另一个函数作为参数的函数。也就是说，这里的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/'):</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br></pre></td></tr></table></figure></p>
+<p>就相当于：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def index():</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">app.route(<span class="string">'/'</span>, index)</span><br></pre></td></tr></table></figure></p>
+<p>所以说route装饰器也是一个函数，至于它怎么定义的现在你不用管，你只要知道它的作用就够了。它的作用就是将URL和函数绑定。当在浏览器请求这个URL时，与之绑定的函数就会被调用，然后函数的返回值会发送给浏览器。而这个与URL绑定了的函数就叫<strong>做视图函数</strong>。</p>
+<p>4.好，看回hello.py里的第二个路由，它有点特别，它是一个<strong>动态路由</strong>。看到后面那个<name>了吧，这个叫通配符，就是它可以随着你传入的值而变动，是一个动态的部分。调用视图函数时，Flask会将动态部分作为参数传入函数，然后返回给浏览器。</name></p>
+<p>5.最后的run()函数的作用是让hello.py运行在本地服务器上，可以把指定的域名和端口作为参数传入。if <strong>name</strong> == ‘<strong>main</strong>’的意思是，当这个hello.py被Python解释器直接执行的时候才会运行服务器，作为模块导入时就不会。</p>
+<p>嗯，终于弄明白这段代码了。来运行这个程序看看。<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py</span><br><span class="line"> * Running on http://<span class="number">127.0.0.1:5000</span>/ (Press CTRL+C to quit)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger is active!</span><br><span class="line"> * Debugger pin code: <span class="number">246</span>-<span class="number">018</span>-<span class="number">741</span></span><br><span class="line"> * <span class="number">127.0.0.1</span> - - <span class="string">[08/May/2016 10:35:16]</span> <span class="string">"<span class="keyword">GET</span> / HTTP/1.1"</span> <span class="number">200</span> -</span><br><span class="line"> * <span class="number">127.0.0.1</span> - - <span class="string">[08/May/2016 10:35:16]</span> <span class="string">"<span class="keyword">GET</span> /favicon.ico HTTP/1.1"</span> <span class="number">404</span> -</span><br></pre></td></tr></table></figure></p>
+<p>现在这个程序运行在本地的服务器上了，那么现在打开浏览器，在地址栏输入<a href="http://127.0.0.1:5000/，然后我们就会看到：" target="_blank" rel="external">http://127.0.0.1:5000/，然后我们就会看到：</a><br> <img src="" alt="index image"><br>这里访问了’/‘，即程序的根地址，于是调用了index()视图函数，即第一个路由。</p>
+<p>如果我们输入<a href="http://127.0.0.1:5000/user/rose/，那么就会看到：" target="_blank" rel="external">http://127.0.0.1:5000/user/rose/，那么就会看到：</a><br><img src="" alt="user image"><br>这里访问了’/user/rose’，用到了第二个路由，并且给name这个动态参数传入了rose这个值。</p>
+<p>至此，路由和试图函数的部分就介绍完了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/05/08/flasksetup/"><span>Flask学习教程 Part1 Chapter1:Flask简介及安装</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/08/flasksetup/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-08T03:37:26.000Z">
+          2016-05-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="Flask-简介"><a href="#Flask-简介" class="headerlink" title="Flask 简介"></a>Flask 简介</h3><p>Flask是一个使用 Python 编写的轻量级 Web 应用框架。它有两个主要的依赖：</p>
+<ul>
+<li>Jinja2:它是一个基于Python的模版引擎，提供了模板系统。其设计思想来源于Django的模板引擎。&gt;详情到<a href="http://docs.jinkan.org/docs/jinja2/" target="_blank" rel="external">Jinja2中文官方文档</a>和<a href="http://jinja.pocoo.org/docs/dev/" target="_blank" rel="external">Jinja2英文官方文档</a></li>
+<li>Werkzeug:它是一个Python的WSGI规范的实用函数库。提供了路由、调试和Web服务器网关接口（WSGI）子系统。详情到<a href="http://werkzeug-docs-cn.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">Werkzeug中文官方文档</a>和<a href="http://werkzeug.pocoo.org/docs/0.11/" target="_blank" rel="external">Werkzeug英文官方文档</a></li>
+</ul>
+<p>Flask并不支持数据库访问、Web表单验证和用户认证等高级功能。这些功能都要通过扩展实现。</p>
+<h3 id="Flask-安装"><a href="#Flask-安装" class="headerlink" title="Flask 安装"></a>Flask 安装</h3><p>一个又方便又整洁的方法就是使用虚拟环境安装啦。虚拟环境用一个叫virtualenv的工具创建。（详情可到<a href="https://virtualenv.pypa.io/en/latest/index.html" target="_blank" rel="external">virtualenv官网</a>）可以先看看自己的系&gt;统中有没有virtualenv：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+<p>如果没有显示版本号，就乖乖去安装吧。</p>
+<p>Mac OS X系统下：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo easy_install virtualenv</span><br></pre></td></tr></table></figure></p>
+<p>Linux的Ubuntu下：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-virtualenv</span><br></pre></td></tr></table></figure></p>
+<p>Windows下：</p>
+<ul>
+<li>方法一：换mac</li>
+<li><ul>
+<li>方法二：换linux系统</li>
+</ul>
+</li>
+<li><ul>
+<li>方法三：比较麻烦，自行百度吧。</li>
+</ul>
+</li>
+</ul>
+<p>安装好virtulaenv了，接着创建一个文件夹来放‘教程’的实例代码。这里我创建了一个叫playwithflask的文件夹，然后进入到这个文件夹中。<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> playwithflask</span><br><span class="line">$ <span class="built_in">cd</span> playwithflask</span><br></pre></td></tr></table></figure></p>
+<p>接下来就要使用virtualenv命令来创建Python虚拟环境了。<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>virtualenv venv</span><br></pre></td></tr></table></figure></p>
+<p>virtulenv命令后只有一个必须的参数，就是虚拟环境的名字，一般命名为venv。也可以叫其它名字，只要你喜欢。</p>
+<p>如果这样显示：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>rose<span class="regexp">/rose/</span>playwithflask<span class="regexp">/venv/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
+<p>就证明你创建好了。并且可以看到用virtualenv创建虚拟环境时还自动安装了setuptools、pip和wheel。</p>
+<p>创建完虚拟环境后，playwithflask文件夹里就会出现一个venv文件夹(或者是你起的其它名字)。和虚&gt;拟环境相关的文件都会保存在这个文件夹中，它保存一个全新的虚拟环境，其中还有一个私有的Python解释器。</p>
+<p>每次使用这个虚拟环境前，都要先激活：</p>
+<p>Mac OS X 和 Linux 下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">source</span> venv<span class="regexp">/bin/</span>activate</span><br></pre></td></tr></table></figure></p>
+<p>Windows下：</p>
+<ul>
+<li>方法一：换mac</li>
+<li>方法二：换linux系统</li>
+<li>方法三：<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ venv<span class="symbol">\S</span>cripts<span class="symbol">\a</span>ctivate</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>激活虚拟环境后，venv文件夹里的Python解释器的路径就会被添加进PATH中，但这只在当前命令行会话有效，所以每次使用虚拟环境前都要先激活它。接下来我们会看到命令行提示符前加入了虚拟环境的名字：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) <span class="symbol">$</span></span><br></pre></td></tr></table></figure></p>
+<p>如果要回到全局Python解释器中，就这样：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>deactivate</span><br></pre></td></tr></table></figure></p>
+<p>接下来，终于到flask的安装了。激活虚拟环境后，用pip来安装：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip <span class="keyword">install</span> flask</span><br></pre></td></tr></table></figure></p>
+<p>安装flask的过程中，可以看到它还自动安装了Werkzeug,MarkupSafe,Jinja2,itsdangerous这些依赖。</p>
+<p>然后来验证一下你是否成功安装了flask。启动python解释器，导入Flask：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; import flask</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果导入Flask时没有报错，就证明你安装成功了。</p>
+<p>那么接下来终于可以开始学习flask了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
     <h3 class="article-title"><a href="/2016/03/27/bottle/"><span>Bottle 总结</span></a></h3>
   
 
