@@ -130,7 +130,7 @@
 <li>Jinja2:它是一个基于Python的模版引擎，提供了模板系统。其设计思想来源于Django的模板引擎。&gt;详情到<a href="http://docs.jinkan.org/docs/jinja2/" target="_blank" rel="external">Jinja2中文官方文档</a>和<a href="http://jinja.pocoo.org/docs/dev/" target="_blank" rel="external">Jinja2英文官方文档</a></li>
 <li>Werkzeug:它是一个Python的WSGI规范的实用函数库。提供了路由、调试和Web服务器网关接口（WSGI）子系统。详情到<a href="http://werkzeug-docs-cn.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">Werkzeug中文官方文档</a>和<a href="http://werkzeug.pocoo.org/docs/0.11/" target="_blank" rel="external">Werkzeug英文官方文档</a></li>
 </ul>
-<p>Flask并不支持数据库访问、Web表单验证和用户认证等高级功能。这些功能都要通过扩展实现。</p>
+<p>Flask本身没有提供数据库访问模块和orm不原生支持数据库访问、也不支持Web表单验证和用户认证等高级功能。这些功能都要通过扩展实现。</p>
 <h3 id="Flask-安装"><a href="#Flask-安装" class="headerlink" title="Flask 安装"></a>Flask 安装</h3><p>一个又方便又整洁的方法就是使用虚拟环境安装啦。虚拟环境用一个叫virtualenv的工具创建（详情可到<a href="https://virtualenv.pypa.io/en/latest/index.html" target="_blank" rel="external">virtualenv官网</a>）.可以先看看自己的系统中有没有virtualenv：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
 <p>如果没有显示版本号，就乖乖去安装吧。</p>
