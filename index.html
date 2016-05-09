@@ -54,7 +54,7 @@
 
   
   
-    <h3 class="article-title"><a href="/2016/05/08/flaskroute/"><span>Flask学习教程 Part1 Chapter2:路由和试图函数</span></a></h3>
+    <h3 class="article-title"><a href="/2016/05/08/flaskroute/"><span>Flask学习教程 Part1 Chapter2:路由和视图函数</span></a></h3>
   
 
 
@@ -86,7 +86,7 @@
 <p>嗯，终于弄明白这段代码了。来运行这个程序看看。<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py</span><br><span class="line"> * Running on http://<span class="number">127.0.0.1:5000</span>/ (Press CTRL+C to quit)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger is active!</span><br><span class="line"> * Debugger pin code: <span class="number">246</span>-<span class="number">018</span>-<span class="number">741</span></span><br><span class="line"> * <span class="number">127.0.0.1</span> - - <span class="string">[08/May/2016 10:35:16]</span> <span class="string">"<span class="keyword">GET</span> / HTTP/1.1"</span> <span class="number">200</span> -</span><br><span class="line"> * <span class="number">127.0.0.1</span> - - <span class="string">[08/May/2016 10:35:16]</span> <span class="string">"<span class="keyword">GET</span> /favicon.ico HTTP/1.1"</span> <span class="number">404</span> -</span><br></pre></td></tr></table></figure></p>
 <p>现在这个程序运行在本地的服务器上了，那么现在打开浏览器，在地址栏输入<a href="http://127.0.0.1:5000/，" target="_blank" rel="external">http://127.0.0.1:5000/，</a> 然后我们就会看到：<br> <img src="/images/world.jpg"><br>这里访问了’/‘，即程序的根地址，于是调用了index()视图函数，即第一个路由。</p>
 <p>如果我们输入<a href="http://127.0.0.1:5000/user/rose/，" target="_blank" rel="external">http://127.0.0.1:5000/user/rose/，</a> 那么就会看到：<br><img src="/images/user.jpg"><br>这里访问了’/user/rose’，用到了第二个路由，并且给name这个动态参数传入了rose这个值。</p>
-<p>至此，路由和试图函数的部分就介绍完了。</p>
+<p>至此，路由和视图函数的部分就介绍完了。</p>
 
       
     </div>
