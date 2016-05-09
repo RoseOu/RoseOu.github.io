@@ -143,11 +143,11 @@
 <li>方法二：换linux系统</li>
 <li><p>方法三：</p>
 <ul>
-<li>1.先进入<a href="https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py" target="_blank" rel="external">这里</a>,复制所有代码粘贴到distribute_setup.py里，请将这个文件放到你 想放的地方。</li>
+<li>1.先进入<a href="https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py" target="_blank" rel="external"> 这里 </a>,复制所有代码粘贴到distribute_setup.py里，请将这个文件放到你想放的地方。</li>
 <li><p>2.然后打开Windows PowerShell，cd到distribute_setup.py所在的目录下，运行distribute_setup.py。</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python</span> distribute_setup.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>3.接下来，就要把你的Python安装中的Scripts文件夹的路劲添加到PATH环境变量中&gt;，这样easy_install命令和其它Python脚本就加入到了命令行自动搜索的路径。步骤是：右键单击“我的电脑”图标，选择“属性”，然后单击“高级系统设置”，再单击”环境变量”按钮，最后双击“系统变量”栏中的“Path”变量，并加入你的Python解释器的Scripts文件夹的路径。确保你用分号把它和现有的值分隔开。假设你使用Python 2.7且为默认目录，添加下面的值:</p>
+<li><p>3.接下来，就要把你的Python安装中的Scripts文件夹的路劲添加到PATH环境变量中，这样easy_install命令和其它Python脚本就加入到了命令行自动搜索的路径。步骤是：右键单击“我的电脑”图标，选择“属性”，然后单击“高级系统设置”，再单击”环境变量”按钮，最后双击“系统变量”栏中的“Path”变量，并加入你的Python解释器的Scripts文件夹的路径。确保你用分号把它和现有的值分隔开。假设你使用Python 2.7且为默认目录，添加下面的值:</p>
 <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;C:<span class="symbol">\P</span>ython27<span class="symbol">\S</span>cripts</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>4.这样，我们就可以使用easy_install了。重启一下Windows PowerShell，用easy_install来安装pip：</p>
@@ -161,7 +161,7 @@
 <p>接下来使用virtualenv命令来创建Python虚拟环境。<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>virtualenv venv</span><br></pre></td></tr></table></figure></p>
 <p>virtulenv命令后只有一个必须的参数，就是虚拟环境的名字，一般命名为venv。也可以叫其它名字，只要你喜欢。</p>
 <p>如果这样显示：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>rose<span class="regexp">/rose/</span>playwithflask<span class="regexp">/venv/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
-<p>就证明你创建好了。并且可以看到用virtualenv创建虚拟环境时还自动安装了setuptools、、wheel等工具。</p>
+<p>就证明你创建好了。并且可以看到用virtualenv创建虚拟环境时还自动安装了setuptools、wheel等工具。</p>
 <p>创建完虚拟环境后，playwithflask文件夹里就会出现一个venv文件夹(或者是你起的其它名字)。和虚拟环境相关的文件都会保存在这个文件夹中，它保存一个全新的虚拟环境，其中还有一个私有的Python解释器。</p>
 <p>每次使用这个虚拟环境前，都要先激活：</p>
 <p>Mac OS X 和 Linux 下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">source</span> venv<span class="regexp">/bin/</span>activate</span><br></pre></td></tr></table></figure></p>
