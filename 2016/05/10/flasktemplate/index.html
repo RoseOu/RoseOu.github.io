@@ -73,7 +73,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>再上一章中，我们把生成的页面的HTML代码直接写到了视图函数的return语句里，事实上,我们不可能把所有HTML代码都写到里面。我们应该把代码写到一个模版里。</p>
+        <p>在上一章中，我们把生成的页面的HTML代码直接写到了视图函数的return语句里，事实上,我们不可能把所有HTML代码都写到里面。我们应该把代码写到一个模版里。</p>
 <p>模板是一个包含响应文本的文件，其中包含用占位变量表示的动态部分，其具体值只在请求的上下文中（上下文的含义后面会提到，现在无需纠结）才能知道。使用真实值替换变量，再返回最终得到的响应字符串，这一过程称为渲染。Flask使用了Jinja2这个模板引擎来渲染模板。</p>
 <p>好，那么我们现在把之前那两个路由的HTML代码放到模板里。首先我们要在playwithflask文件夹里创建一个叫templates文件夹，因为默认情况下Flask会在templates文件夹里寻找模板。然后进入templates文件夹，创建index.html文件来放显示程序根地址页面的代码：</p>
 <p>playwithflask/templates/index.html:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
