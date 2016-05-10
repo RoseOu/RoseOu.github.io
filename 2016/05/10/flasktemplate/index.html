@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 Chapter3:用Jinja2渲染模板 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flask学习教程 Part1 Chapter3:用Jinja2渲染模板"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 Chapter3:用Jinja2渲染模板</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/10/flasktemplate/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-10T13:39:34.000Z">
+          2016-05-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>再上一章中，我们把生成的页面的HTML代码直接写到了视图函数的return语句里，事实上,我们不可能把所有HTML代码都写到里面。我们应该把代码写到一个模版里。</p>
+<p>模板是一个包含响应文本的文件，其中包含用占位变量表示的动态部分，其具体值只在请求的上下文中（上下文的含义后面会提到，现在无需纠结）才能知道。使用真实值替换变量，再返回最终得到的响应字符串，这一过程称为渲染。Flask使用了Jinja2这个模板引擎来渲染模板。</p>
+<p>好，那么我们现在把之前那两个路由的HTML代码放到模板里。首先我们要在playwithflask文件夹里创建一个叫templates文件夹，因为默认情况下Flask会在templates文件夹里寻找模板。然后进入templates文件夹，创建index.html文件来放显示程序根地址页面的代码：</p>
+<p>playwithflask/templates/index.html:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后再创建一个user.html 。<br>playwithflask/templates/user.html:<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;Hello, <span class="template-variable">&#123;&#123; name &#125;&#125;</span>!&lt;<span class="regexp">/h1&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接着再打开hello.py将代码修改如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/user/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'user.html'</span>, name=name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
+<p>现在来解释一下修改了的部分：<br>1.新导入了render_template()函数来渲染模板。</p>
+<p>2.这个函数的第一个参数是模板的文件名，随后的参数都是键值对，表示模板中变量对应的真实值。</p>
+<p>3.看到第二个路由里的user.html模板收到一个name变量。这里的name=name是关键字参数，左边是参数名，右边是传入该参数的值。</p>
+<p>4.注意：上面说到Flask会在templates文件夹里寻找模板。事实上，如果你的应用是个模块，这个文件夹应该与模块同级；如果它是一个包，那么这个文件夹作为包的子目录。现在我们的应用只是一个单一的hello.py 模块，所以我们创建的templates文件夹与它同级。</p>
+<p>嗯，修改好代码后，我们再来运行hello.py看看:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger <span class="keyword">is</span> active!</span><br><span class="line"> * Debugger pin code: <span class="number">959</span>-<span class="number">578</span>-<span class="number">864</span></span><br></pre></td></tr></table></figure></p>
+<p>现在打开浏览器，在地址栏输入<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> ，然后我们就会看到：<br><img src="/images/world.jpg"></p>
+<p>如果输入<a href="http://127.0.0.1:5000/user/rose/" target="_blank" rel="external">http://127.0.0.1:5000/user/rose/</a> ，就会看到：<br><img src="/images/user.jpg"></p>
+<p>效果跟之前是一摸一样的。</p>
+<p>在这两个路由中，我们都是把一个URL和一个视图函数绑定，实际上，还可以把几个URL绑定到同一个函数上。再次打开hello.py把部分修改成：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/user/')</span></span><br><span class="line"><span class="meta">@app.route('/user/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user</span><span class="params">(name=None)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'user.html'</span>, name=name)</span><br><span class="line"></span><br><span class="line"><span class="comment">#...</span></span><br></pre></td></tr></table></figure></p>
+<p>这里就把两个URL（’/user/‘和’/user/<name>‘）绑定到一个视图函数上啦，也就是请求这两个URL时，视图函数user()都会被调用。所以这里要给name参数一个默认值None，否则，当我们没有给name传入值时也就是访问’/user/‘这个URL时，就会报错。</name></p>
+<p>然后再把playwithflask/templates/user.html修改成：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, </span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, Stranger!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<p>这里是Jinja2的语法。意思是当我们给name传入值时，就把这个值传入并返回出来，当我们没有给name传入值，就返回Hello，Stranger！</p>
+<p>好，我们来启动服务器，并在浏览器中输入<a href="http://127.0.0.1:5000/user/" target="_blank" rel="external">http://127.0.0.1:5000/user/</a> 。<br><img src="/images/stranger.jpg"></p>
+<p>然后如果给name输入值rose：<br><img src="/images/user.jpg"></p>
+<p>嗯，模板就是这样渲染的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
