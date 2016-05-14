@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Flask学习教程 Part1 Chapter2:路由和视图函数 | Rose&#39;s blog | Work hard!</title>
+  <title>Flask学习教程 Part1 2.1:路由和视图函数 | Rose&#39;s blog | Work hard!</title>
   <meta name="author" content="Rose Ou">
   
   <meta name="description" content="Fighting!">
@@ -14,7 +14,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Flask学习教程 Part1 Chapter2:路由和视图函数"/>
+  <meta property="og:title" content="Flask学习教程 Part1 2.1:路由和视图函数"/>
   <meta property="og:site_name" content="Rose&#39;s blog"/>
 
   
@@ -53,7 +53,7 @@
 
   
   
-    <h3 class="article-title"><span>Flask学习教程 Part1 Chapter2:路由和视图函数</span></h3>
+    <h3 class="article-title"><span>Flask学习教程 Part1 2.1:路由和视图函数</span></h3>
   
 
 
@@ -80,7 +80,7 @@
 <p>2.然后，我们就创建一个Flask类的实例，它叫app。因为app是Flask类，所以它有着Flask类的属性和方法。Flask类里有着一个构造函数，当我们实例化Flask类创造app的时候，这个构造函数就会被调用，这个函数里有一个必须要传入的参数，就是程序主模块或包的名称。这个参数决定着程序的根目录。如果你使用单一的模块，你应该使用__name__ ，因为模块的名称将会因其作为单独应用启动还是作为模块导入而有不同（也就是‘__main__’或实际的导入名）。这里的hello.py就是一个单一的模块，所以使用__name__就好了。</p>
 <p>3.接下来这两段代码就叫做<strong>路由</strong>。这里使用到了app实例里的route装饰器。装饰器又是什么？装饰器实际上也是一个函数，它是一个接受另一个函数作为参数的函数。也就是说，这里的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/'):</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br></pre></td></tr></table></figure></p>
 <p>就相当于：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br><span class="line"></span><br><span class="line">app.route(<span class="string">'/'</span>, index)</span><br></pre></td></tr></table></figure></p>
-<p>所以说route装饰器也是一个函数，至于它怎么定义的现在你不用管，你只要知道它的作用就够了。它的作用就是将URL和函数绑定。当在浏览器请求这个URL时，与之绑定的函数就会被调用，然后函数的返回值会发送给浏览器。而这个与URL绑定了的函数就叫做<strong>视图函数</strong>。</p>
+<p>所以说route装饰器也是一个函数，至于它怎么定义的现在你不用管，你只要知道它的作用就够了。它的作用就是将URL和函数绑定。当在浏览器请求这个URL时，与之绑定的函数就会被调用，然后函数的返回值会发送给浏览器。而这个与URL绑定了的函数就叫做<strong>视图函数</strong>。而URl和视图函数之间的这种对应关系叫URL映射，这会在下一节中详细介绍。</p>
 <p>4.好，看回hello.py里的第二个路由，它有点特别，它是一个<strong>动态路由</strong>。看到后面那个<name>了吧，这个叫通配符，就是它可以随着你传入的值而变动，是一个动态的部分。调用视图函数时，Flask会将动态部分作为参数传入函数，然后返回给浏览器。</name></p>
 <p>5.最后的app.run()的意思是调用run()函数，让hello.py运行在本地服务器上，可以把指定的域名和端口作为参数传入。if__name__==’__main__‘的意思是，当这个hello.py被Python解释器直接执行的时候才会运行服务器，作为模块导入时就不会。debug=True的意思就是将run()函数里的debug参数的值设置为True，表示启用调试模式（在调试模式下，程序运行时被修改会自动重载）。</p>
 <p>嗯，终于弄明白这段代码了。来运行这个程序看看。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger <span class="keyword">is</span> active!</span><br><span class="line"> * Debugger pin code: <span class="number">246</span>-<span class="number">018</span>-<span class="number">741</span></span><br></pre></td></tr></table></figure></p>

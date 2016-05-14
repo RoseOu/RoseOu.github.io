@@ -54,7 +54,121 @@
 
   
   
-    <h3 class="article-title"><a href="/2016/05/11/wrongpage/"><span>Flask学习教程 Part1 Chapter3 Session2:错误页面</span></a></h3>
+    <h3 class="article-title"><a href="/2016/05/13/context/"><span>Flask学习教程 Part1 2.2:请求与响应</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/13/context/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-13T12:00:37.000Z">
+          2016-05-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h2><p>什么是上下文？</p>
+<p>这里我想引用一下《flask web开发》里介绍上下文的一段话：</p>
+<blockquote>
+<p>Flask从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。请求对象就是一个很好的例子，它封装了客户端发送的HTTP请求。<br>要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，不过这会导致程序中的每个视图函数都增加一个参数。除了访问请求对象，如果视图函数在处理请求时还要访问其他对象，情况会变得更糟。<br>为了避免大量可有可无的参数把视图函数弄得一团糟，Flask使用上下文临时把某些对象变为全局可访问。有了上下文，就可以写出下面的视图函数：</p>
+<p>   from flask import request</p>
+<p>   @app.route(‘/‘)<br>   def index():<br>   user_agent = request.headers.get(‘User-Agent’)<br>   return ‘</p><p>Your browser is %s</p>‘ % user_agent<p></p>
+<p>注意在这个视图函数中我们如何把request当作全局变量使用。事实上，request不可能是全局变量。试想，在多线程服务器中，多个线程同时处理不同客户端发送的不同请求时，每个线程看到的request对象必然不同。Falsk使用上下文让特定的变量在一个线程中全局可访问，与此同时却不会干扰其他线程。</p>
+</blockquote>
+<p>我不知道该如何很官方的去解释上下文，我所理解的就是，通常我们所调用的函数不是一个单独完整的函数，我们只是在往框架上面添加函数，函数完成本身功能时，还得与框架的其他部分交互。当你运行一个程序或者说处理一个请求时，需要用到其他的一些外部变量，这就由上下文来提供。这可以理解为环境，就是你运行这个程序或者处理这个请求时，需要一个特定的环境。</p>
+<p>每一段程序都有很多外部变量。这说明你这段程序是不完整的，不能独立运行。为了它正常运行，你就要给所有的外部变量一个一个赋值。而这些值的集合就叫上下文。它类似于一个全局变量吧,而这个变量的值会根据提供的值而改变。我们一般是写一个类，然后将程序运行时需要的配置文件写进这个类，当需要时再通过这个类来获取参数。</p>
+<p>这个上下文跟语文阅读理解里的上下文也差不多。如果我不告诉你上下文，只随便给你一个句子，没有相关的语境，你也就无法理解它。文章需要语境，程序需要环境。</p>
+<p>总之，上下文可以简单地理解为一个应用运行过程中或一次请求中的所有数据。</p>
+<p>flask中有两种上下文全局变量：应用上下文，请求上下文。其中它们分别有current_app,g变量和request,session变量。这四个都是线程级的全局变量。</p>
+<blockquote>
+<p>(应用上下文)对于应用，上下文包括：</p>
+<pre><code>* 应用的启动脚本是哪个文件，启动时指定了哪些参数
+* 加载了哪些配置文件，导入了哪些配置
+* 连了哪个数据库
+* 有哪些public的工具类、常量
+* 应用跑在哪个机器上，IP多少，内存多大...
+* ......
+</code></pre><p>(请求上下文)对于一次请求，就是:</p>
+<pre><code>* 请求的方法、地址、参数、post上来的数据、带上来的cookie...
+* 当前的session
+* 处理这个请求时创建出来的变量、对象...
+* ......
+</code></pre></blockquote>
+<p><strong> 应用上下文 </strong><br>从一个 Flask App读入配置并启动开始，就进入了应用上下文，在其中我们可以访问配置文件、打开资源文件、通过路由规则反向构造URL等。</p>
+<ul>
+<li>current_app:表示当前激活程序的程序实例。</li>
+<li>g:它是在处理请求时用作临时存储的对象。每次请求都会重设。</li>
+</ul>
+<p><strong> 请求上下文 </strong><br>当一个请求进入开始被处理时，就进入了请求上下文，在其中我们可以访问请求携带的信息，比如HTTP方法、表单域等。</p>
+<ul>
+<li>request(请求对象):封装了客户端发出的HTTP请求中的内容。</li>
+<li>session(用户会话):用于储存请求之间需要“记住”的值，它是一个字典。</li>
+</ul>
+<p>要使用这四个变量，只要从flask中导入就可以：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> g</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> session</span><br><span class="line"></span><br><span class="line">＃可以直接从中获取内容，如：</span><br><span class="line">request.args</span><br><span class="line">request.forms</span><br><span class="line">request.cookies</span><br></pre></td></tr></table></figure>
+<p>如果在使用这四个变量时我没有激活程序上下文或者请求上下文，就会导致错误。用current_app做例子。</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from hello <span class="keyword">import</span> app</span><br><span class="line">from flask <span class="keyword">import</span> current_app</span><br><span class="line"></span><br><span class="line">current_app.<span class="keyword">name</span></span><br></pre></td></tr></table></figure>
+<p>会报错：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">working outside <span class="keyword">of</span> <span class="built_in">application</span> context</span><br></pre></td></tr></table></figure>
+<p>要这样执行才不会报错：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hello <span class="keyword">import</span> app           ＃从hello文件导入app实例</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app   ＃从flask包导入current_app对象</span><br><span class="line"></span><br><span class="line">app_ctx = app.app_context()     ＃获得一个程序上下文（激活程序上下文），实际上是创建了一个AppContext类的实例</span><br><span class="line">app_ctx.<span class="keyword">push</span>()                  ＃把程序上下文压入堆栈中</span><br><span class="line">current_app.name                ＃当前激活程序的程序实例的名字</span><br><span class="line">app_ctx.<span class="keyword">pop</span>()                   ＃把上下文弹出</span><br></pre></td></tr></table></figure></p>
+<h2 id="请求调度"><a href="#请求调度" class="headerlink" title="请求调度"></a>请求调度</h2><p>当客户端发送请求给程序时，Flask会在程序的URL映射中查找客户端所请求的URL，让程序找到处理该请求的视图函数。</p>
+<p>上一节中也稍微介绍过URL映射，它就是Rl和视图函数之间的这种对应关系。在上一节的hello.py中，我们使用了app.route()装饰器生成映射。其实除了使用app.route()装饰器外，还可以使用app.add_url_rule()函数生成映射。</p>
+<p>现在我们可以查看一下我们的hello.py程序所生成的映射。在Python shell中检查：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line">&gt;&gt;&gt; <span class="keyword">from</span> hello <span class="keyword">import</span> app</span><br><span class="line">&gt;&gt;&gt; app.url_map</span><br><span class="line">Map<span class="function"><span class="params">([&lt;Rule <span class="string">'/user/'</span> (HEAD, OPTIONS, GET) -&gt; user&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/'</span> (HEAD, OPTIONS, GET) -&gt; index&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/static/&lt;filename&gt;'</span> (HEAD, OPTIONS, GET) -&gt; static&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/user/&lt;name&gt;'</span> (HEAD, OPTIONS, GET) -&gt; user&gt;])</span></span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到现在我们有四个URL映射。其中‘／’、’/user/‘和’/user/<name>‘这三个路由是在程序中使用app.route装饰器定义的。’/static/<filename>‘这个路由是Flask添加的特殊路由，用于访问静态文件，后面会说到。<br>URl映射中的HEAD、OPTIONS、GET叫做请求方法，Flask为每个路由都指定了请求方法，当不同的请求方法发送到相同的URl上时，会由不同的视图函数进行处理。默认情况下，路由只回应GET 请求，但是可以通过methods参数使用不同方法。因此，在这个程序中的这三个路由都使用GET方法。后面会介绍如何为路由指定不同的请求方法。</filename></name></p>
+<blockquote>
+<p>以下是一些比较常见的HTTP方法：</p>
+<ul>
+<li>GET：浏览器告诉服务器只要得到页面上的信息并发送这些信息。</li>
+<li>HEAD：浏览器告诉服务器想要得到信息，但是只要得到信息头，不需要页面内容。Flask会自动处理这个方法。</li>
+<li>POST：浏览器告诉服务器想要向URL发表一些新的信息，服务器必须确保数据被保存好且只保存了一次。 </li>
+<li>PUT：与 POST 方法类似，不同的是服务器可能触发多次储存过程而把旧的值覆盖掉。假设在传输过程中连接丢失的情况下，一个处于浏览器和服务器之间的系统可以在不中断的情况下安全地接收第二次请求。在这种情况下，使用 POST 方法就无法做到了，因为它只被触发一次。</li>
+<li>DELETE：删除给定位置的信息。</li>
+<li>OPTIONS：为客户端提供一个查询URL支持哪些方法的捷径。Flask会自动处理这个方法。</li>
+</ul>
+</blockquote>
+<h2 id="请求钩子"><a href="#请求钩子" class="headerlink" title="请求钩子"></a>请求钩子</h2><p>有时候我们需要经常在处理请求之前或之后执行同一段代码，例如，在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户。为了避免在每个视图函数中都使用重复的代码，Flask提供了注册通用函数功能，它们就是请求钩子。请求钩子可在请求被分发到视图函数之前或之后调用。</p>
+<p>请求钩子使用装饰器实现。Flask支持以下4种钩子。</p>
+<ul>
+<li>before_first_request：注册一个函数，在处理第一个请求之前运行。</li>
+<li>before_request：注册一个函数，在每次请求之前运行。其中一个函数作出响应后，其它函数将不再调用。</li>
+<li>after_request：注册一个函数，如果没有未处理的异常抛出，在每次请求之后运行。试图函数返回值会转换成一个实际响应对象交给它处理。</li>
+<li>teardown_request：注册一个函数，即使有未处理的异常抛出，也在每次请求之后运行。</li>
+</ul>
+<p>在请求钩子函数和视图函数之间共享数据一般使用上下文全局变量g。例如，before_request处理程序可以从数据库中加载已登陆用户，并将其保存到g.user中。随后调用试图函数时，试图函数再使用g.user获取用户。</p>
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><blockquote>
+<p>Flask调用视图函数后，会将其返回值作为响应内容。大多数情况下，响应就是一个简单的字符串，作为HTML页面回送客户端。但HTTP协议需要的不仅是作为请求响应的字符串。HTTP响应中一个很重要的部分是状态吗，Flask默认为200，这个代码表明请求已经被成功处理。</p>
+</blockquote>
+<p>以上出自《Flask Web 开发》一书。</p>
+<p>其实简单来说就是，Flask调用视图函数将该函数的返回值作为响应内容时，响应内容不仅仅是作为请求响应的字符串，还有状态码。这个状态码作为视图函数的第二个返回值，添加在响应文本后面。</p>
+<p>不同的响应需要不同的状态码。我们所发出的请求往往不可能全部都成功响应，总会有发生错误的时候，例如当你请求了一个不存在的URL就会返回404状态码，当请求报文存在错误时就会返回400状态码。</p>
+<p>下面我们来看一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Bad Request&lt;/h1&gt;, 400</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到第一个返回值是响应文本，第二个返回值是400状态码。这样当你请求访问程序根地址时，它就会返回400状态码表示请求无效。（注意：浏览器会像对待状态码200一样对待状态码400）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/05/11/wrongpage/"><span>Flask学习教程 Part1 3.2:错误页面</span></a></h3>
   
 
 
@@ -74,15 +188,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h3 id="关于响应"><a href="#关于响应" class="headerlink" title="关于响应"></a>关于响应</h3><blockquote>
-<p>Flask调用视图函数后，会将其返回值作为响应内容。大多数情况下，响应就是一个简单的字符串，作为HTML页面回送客户端。但HTTP协议需要的不仅是作为请求响应的字符串。HTTP响应中一个很重要的部分是状态吗，Flask默认为200，这个代码表明请求已经被成功处理。</p>
-</blockquote>
-<p>以上出自《Flask Web 开发》一书。</p>
-<p>其实简单来说就是，Flask调用视图函数将该函数的返回值作为响应内容时，响应内容不仅仅是作为请求响应的字符串，还有状态码。这个状态码作为视图函数的第二个返回值，添加在响应文本后面。</p>
-<p>不同的响应需要不同的状态码。我们所发出的请求往往不可能全部都成功响应，总会有发生错误的时候，例如当你请求了一个不存在的URL就会返回404状态码，当请求报文存在错误时就会返回400状态码。</p>
-<p>下面我们来看一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Bad Request&lt;/h1&gt;, 400</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看到第一个返回值是响应文本，第二个返回值是400状态码。这样当你请求访问程序根地址时，它就会返回400状态码表示请求无效。（注意：浏览器会像对待状态码200一样对待状态码400）</p>
-<h3 id="错误页面"><a href="#错误页面" class="headerlink" title="错误页面"></a>错误页面</h3><p>当请求错误时，我们就需要有一个页面来显示一些错误信息告诉我们发生了什么错误。Flask中还有一个abort()函数用来处理错误，返回一个显示相应错误消息的页面。以下是一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    abort(<span class="number">400</span>)</span><br></pre></td></tr></table></figure></p>
+        <p>当请求错误时，我们需要有一个页面来显示一些错误信息告诉我们发生了什么错误。Flask中还有一个abort()函数用来处理错误，返回一个显示相应错误消息的页面。以下是一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    abort(<span class="number">400</span>)</span><br></pre></td></tr></table></figure></p>
 <p>当我们访问<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> 时，就会自动返回一个显示400错误消息的页面，这个页面是这样的：<br><img src="/images/badrequest.jpg"><br>它告诉了我们浏览器发送了一个服务器无法理解的请求。</p>
 <p>可是这个页面有点丑，我们可以<strong>自定义错误页面</strong>。这也是这一小节想说的，前面的都是铺垫啊铺垫。</p>
 <p>首先，我们来添加两个处理错误的路由，打开hello.py，加入代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'404.html'</span>), <span class="number">404</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(500)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">internal_server_error</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'500.html'</span>), <span class="number">500</span></span><br><span class="line"><span class="comment">#...</span></span><br></pre></td></tr></table></figure></p>
@@ -168,7 +274,7 @@
 
   
   
-    <h3 class="article-title"><a href="/2016/05/08/routing/"><span>Flask学习教程 Part1 Chapter2:路由和视图函数</span></a></h3>
+    <h3 class="article-title"><a href="/2016/05/08/routing/"><span>Flask学习教程 Part1 2.1:路由和视图函数</span></a></h3>
   
 
 
@@ -195,7 +301,7 @@
 <p>2.然后，我们就创建一个Flask类的实例，它叫app。因为app是Flask类，所以它有着Flask类的属性和方法。Flask类里有着一个构造函数，当我们实例化Flask类创造app的时候，这个构造函数就会被调用，这个函数里有一个必须要传入的参数，就是程序主模块或包的名称。这个参数决定着程序的根目录。如果你使用单一的模块，你应该使用__name__ ，因为模块的名称将会因其作为单独应用启动还是作为模块导入而有不同（也就是‘__main__’或实际的导入名）。这里的hello.py就是一个单一的模块，所以使用__name__就好了。</p>
 <p>3.接下来这两段代码就叫做<strong>路由</strong>。这里使用到了app实例里的route装饰器。装饰器又是什么？装饰器实际上也是一个函数，它是一个接受另一个函数作为参数的函数。也就是说，这里的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/'):</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br></pre></td></tr></table></figure></p>
 <p>就相当于：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br><span class="line"></span><br><span class="line">app.route(<span class="string">'/'</span>, index)</span><br></pre></td></tr></table></figure></p>
-<p>所以说route装饰器也是一个函数，至于它怎么定义的现在你不用管，你只要知道它的作用就够了。它的作用就是将URL和函数绑定。当在浏览器请求这个URL时，与之绑定的函数就会被调用，然后函数的返回值会发送给浏览器。而这个与URL绑定了的函数就叫做<strong>视图函数</strong>。</p>
+<p>所以说route装饰器也是一个函数，至于它怎么定义的现在你不用管，你只要知道它的作用就够了。它的作用就是将URL和函数绑定。当在浏览器请求这个URL时，与之绑定的函数就会被调用，然后函数的返回值会发送给浏览器。而这个与URL绑定了的函数就叫做<strong>视图函数</strong>。而URl和视图函数之间的这种对应关系叫URL映射，这会在下一节中详细介绍。</p>
 <p>4.好，看回hello.py里的第二个路由，它有点特别，它是一个<strong>动态路由</strong>。看到后面那个<name>了吧，这个叫通配符，就是它可以随着你传入的值而变动，是一个动态的部分。调用视图函数时，Flask会将动态部分作为参数传入函数，然后返回给浏览器。</name></p>
 <p>5.最后的app.run()的意思是调用run()函数，让hello.py运行在本地服务器上，可以把指定的域名和端口作为参数传入。if__name__==’__main__‘的意思是，当这个hello.py被Python解释器直接执行的时候才会运行服务器，作为模块导入时就不会。debug=True的意思就是将run()函数里的debug参数的值设置为True，表示启用调试模式（在调试模式下，程序运行时被修改会自动重载）。</p>
 <p>嗯，终于弄明白这段代码了。来运行这个程序看看。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger <span class="keyword">is</span> active!</span><br><span class="line"> * Debugger pin code: <span class="number">246</span>-<span class="number">018</span>-<span class="number">741</span></span><br></pre></td></tr></table></figure></p>
@@ -804,138 +910,6 @@
 <h3 id="五、模块内建函数"><a href="#五、模块内建函数" class="headerlink" title="五、模块内建函数"></a>五、模块内建函数</h3><p>1、import ()：模块导入。<br>2、globals()、locals() ：包含当前全局符号表的名字的字典/包含局部符号表的名字的字典<br>3、reload()：重新导入一个已经导入的模块，其参数必须是模块自身而不是包含模块名的字符串</p>
 <hr>
 <h3 id="六、包"><a href="#六、包" class="headerlink" title="六、包"></a>六、包</h3><p>包是一个有层次的文件目录结构，它定义了一个由模块和子包组成的python应用程序执行环境。包也使用句点属性标知来访问它们的函数。<br>1、绝对导入：导入子包会导致与真正的标准库模块（事实上是它们的名字）发生冲突，会把名字相同的标准库模块隐藏掉。这些名字必须通过Python路径来访问。<br>2、相对导入：只用于from-import语句，明确在子包中某个模块的位置。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
-</article>
-
-
-  <article class="post article">
-
-  
-  
-    <h3 class="article-title"><a href="/2015/11/13/python 面向对象总结/"><span>理解 python 面向对象</span></a></h3>
-  
-
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/11/13/python 面向对象总结/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-13T14:35:12.000Z">
-          2015-11-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="对象"><a href="#对象" class="headerlink" title="对象:"></a>对象:</h2><p><strong>对象是要研究的任何事物,它不仅能表示具体的事物，还能表示抽象的东西。类是在对象之上的抽象，对象则是类的具体化，是类的实例。</strong><br>1.一个对象用数据值来描述它的状态。<br>2.用于改变对象的状态，对象及其操作就是对象的行为。</p>
-<hr>
-<h2 id="类："><a href="#类：" class="headerlink" title="类："></a>类：</h2><blockquote>
-<p>类可以对具有相同数据和方法的对象（即属性相近的对象）描述或定义。类是现实世界的抽象的实体以编程形式出现，实例是这些对象的具体化。</p>
-</blockquote>
-<p>类，实际上也是一种数据结构，像元组，列表那些。当我们定义了一个类，实际上相当于<strong>自己创建一个数据类型</strong>。而元组、列表等，这些数据类型其实相当于python内建的数据类型。</p>
-<p>就像函数那样，python也有许多内建函数，但往往我们还要自己定义函数。</p>
-<p>所以这就是面向对象编程和函数编程。面向对象编程就是新建一些封装了行为的对象（类型），函数编程就是新定义一些封装了对象（类型）的行为。</p>
-<p>1.定义类：</p>
-<pre><code>class ClassName(bases):           #类定义也和函数定义类似
-    &apos;class documentation string&apos;
-    class_suite  #类体。包含所有声明语句、类成员定义、数据属性、和函数。
-</code></pre><p>当一个类定义完之后，就产生了一个类对象。而实例化是产生出一个类对象的实例，称作实例对象。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>基类就是一个或多个用于继承的父类的集合。</li>
-<li>类通常在一个模块的顶层进行定义。想想，如果它相当于元组、列表这些数据类型，那肯定要早早定义才能像‘内建数据类型’（元组等）那样正常使用。</li>
-<li>声明和定义的区别：看上面那串伪代码，含class关键字的头行和第二行类文档字符串就是声明，类体就是定义。</li>
-</ul>
-<p>2.类定义完成后可通过类对象来访问类的属性和方法。实例化后，可以通过实例对象来访问属性和方法，栗子：</p>
-<pre><code>class bird:
-    name = &apos;Jack&apos;
-    age = 18
-b = bird()
-print b.name,b.age`
-</code></pre><p>这里定义了一个鸟类。有姓名、年龄属性。<br>b=bird()实例化了一个对象b，然后就可通过b来读取属性。(这里的name和age是公有的，可在类外通过对象名直接访问，如果想定义成私有的，需在前面加2个下划线。)</p>
-<p>为了更好地理解实例化，举一个列表的栗子：（上面说过类和它们一样是一种数据类型）</p>
-<pre><code>a = []
-</code></pre><p>这里大概谁都能看得懂发生了什么，就是创建了一个列表‘a’，也就相当于:</p>
-<pre><code>a = list()
-</code></pre><p>这样看起来就和类的实例化很像了吧，所以实例化其实也就是这么个意思。其实只要把类想象成像列表那样的‘内建数据类型’，一切关于类的东西就很好理解了。</p>
-<p>所以才说：</p>
-<blockquote>
-<p>在python中，一切皆对象。</p>
-</blockquote>
-<p>类是对象，列表、元组等也是对象。类定义完后产生了一个类对象，于是你也可以把元组看成‘元组对象’，把列表看成‘列表对象’。</p>
-<p>2.类属性</p>
-<blockquote>
-<p>属性就是属于另一个对象的数据或者函数元素，可以通过句点属性标识法来访问。</p>
-</blockquote>
-<p>类属性仅仅与其被定义的类相绑定，类属性分为数据属性和函数属性（方法）。</p>
-<ul>
-<li>数据属性</li>
-</ul>
-<p><strong>数据属性就是所定义的类的变量。</strong>它们像其他变量一样在类创建后被使用，它们可以由类中的方法更新，也可以在主程序的其他地方更新。</p>
-<p>这种变量也叫静态变量，或者是静态数据，它们与它们所属的类对象绑定，不依赖与任何类实例。</p>
-<pre><code>&gt;&gt;&gt; class C(object):
-...    foo = 100
-&gt;&gt;&gt; print C.foo
-100
-&gt;&gt;&gt; C.foo = C.foo + 1
-&gt;&gt;&gt; print C.foo
-101
-</code></pre><ul>
-<li>函数属性</li>
-</ul>
-<p>在类中也可以定义函数，这些函数就是方法。不难理解，像列表那些类型也有许多方法，那么这个自己创建的类型自然也能自己定义方法。</p>
-<p>方法是作为类定义的一部分，在类中定义的函数，这使得方法也成为类的属性。即这些方法也仅能应用于所属的类型的对象的实例上。</p>
-<p>方法通过句点属性标识法与它的实例绑定。注意：它是一个方法，属于一个类，而不是全局空间中的名字。</p>
-<pre><code>&gt;&gt;&gt; class MyClass(object):
-        def myNoActionMethod(self):
-            pass
-
-&gt;&gt;&gt; mc = Myclass()
-&gt;&gt;&gt; mc.myNoActionMethod()    
-</code></pre><p>注意：</p>
-<ul>
-<li>没有实例，方法是不能被调用的。方法必须绑定（到一个实例）才能直接被调用。即上面的栗子不能通过Myclass.myNoActionMethod()调用，这也不难理解，就像你不会list.append()来调用append()方法，而是会先创建一个列表实例。</li>
-<li>方法的第一个参数必须是self，无论是否用到。</li>
-<li><p>方法是与类对象或实例对象进行绑定了的，而函数没有与对象绑定。</p>
-</li>
-<li><p>类的内置方法:</p>
-</li>
-</ul>
-<blockquote>
-<p>__init__ :构造方法（ 初始化对象）<br>__del__:析构方法（释放对象）<br>__new__:生成实例<br>__getattr__: 获取属性的值<br>__setattr__:设置属性的值<br>__delattr__:删除name属性<br>__getitem__: 获取序列的索引对应的值<br>__cmp__:比较两个对象<br>__call__:把实例对象作为函数调用     等等等等….</p>
-</blockquote>
-<p>3.特殊的类属性</p>
-<blockquote>
-<p>C.__name__: 类C的名字（字符串形式）<br>C.<em>\</em>\doc__:类C的文档字符串<br>C.<em>\</em>\bases__:类C的所有父类构成的元组<br>C.<em>\</em>\dict__:类C的属性<br>C.<em>\</em>\module__:类C定义所在的模块<br>C.<em>\</em>\class__:实例C对应的类（仅新式类中）</p>
-</blockquote>
-<p>4.实例/实例属性(待加)</p>
-<ul>
-<li>类属性和实例属性:(待加)</li>
-</ul>
-<p>类属性是类对象所拥有的，被所有类对象的实例对象所共有,另外可通过类对象和实例对象访问。在类外修改类属性，须通过类对象去引用后再修改。如通过实例对象去引用，会产生一个同名的实例属性，修改的是实例属性非类属性。如果通过实例对象去引用该名称的属性，实例属性会强制屏蔽类属性（即引用的是实例属性)。</p>
-<hr>
-<h3 id="继承：-待改"><a href="#继承：-待改" class="headerlink" title="继承：(待改)"></a>继承：(待改)</h3><p>类别本身还可以进一步细分成子类，子类通过继承享有了父类的所有属性（数据属性和方法）。通过继承，减少了程序中的重复信息和重复语句。另外，子类也可以覆盖父类同名的变量和方法。<br>1.子类继承父类所有的公有属性和方法，可在子类中通过父类名来调用，而对于私有的属性和方法，子类不进行继承，因此在子类中无法通过父类名来访问。<br>2.继承的特点：<br>（1）如果父类和子类都重新定义了构造方法__init__，在进行子类实例化的时候，子类的构造方法不会自动调用父类的构造方法，必须在子类中显示调用。<br>（2）在调用基类的方法时，需要加上基类的类名前缀（以 父类名.方法 这种方式调用），且需要带上self参数变量。而在类中调用普通函数时并不需要带上self参数<br>（3）Python总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）。<br>3.在传统类中，如果子类和父类中同名的方法或者属性，在查找的时候基本遵循自左到右，深度优先的原则。新式类中，则采用“广度优先”的方式去查找属性。<br>4.在类层次中，子类继承了多个父类的数据结构和方法，那么它就被称作”多重继承”（如果有多个父类，多个父类名之间用逗号隔开）。<br>5.关于继承的构造函数：<br>（1）若子类没有定义自己的构造函数，父类的构造函数会被默认调用，但是此时如果要实例化子类的对象，则只能传入父类的构造函数对应的参数。<br>（2）若子类定义了自己的构造函数，而没有显示调用父类的构造函数，则父类的属性不会被初始化。<br>（3）若子类定义了自己的构造函数，显示调用父类，子类和父类的属性都会被初始化。</p>
-<hr>
-<h3 id="多态：-待改"><a href="#多态：-待改" class="headerlink" title="多态：(待改)"></a>多态：(待改)</h3><p>不同的对象，收到同一消息可以产生不同的结果，每个对象以适合自身的方式去响应共同的消息。允许将父对象设置成为和它的子对象相等，使得能够利用同一类(基类)类型的指针来引用不同类的对象,以及根据所引用对象的不同,以不同的方式执行相同的操作并获得不同的结果.</p>
-<hr>
-<h3 id="封装：-信息隐藏-待改"><a href="#封装：-信息隐藏-待改" class="headerlink" title="封装：(信息隐藏) (待改)"></a>封装：(信息隐藏) (待改)</h3><p>把类的属性和方法封装在类中，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。就是只提供调用接口，但是不公布实现细节。</p>
-<hr>
-<h3 id="新式类和经典类：待改"><a href="#新式类和经典类：待改" class="headerlink" title="新式类和经典类：待改)"></a>新式类和经典类：待改)</h3><p>1.新型类默认的元类为type，经典类默认类型为types.ClassType<br>2.新型类是在Python2.2中引入的，所有的新式类必须继承至少一个父类，如果类没有继承任何其他父类，则object将作为默认的父类。</p>
 
       
     </div>

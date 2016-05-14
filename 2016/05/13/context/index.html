@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 2.2:请求与响应 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flask学习教程 Part1 2.2:请求与响应"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 2.2:请求与响应</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/13/context/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-13T12:00:37.000Z">
+          2016-05-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h2><p>什么是上下文？</p>
+<p>这里我想引用一下《flask web开发》里介绍上下文的一段话：</p>
+<blockquote>
+<p>Flask从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。请求对象就是一个很好的例子，它封装了客户端发送的HTTP请求。<br>要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，不过这会导致程序中的每个视图函数都增加一个参数。除了访问请求对象，如果视图函数在处理请求时还要访问其他对象，情况会变得更糟。<br>为了避免大量可有可无的参数把视图函数弄得一团糟，Flask使用上下文临时把某些对象变为全局可访问。有了上下文，就可以写出下面的视图函数：</p>
+<p>   from flask import request</p>
+<p>   @app.route(‘/‘)<br>   def index():<br>   user_agent = request.headers.get(‘User-Agent’)<br>   return ‘</p><p>Your browser is %s</p>‘ % user_agent<p></p>
+<p>注意在这个视图函数中我们如何把request当作全局变量使用。事实上，request不可能是全局变量。试想，在多线程服务器中，多个线程同时处理不同客户端发送的不同请求时，每个线程看到的request对象必然不同。Falsk使用上下文让特定的变量在一个线程中全局可访问，与此同时却不会干扰其他线程。</p>
+</blockquote>
+<p>我不知道该如何很官方的去解释上下文，我所理解的就是，通常我们所调用的函数不是一个单独完整的函数，我们只是在往框架上面添加函数，函数完成本身功能时，还得与框架的其他部分交互。当你运行一个程序或者说处理一个请求时，需要用到其他的一些外部变量，这就由上下文来提供。这可以理解为环境，就是你运行这个程序或者处理这个请求时，需要一个特定的环境。</p>
+<p>每一段程序都有很多外部变量。这说明你这段程序是不完整的，不能独立运行。为了它正常运行，你就要给所有的外部变量一个一个赋值。而这些值的集合就叫上下文。它类似于一个全局变量吧,而这个变量的值会根据提供的值而改变。我们一般是写一个类，然后将程序运行时需要的配置文件写进这个类，当需要时再通过这个类来获取参数。</p>
+<p>这个上下文跟语文阅读理解里的上下文也差不多。如果我不告诉你上下文，只随便给你一个句子，没有相关的语境，你也就无法理解它。文章需要语境，程序需要环境。</p>
+<p>总之，上下文可以简单地理解为一个应用运行过程中或一次请求中的所有数据。</p>
+<p>flask中有两种上下文全局变量：应用上下文，请求上下文。其中它们分别有current_app,g变量和request,session变量。这四个都是线程级的全局变量。</p>
+<blockquote>
+<p>(应用上下文)对于应用，上下文包括：</p>
+<pre><code>* 应用的启动脚本是哪个文件，启动时指定了哪些参数
+* 加载了哪些配置文件，导入了哪些配置
+* 连了哪个数据库
+* 有哪些public的工具类、常量
+* 应用跑在哪个机器上，IP多少，内存多大...
+* ......
+</code></pre><p>(请求上下文)对于一次请求，就是:</p>
+<pre><code>* 请求的方法、地址、参数、post上来的数据、带上来的cookie...
+* 当前的session
+* 处理这个请求时创建出来的变量、对象...
+* ......
+</code></pre></blockquote>
+<p><strong> 应用上下文 </strong><br>从一个 Flask App读入配置并启动开始，就进入了应用上下文，在其中我们可以访问配置文件、打开资源文件、通过路由规则反向构造URL等。</p>
+<ul>
+<li>current_app:表示当前激活程序的程序实例。</li>
+<li>g:它是在处理请求时用作临时存储的对象。每次请求都会重设。</li>
+</ul>
+<p><strong> 请求上下文 </strong><br>当一个请求进入开始被处理时，就进入了请求上下文，在其中我们可以访问请求携带的信息，比如HTTP方法、表单域等。</p>
+<ul>
+<li>request(请求对象):封装了客户端发出的HTTP请求中的内容。</li>
+<li>session(用户会话):用于储存请求之间需要“记住”的值，它是一个字典。</li>
+</ul>
+<p>要使用这四个变量，只要从flask中导入就可以：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> g</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> session</span><br><span class="line"></span><br><span class="line">＃可以直接从中获取内容，如：</span><br><span class="line">request.args</span><br><span class="line">request.forms</span><br><span class="line">request.cookies</span><br></pre></td></tr></table></figure>
+<p>如果在使用这四个变量时我没有激活程序上下文或者请求上下文，就会导致错误。用current_app做例子。</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from hello <span class="keyword">import</span> app</span><br><span class="line">from flask <span class="keyword">import</span> current_app</span><br><span class="line"></span><br><span class="line">current_app.<span class="keyword">name</span></span><br></pre></td></tr></table></figure>
+<p>会报错：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">working outside <span class="keyword">of</span> <span class="built_in">application</span> context</span><br></pre></td></tr></table></figure>
+<p>要这样执行才不会报错：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hello <span class="keyword">import</span> app           ＃从hello文件导入app实例</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app   ＃从flask包导入current_app对象</span><br><span class="line"></span><br><span class="line">app_ctx = app.app_context()     ＃获得一个程序上下文（激活程序上下文），实际上是创建了一个AppContext类的实例</span><br><span class="line">app_ctx.<span class="keyword">push</span>()                  ＃把程序上下文压入堆栈中</span><br><span class="line">current_app.name                ＃当前激活程序的程序实例的名字</span><br><span class="line">app_ctx.<span class="keyword">pop</span>()                   ＃把上下文弹出</span><br></pre></td></tr></table></figure></p>
+<h2 id="请求调度"><a href="#请求调度" class="headerlink" title="请求调度"></a>请求调度</h2><p>当客户端发送请求给程序时，Flask会在程序的URL映射中查找客户端所请求的URL，让程序找到处理该请求的视图函数。</p>
+<p>上一节中也稍微介绍过URL映射，它就是Rl和视图函数之间的这种对应关系。在上一节的hello.py中，我们使用了app.route()装饰器生成映射。其实除了使用app.route()装饰器外，还可以使用app.add_url_rule()函数生成映射。</p>
+<p>现在我们可以查看一下我们的hello.py程序所生成的映射。在Python shell中检查：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line">&gt;&gt;&gt; <span class="keyword">from</span> hello <span class="keyword">import</span> app</span><br><span class="line">&gt;&gt;&gt; app.url_map</span><br><span class="line">Map<span class="function"><span class="params">([&lt;Rule <span class="string">'/user/'</span> (HEAD, OPTIONS, GET) -&gt; user&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/'</span> (HEAD, OPTIONS, GET) -&gt; index&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/static/&lt;filename&gt;'</span> (HEAD, OPTIONS, GET) -&gt; static&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/user/&lt;name&gt;'</span> (HEAD, OPTIONS, GET) -&gt; user&gt;])</span></span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到现在我们有四个URL映射。其中‘／’、’/user/‘和’/user/<name>‘这三个路由是在程序中使用app.route装饰器定义的。’/static/<filename>‘这个路由是Flask添加的特殊路由，用于访问静态文件，后面会说到。<br>URl映射中的HEAD、OPTIONS、GET叫做请求方法，Flask为每个路由都指定了请求方法，当不同的请求方法发送到相同的URl上时，会由不同的视图函数进行处理。默认情况下，路由只回应GET 请求，但是可以通过methods参数使用不同方法。因此，在这个程序中的这三个路由都使用GET方法。后面会介绍如何为路由指定不同的请求方法。</filename></name></p>
+<blockquote>
+<p>以下是一些比较常见的HTTP方法：</p>
+<ul>
+<li>GET：浏览器告诉服务器只要得到页面上的信息并发送这些信息。</li>
+<li>HEAD：浏览器告诉服务器想要得到信息，但是只要得到信息头，不需要页面内容。Flask会自动处理这个方法。</li>
+<li>POST：浏览器告诉服务器想要向URL发表一些新的信息，服务器必须确保数据被保存好且只保存了一次。 </li>
+<li>PUT：与 POST 方法类似，不同的是服务器可能触发多次储存过程而把旧的值覆盖掉。假设在传输过程中连接丢失的情况下，一个处于浏览器和服务器之间的系统可以在不中断的情况下安全地接收第二次请求。在这种情况下，使用 POST 方法就无法做到了，因为它只被触发一次。</li>
+<li>DELETE：删除给定位置的信息。</li>
+<li>OPTIONS：为客户端提供一个查询URL支持哪些方法的捷径。Flask会自动处理这个方法。</li>
+</ul>
+</blockquote>
+<h2 id="请求钩子"><a href="#请求钩子" class="headerlink" title="请求钩子"></a>请求钩子</h2><p>有时候我们需要经常在处理请求之前或之后执行同一段代码，例如，在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户。为了避免在每个视图函数中都使用重复的代码，Flask提供了注册通用函数功能，它们就是请求钩子。请求钩子可在请求被分发到视图函数之前或之后调用。</p>
+<p>请求钩子使用装饰器实现。Flask支持以下4种钩子。</p>
+<ul>
+<li>before_first_request：注册一个函数，在处理第一个请求之前运行。</li>
+<li>before_request：注册一个函数，在每次请求之前运行。其中一个函数作出响应后，其它函数将不再调用。</li>
+<li>after_request：注册一个函数，如果没有未处理的异常抛出，在每次请求之后运行。试图函数返回值会转换成一个实际响应对象交给它处理。</li>
+<li>teardown_request：注册一个函数，即使有未处理的异常抛出，也在每次请求之后运行。</li>
+</ul>
+<p>在请求钩子函数和视图函数之间共享数据一般使用上下文全局变量g。例如，before_request处理程序可以从数据库中加载已登陆用户，并将其保存到g.user中。随后调用试图函数时，试图函数再使用g.user获取用户。</p>
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><blockquote>
+<p>Flask调用视图函数后，会将其返回值作为响应内容。大多数情况下，响应就是一个简单的字符串，作为HTML页面回送客户端。但HTTP协议需要的不仅是作为请求响应的字符串。HTTP响应中一个很重要的部分是状态吗，Flask默认为200，这个代码表明请求已经被成功处理。</p>
+</blockquote>
+<p>以上出自《Flask Web 开发》一书。</p>
+<p>其实简单来说就是，Flask调用视图函数将该函数的返回值作为响应内容时，响应内容不仅仅是作为请求响应的字符串，还有状态码。这个状态码作为视图函数的第二个返回值，添加在响应文本后面。</p>
+<p>不同的响应需要不同的状态码。我们所发出的请求往往不可能全部都成功响应，总会有发生错误的时候，例如当你请求了一个不存在的URL就会返回404状态码，当请求报文存在错误时就会返回400状态码。</p>
+<p>下面我们来看一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Bad Request&lt;/h1&gt;, 400</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到第一个返回值是响应文本，第二个返回值是400状态码。这样当你请求访问程序根地址时，它就会返回400状态码表示请求无效。（注意：浏览器会像对待状态码200一样对待状态码400）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
