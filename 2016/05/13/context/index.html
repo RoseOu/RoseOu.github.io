@@ -152,6 +152,7 @@
 <p>不同的响应需要不同的状态码。我们所发出的请求往往不可能全部都成功响应，总会有发生错误的时候，例如当你请求了一个不存在的URL就会返回404状态码，当请求报文存在错误时就会返回400状态码。</p>
 <p>下面我们来看一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Bad Request&lt;/h1&gt;, 400</span></span><br></pre></td></tr></table></figure></p>
 <p>可以看到第一个返回值是响应文本，第二个返回值是400状态码。这样当你请求访问程序根地址时，它就会返回400状态码表示请求无效。（注意：浏览器会像对待状态码200一样对待状态码400）</p>
+<p>Next: <a href="http://roseou.github.io/2016/05/15/script/" target="_blank" rel="external">Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项</a></p>
 
       
     </div>
