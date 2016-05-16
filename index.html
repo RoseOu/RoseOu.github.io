@@ -54,49 +54,6 @@
 
   
   
-    <h3 class="article-title"><a href="/2016/05/16/base/"><span>base</span></a></h3>
-  
-
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/05/16/base/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-05-16T13:58:32.000Z">
-          2016-05-16
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>或许你已经看到我的题目知道这一节要讲的是模板继承。模板继承是一种重复使用代码的方法。但是现在我们的模板都太过简单，完全没有重复的地方，然而实际上，一个应用中的不同页面往往长的差不多。现在我们来修改一下我们已有的模板，让它们看起来稍微有点像是来自于一个应用程序的。</p>
-<p>index.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>user.html：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, </span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, Stranger!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>404.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Page Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>500.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>500 Internal Server Error<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
-</article>
-
-
-  <article class="post article">
-
-  
-  
     <h3 class="article-title"><a href="/2016/05/16/templates/"><span>Flask学习教程 Part1 3.1:用Jinja2渲染模板</span></a></h3>
   
 
@@ -858,6 +815,107 @@
 <li>文件传输:文件传输通过发送格式化文件实现应用程序间数据共享。</li>
 <li>信息交付:指松耦合或紧耦合应用程序间的小型格式化信息，通过程序间的直接通信实现数据共享。</li>
 </ul>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2015/12/09/python-魔法方法/"><span>python 魔法方法</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/09/python-魔法方法/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-08T16:08:12.000Z">
+          2015-12-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><strong>魔法方法即前后各加两个下划线的名字组成的集合所包含的方法。（如果对象实现了魔法方法中的某一个，那么这个方法会在特殊的情况下被调用） </strong></p>
+<hr>
+<hr>
+<h3 id="一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。"><a href="#一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。" class="headerlink" title="一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。"></a>一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。</h3><hr>
+<h3 id="二、构造和初始化"><a href="#二、构造和初始化" class="headerlink" title="二、构造和初始化"></a>二、构造和初始化</h3><blockquote>
+<p>1.__new__(cls,…):一个对象实例化的时候所调用的第一个方法，它的第一个参数是这个类，其他的参数是用来直接传递给__init__ 方法。<br>2.__init__(self,…):(最基本的魔术方法)<br>这是类的初始化方法，当构造函数被调用的时候的任何参数都将会传给它。<br>3.__del__(self):它定义的是当一个对象进行垃圾回收时候的行为。<br>  当调用 x = SomeClass() 的时候,__init__ 并不是第一个被调用的方法。是__new__来构造这个实例。\</p>
+</blockquote>
+<hr>
+<h3 id="三、用于比较的魔术方法"><a href="#三、用于比较的魔术方法" class="headerlink" title="三、用于比较的魔术方法"></a>三、用于比较的魔术方法</h3><blockquote>
+<p>1.__cmp__：最基本的用于比较的魔术方法。它实际上实现了所有的比较符号(&lt;,==,!=,等等)<br>2.__eq__(self, other)：等号, ==<br>3.__ne__(self, other)：不等号, !=<br>4.__lt__(self, other)：小于号,  &lt;<br>5.__gt__(self, other)：大于等于号,&gt;= \</p>
+</blockquote>
+<hr>
+<h3 id="四、数值处理的魔术方法"><a href="#四、数值处理的魔术方法" class="headerlink" title="四、数值处理的魔术方法"></a>四、数值处理的魔术方法</h3><p>一元操作符和函数：仅仅有一个操作位的一元操作符和函数</p>
+<blockquote>
+<p>__pos__(self)：正号<br>__neg__(self)：负号<br>__abs__(self)：实现内置abs()函数的行为<br>__invert__(self) ：~ 符号\</p>
+</blockquote>
+<hr>
+<h3 id="五、普通算数操作符"><a href="#五、普通算数操作符" class="headerlink" title="五、普通算数操作符"></a>五、普通算数操作符</h3><blockquote>
+<p>__add__(self, other)：加法<br>__sub__(self, other)：减法<br>__mul__(self, other)：乘法<br>__floordiv__(self, other)：地板除法，使用//操作符<br>__div__(self, other)：传统除法，使用/操作符<br>__truediv__(self, other)：真正除法。注意，只有当from __future__ import division时才会有效<br>__mod__(self, other)：求模，使用%操作符<br>__divmod__(self, other)：实现内建函数divmod()的行为<br>__pow__(self, other)：乘方，使用**操作符<br>__lshift__(self, other)：左按位位移，使用&lt;&lt;操作符<br>__rshift__(self, other)：右按位位移，使用&gt;&gt;操作符<br>__and__(self, other)：按位与，使用&amp;操作符<br>__or__(self, other)：按位或，使用|操作符<br>__xor__(self, other)：按位异或，使用^操作符\</p>
+</blockquote>
+<hr>
+<h3 id="六、反射算术操作符"><a href="#六、反射算术操作符" class="headerlink" title="六、反射算术操作符"></a>六、反射算术操作符</h3><p>改变操作数的位置关系，大多数情况下，反射算术操作的结果等价于常规算术操作</p>
+<blockquote>
+<p>__radd__(self, other)：反射加法<br>__rsub__(self, other)：反射减法<br>__rmul__(self, other)：反射乘法<br>__rfloordiv__(self, other)：反射地板除，用//操作符<br>__rdiv__(self, other)：传统除法，用/操作符<br>__rturediv__(self, other)：真实除法，注意，只有当from __future__ import division时才会有效<br>__rmod__(self, other)：反射求模，用%操作符<br>__rdivmod__(self,other)：实现内置函数divmod()的长除行为，当调用divmod(other,self)时被调用<br>__rpow__(self, other)：反射乘方，用**操作符<br>__rlshift__(self, other)：反射的左按位位移，使用&lt;&lt;操作符<br>__rrshift__(self, other)：反射的右按位位移，使用&gt;&gt;操作符<br>__rand__(self, other)：反射的按位与，使用&amp;操作符<br>__ror__(self, other)：反射的按位或，使用|操作符<br>__rxor__(self, other)：反射的按位异或，使用^操作符\</p>
+</blockquote>
+<hr>
+<h3 id="七、增量赋值"><a href="#七、增量赋值" class="headerlink" title="七、增量赋值"></a>七、增量赋值</h3><blockquote>
+<p>__iadd__(self, other)：加法和赋值<br>__isub__(self, other)：减法和赋值<br>__imul__(self, other)：乘法和赋值<br>__ifloordiv__(self, other)：地板除和赋值，用//=操作符<br>__idiv__(self, other)：传统除法和赋值，用/=操作符<br>__iturediv__(self, other)：真实除法和赋值，注意，只有当from __future__ import division时才会有效<br>__imod__(self, other)：求模和赋值，用%=操作符<br>__ipow__(self, other)：乘方和赋值，用**=操作符<br>__ilshift__(self, other)：左按位位移和赋值，使用&lt;&lt;=操作符<br>__irshift__(self, other)：右按位位移和赋值，使用&gt;&gt;=操作符<br>__iand__(self, other)：按位与和赋值，使用&amp;=操作符<br>__ior__(self, other)：按位或和赋值，使用|=操作符<br>__ixor__(self, other)：按位异或和赋值，使用^=操作符\</p>
+</blockquote>
+<hr>
+<h3 id="八、类型转换"><a href="#八、类型转换" class="headerlink" title="八、类型转换"></a>八、类型转换</h3><blockquote>
+<p>__int__(self)：实现到整型的类型转换<br>__long__(self)：长整形<br>__float__(self)：浮点型<br>__complex__(self)：复数型<br>__oct__(self)：8进制型<br>__hex__(self)：16进制型<br>__index__(self)：实现一个当对象被切片到int的类型转换。若自定义了一个数值类型，考虑到它可能被切片，要重载__index__<br>__trunc__(self)：当math.trunc(self)被调用时调用。返回一个整型的截断<br>__coerce__(self,other)：实现混合模式的算术。如果类型转换不可能则返回None。否则，它应当返回一对相同类型的元祖\</p>
+</blockquote>
+<hr>
+<h3 id="九、描述类"><a href="#九、描述类" class="headerlink" title="九、描述类"></a>九、描述类</h3><p><strong>在类中自定义内建函数返回类行为的描述</strong></p>
+<blockquote>
+<p>__str__(self)：定义行为<br>__repr__(self)：定义行为。<br><strong>str()和repr()主要的区别在于它的阅读对象。repr()产生的输出主要为计算机可读，而str()则是为了让人类可读。</strong><br>__unicode__(self)：定义行为。<br><strong>unicode()像是str(),但它返回一个unicode字符串。如果你的类中的一个实例调用了str(),而你仅定义了__unicode__(),那它是不会工作的。以防万一，你应当总是定义好 __str__()，哪怕用户不会使用unicode</strong><br>__hash__(self)：定义行为。它必须返回一个整型，而且它的结果是用于来在字典中作为快速键比对。<br>__nonzero__(self)：定义行为。返回True或False，取决于你是否考虑一个实例是True或False。</p>
+</blockquote>
+<hr>
+<h3 id="十、属性访问控制"><a href="#十、属性访问控制" class="headerlink" title="十、属性访问控制"></a>十、属性访问控制</h3><blockquote>
+<p>__getattr__(self, name)：用户在试图访问不存在（不论是存在或尚未建立）的类属性时定义其行为<br>__setattr__(self, name, value)：允许你为一个属性赋值<br>__delattr__：删除类属性（当在__delattr__中调用del self.name会引起无限递归）<br>__getattribute__(self, name)：允许你定规则，在任何时候不管一个类属性的值那时候是否可访问。</p>
+</blockquote>
+<hr>
+<h3 id="十一、隐藏在容器背后的魔法"><a href="#十一、隐藏在容器背后的魔法" class="headerlink" title="十一、隐藏在容器背后的魔法"></a>十一、隐藏在容器背后的魔法</h3><blockquote>
+<p>__len__(self)：返回容器的长度<br>__getitem__(self, key)：定义当某一个item被访问时的行为，使用self[key]表示法。<br>__setitem__(self, key, value)：定义当某一个item被赋值时候的行为，使用self[key]=value表示法。<br>__delitem__(self, key)：定义当某一个item被删除（例如 del self[key]）时的行为。<br>__iter__(self)：应该给容器返回一个迭代器。迭代器会返回若干内容,大多使用内建函数iter()表示。当一个容器使用形如for x in container:的循环。迭代器本身就是其对象，同时也要定义好一个__iter__方法来返回自身。<br>__reversed__(self)：定义调用内建函数reversed()时的行为。应返回一个反向版本的列表。<br>__contains__(self, item)：__contains__为成员关系，用in和not in测试时定义的行为<br>__concat__(self, other)：定义序列和另外一个序列的连接。</p>
+</blockquote>
+<hr>
+<h3 id="十二、反射"><a href="#十二、反射" class="headerlink" title="十二、反射"></a>十二、反射</h3><blockquote>
+<p>__instancecheck__(self, instance)：检查一个实例是否是你定义类中的一个实例(比如，isinstance(instance, class))<br>__subclasscheck__(self, subclass)：检查一个类是否是你定义类的子类比如，issubclass(subclass, class)）</p>
+</blockquote>
+<hr>
+<h3 id="十三、可调用对象"><a href="#十三、可调用对象" class="headerlink" title="十三、可调用对象"></a>十三、可调用对象</h3><blockquote>
+<p>__call__(self, [args…])：允许类实例像函数一样被调用。</p>
+</blockquote>
+<hr>
+<h3 id="十四、构建描述符对象"><a href="#十四、构建描述符对象" class="headerlink" title="十四、构建描述符对象"></a>十四、构建描述符对象</h3><p>描述符可以改变其他对象。</p>
+<blockquote>
+<p>__get__(self, instance, owner)：描述符的值被取回时定义其行为。instance是owner对象的一个实例，owner是所有类。<br>__set__(self, instance, value)：描述符的值被改变时定义其行为。instance是owner对象的一个实例，value是设置的描述符的值<br>__delete__(self, instance)：描述符的值被删除时定义其行为。instance是owner对象的一个实例。</p>
+</blockquote>
+<hr>
+<h3 id="十五、Pickling自定义的对象"><a href="#十五、Pickling自定义的对象" class="headerlink" title="十五、Pickling自定义的对象"></a>十五、Pickling自定义的对象</h3><blockquote>
+<p>__getinitargs__(self)：当类unpickled时调用__init__，可以定义__getinitargs__，该方法返回一个元组的参数，然后传递给__init__。（旧式类）<br>__getnewargs__(self)：进行unpickling时将参数传递到__new__。该方法返回一个元组参数，然后能传递给__new__。 （新式类）<br>__getstate__(self)：代替对象的__dict__属性被保存。<br>__setstate__(self, state)：对象unpickled时，如果__setstate__定义对象状态会传递来代替直接用对象的__dict__属性。</p>
+</blockquote>
 
       
     </div>
