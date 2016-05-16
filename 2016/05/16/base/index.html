@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>base | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="base"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>base</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/16/base/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-16T13:58:32.000Z">
+          2016-05-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>或许你已经看到我的题目知道这一节要讲的是模板继承。模板继承是一种重复使用代码的方法。但是现在我们的模板都太过简单，完全没有重复的地方，然而实际上，一个应用中的不同页面往往长的差不多。现在我们来修改一下我们已有的模板，让它们看起来稍微有点像是来自于一个应用程序的。</p>
+<p>index.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>user.html：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, </span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, Stranger!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>404.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Page Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>500.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>500 Internal Server Error<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
