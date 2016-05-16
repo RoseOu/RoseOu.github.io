@@ -54,6 +54,55 @@
 
   
   
+    <h3 class="article-title"><a href="/2016/05/15/script/"><span>Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/15/script/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-15T14:54:25.000Z">
+          2016-05-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在第一章关于Flask简介中就有提到过Flask很多高级功能都要通过扩展实现，这一节就来介绍一个Flask扩展，Flask-Script。这个扩展为Flask程序添加了一个命令行解析器，并自带了一组常用选项，它还支持自定义命令。</p>
+<p>Flask的开发服务器支持很多启动设置选项，但只能在脚本中作为参数传给app.run()函数，例如域名和端口。这些每次当你想修改这些参数时，都要在代码中修改，十分麻烦。我们可以使用命令行参数传递设置选项，即在运行服务器前在命令行中传入参数。这个时候，我们就要用到Flask-Script。</p>
+<p>首先来安装它：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask-<span class="keyword">script</span></span><br></pre></td></tr></table></figure></p>
+<p>现在我们要把这个命令行解析功能添加到我们的程序中，打开hello.py，修改如下：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask.ext.<span class="keyword">script</span> import Manager</span><br><span class="line"></span><br><span class="line">manager = Manager(app)</span><br><span class="line"></span><br><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == '__main__':</span><br><span class="line">    manager.<span class="built_in">run</span>()</span><br></pre></td></tr></table></figure></p>
+<p>1.Flask的扩展都定义在flask.ext的命名空间下，Flask-Script有一个Manager类,首先我们就从flask.ext.script里导入Manager类。<br>2.然后创造一个Manager类的实例，它叫manager，并把程序实例app作为参数传给Manager类的构造函数。注意manager的实例化一定要在app的实例化之后。<br>3.最后用Manager里的run()函数启动服务器，然后就能解析命令行了。<br>4.注意，这里创建的manager对象可以在其它各个扩展中使用。</p>
+<p>现在我们可以使用一些基本的命令行选项了。我们来运行一下hello.py，它会显出出关于命令行选项用法的消息：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span></span><br><span class="line">usage: hello.<span class="keyword">py</span> [-?] &#123;<span class="keyword">shell</span>,runserver&#125; ...</span><br><span class="line"></span><br><span class="line">positional <span class="keyword">argument</span><span class="variable">s:</span></span><br><span class="line">  &#123;<span class="keyword">shell</span>,runserver&#125;</span><br><span class="line">    <span class="keyword">shell</span>            Runs <span class="keyword">a</span> Python <span class="keyword">shell</span> inside Flask application context.</span><br><span class="line">    runserver        Runs the Flask development server i.<span class="keyword">e</span>. app.run()</span><br><span class="line"></span><br><span class="line">optional <span class="keyword">argument</span><span class="variable">s:</span></span><br><span class="line">  -?, --<span class="keyword">help</span>         show this <span class="keyword">help</span> message <span class="built_in">and</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure></p>
+<p>1.首先它告诉我们它的用法就是在python hello.py后面直接加命令。如 python hello.py shell。<br>2.我们有两个可以用的命令行选项。shell和runserver。shell的作用就是在Flask应用上下文中运行Python shell，runserver就是运行Flask开发服务器：app.run()。<br>3.如果我们输入–help命令就会显示出帮助菜单。</p>
+<p>我们可以试试用shell命令在程序的上下文中启动Python shell会话，我们可以使用这个会话进行维护、测试和调试异常。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py shell</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后再来说说runserver这个用来启动服务器的命令。当我们运行python hello.py runserver 时，将会以调试模式启动Web服务器。基于runserver这个命令选项，我们还有很多选项可用：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py runserver <span class="comment">--help</span></span><br><span class="line">usage: hello.py runserver [-?] [-h HOST] [-p PORT] [<span class="comment">--threaded]</span></span><br><span class="line">                          [<span class="comment">--processes PROCESSES] [--passthrough-errors] [-d]</span></span><br><span class="line">                          [-D] [-r] [-R]</span><br><span class="line"></span><br><span class="line">Runs the Flask development server i.e. app.run()</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -?, <span class="comment">--help            show this help message and exit</span></span><br><span class="line">  -h HOST, <span class="comment">--host HOST</span></span><br><span class="line">  -p PORT, <span class="comment">--port PORT</span></span><br><span class="line">  <span class="comment">--threaded</span></span><br><span class="line">  <span class="comment">--processes PROCESSES</span></span><br><span class="line">  <span class="comment">--passthrough-errors</span></span><br><span class="line">  -d, <span class="comment">--debug           enable the Werkzeug debugger (DO NOT use in production</span></span><br><span class="line">                        code)</span><br><span class="line">  -D, <span class="comment">--no-debug        disable the Werkzeug debugger</span></span><br><span class="line">  -r, <span class="comment">--reload          monitor Python files for changes (not 100&#123;'const':</span></span><br><span class="line">                        True, '<span class="keyword">help</span><span class="string">': '</span>monitor Python files <span class="keyword">for</span> changes (<span class="keyword">not</span></span><br><span class="line">                        <span class="number">100</span>% <span class="keyword">safe</span> <span class="keyword">for</span> production <span class="keyword">use</span>)<span class="string">', '</span>option_strings<span class="string">':</span><br><span class="line">                        ['</span>-r<span class="string">', '</span><span class="comment">--reload'], 'dest': 'use_reloader',</span></span><br><span class="line">                        <span class="string">'required'</span>: <span class="literal">False</span>, <span class="string">'nargs'</span>: <span class="number">0</span>, <span class="string">'choices'</span>: <span class="keyword">None</span>,</span><br><span class="line">                        <span class="string">'default'</span>: <span class="keyword">None</span>, <span class="string">'prog'</span>: <span class="string">'hello.py runserver'</span>,</span><br><span class="line">                        <span class="string">'container'</span>: &lt;argparse._ArgumentGroup <span class="keyword">object</span> <span class="keyword">at</span></span><br><span class="line">                        <span class="number">0x10bdd5090</span>&gt;, <span class="string">'type'</span>: <span class="keyword">None</span>, <span class="string">'metavar'</span>: <span class="keyword">None</span>&#125;afe <span class="keyword">for</span></span><br><span class="line">                        production <span class="keyword">use</span>)</span><br><span class="line">  -R, <span class="comment">--no-reload       do not monitor Python files for changes</span></span><br></pre></td></tr></table></figure></p>
+<p>嗯，真的有很多，我们在这里无法一一去试。之前说过我们可以在运行服务器前在命令行中传入域名和端口等参数，现在我们就来试试。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span> runserver --host <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br></pre></td></tr></table></figure></p>
+<p>‘–host’这个参数用来指定Web服务器监听来自客户端的连接的网络接口。在默认情况下，Flask的开发服务器监听localhost上(即127.0.0.1)的连接，所以只接受来自服务器所在计算机发起的连接。上面这个命令让Web服务器监听公共网络接口上的连接，允许同网中的其它计算机连接服务器。所以，现在Web服务器可以使用<a href="http://0.0.0.0:5000/网络中的任意一台电脑访问，其中‘0.0.0.0’就是服务器所在的计算机的外网IP地址。" target="_blank" rel="external">http://0.0.0.0:5000/网络中的任意一台电脑访问，其中‘0.0.0.0’就是服务器所在的计算机的外网IP地址。</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
     <h3 class="article-title"><a href="/2016/05/13/context/"><span>Flask学习教程 Part1 2.2:请求与响应</span></a></h3>
   
 
@@ -115,11 +164,11 @@
 </ul>
 <p>要使用这四个变量，只要从flask中导入就可以：</p>
 <figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> g</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> session</span><br><span class="line"></span><br><span class="line">＃可以直接从中获取内容，如：</span><br><span class="line">request.args</span><br><span class="line">request.forms</span><br><span class="line">request.cookies</span><br></pre></td></tr></table></figure>
-<p>如果在使用这四个变量时我没有激活程序上下文或者请求上下文，就会导致错误。用current_app做例子。</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from hello <span class="keyword">import</span> app</span><br><span class="line">from flask <span class="keyword">import</span> current_app</span><br><span class="line"></span><br><span class="line">current_app.<span class="keyword">name</span></span><br></pre></td></tr></table></figure>
+<p>如果在使用这四个变量时我没有激活程序上下文或者请求上下文，就会导致错误。用current_app做例子，进入Python shell会话：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; from hello import app</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; from flask import current_app</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; current_app.name</span><br></pre></td></tr></table></figure>
 <p>会报错：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">working outside <span class="keyword">of</span> <span class="built_in">application</span> context</span><br></pre></td></tr></table></figure>
-<p>要这样执行才不会报错：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hello <span class="keyword">import</span> app           ＃从hello文件导入app实例</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app   ＃从flask包导入current_app对象</span><br><span class="line"></span><br><span class="line">app_ctx = app.app_context()     ＃获得一个程序上下文（激活程序上下文），实际上是创建了一个AppContext类的实例</span><br><span class="line">app_ctx.<span class="keyword">push</span>()                  ＃把程序上下文压入堆栈中</span><br><span class="line">current_app.name                ＃当前激活程序的程序实例的名字</span><br><span class="line">app_ctx.<span class="keyword">pop</span>()                   ＃把上下文弹出</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Traceback(most recent <span class="keyword">call</span> <span class="keyword">last</span>):</span><br><span class="line">...</span><br><span class="line">RuntimeError: working outside <span class="keyword">of</span> application <span class="keyword">context</span></span><br></pre></td></tr></table></figure>
+<p>要这样执行才不会报错：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; from hello import app           ＃从hello文件导入app实例</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; from flask import current_app   ＃从flask包导入current_app对象</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; app_ctx = app.app_context()     ＃获得一个程序上下文（激活程序上下文），实际上是创建了一个AppContext类的实例</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; app_ctx.push()                  ＃把程序上下文压入堆栈中</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; current_app.name                ＃当前激活程序的程序实例的名字</span><br><span class="line"><span class="string">'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; app_ctx.pop()                   ＃把上下文弹出</span><br></pre></td></tr></table></figure></p>
 <h2 id="请求调度"><a href="#请求调度" class="headerlink" title="请求调度"></a>请求调度</h2><p>当客户端发送请求给程序时，Flask会在程序的URL映射中查找客户端所请求的URL，让程序找到处理该请求的视图函数。</p>
 <p>上一节中也稍微介绍过URL映射，它就是Rl和视图函数之间的这种对应关系。在上一节的hello.py中，我们使用了app.route()装饰器生成映射。其实除了使用app.route()装饰器外，还可以使用app.add_url_rule()函数生成映射。</p>
 <p>现在我们可以查看一下我们的hello.py程序所生成的映射。在Python shell中检查：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line">&gt;&gt;&gt; <span class="keyword">from</span> hello <span class="keyword">import</span> app</span><br><span class="line">&gt;&gt;&gt; app.url_map</span><br><span class="line">Map<span class="function"><span class="params">([&lt;Rule <span class="string">'/user/'</span> (HEAD, OPTIONS, GET) -&gt; user&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/'</span> (HEAD, OPTIONS, GET) -&gt; index&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/static/&lt;filename&gt;'</span> (HEAD, OPTIONS, GET) -&gt; static&gt;,</span><br><span class="line"> &lt;Rule <span class="string">'/user/&lt;name&gt;'</span> (HEAD, OPTIONS, GET) -&gt; user&gt;])</span></span></span><br></pre></td></tr></table></figure></p>
@@ -218,7 +267,7 @@
 
   
   
-    <h3 class="article-title"><a href="/2016/05/10/templates/"><span>Flask学习教程 Part1 Chapter3 Session1:用Jinja2渲染模板</span></a></h3>
+    <h3 class="article-title"><a href="/2016/05/10/templates/"><span>Flask学习教程 Part1 3.1:用Jinja2渲染模板</span></a></h3>
   
 
 
@@ -311,7 +360,7 @@
 <p>现在这个程序运行在本地的服务器上了，那么现在打开浏览器，在地址栏输入<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> ， 然后我们就会看到：<br> <img src="/images/world.jpg"><br>这里访问了’/‘，即程序的根地址，于是调用了index()视图函数，即第一个路由。</p>
 <p>如果我们输入<a href="http://127.0.0.1:5000/user/rose/" target="_blank" rel="external">http://127.0.0.1:5000/user/rose/</a> ， 那么就会看到：<br><img src="/images/user.jpg"><br>这里访问了’/user/rose’，用到了第二个路由，并且给name这个动态参数传入了rose这个值。</p>
 <p>至此，路由和试图函数的部分就介绍完了。实际上，在本章不仅仅介绍了路由和试图函数，而把把一个完整的程序的基本结构都介绍了一遍。</p>
-<p><a href="http://roseou.github.io/2016/05/10/flasktemplate/" target="_blank" rel="external">Flask学习教程 Part1<br>Chapter3:用Jinja2渲染模板</a></p>
+<p>Next: <a href="http://roseou.github.io/2016/05/10/flasktemplate/" target="_blank" rel="external">Flask学习教程 3.1:用Jinja2渲染模板</a></p>
 
       
     </div>
@@ -330,7 +379,7 @@
 
   
   
-    <h3 class="article-title"><a href="/2016/05/08/setup/"><span>Flask学习教程 Part1 Chapter1:Flask简介及安装</span></a></h3>
+    <h3 class="article-title"><a href="/2016/05/08/setup/"><span>Flask学习教程 Part1 1:Flask简介及安装</span></a></h3>
   
 
 
@@ -402,10 +451,10 @@
 <p>(其实还可以先安装virtualenv，然后创建虚拟环境，创建虚拟环境的同时会在这个坏境下自动安装pip。)</p>
 <p>接下来，终于到flask的安装了。激活虚拟环境后，用pip来安装：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip <span class="keyword">install</span> flask</span><br></pre></td></tr></table></figure></p>
 <p>安装flask的过程中，可以看到它还自动安装了Werkzeug,MarkupSafe,Jinja2,itsdangerous这些依赖。</p>
-<p>然后来验证一下你是否成功安装了flask。启动python解释器，导入Flask：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; import flask</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后来验证一下你是否成功安装了flask。启动python解释器，导入Flask：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line">Python <span class="number">2.7</span>.<span class="number">10</span> (default, Oct <span class="number">23</span> <span class="number">2015</span>, <span class="number">18</span><span class="symbol">:</span><span class="number">05</span><span class="symbol">:</span><span class="number">06</span>)</span><br><span class="line">[GCC <span class="number">4.2</span>.<span class="number">1</span> Compatible Apple LLVM <span class="number">7.0</span>.<span class="number">0</span> (clang-<span class="number">700.0</span>.<span class="number">59.5</span>)] on darwin</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; import flask</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>如果导入Flask时没有报错，就证明你安装成功了。</p>
 <p>那么接下来终于可以开始学习flask了。</p>
-<p><a href="http://roseou.github.io/2016/05/08/flaskroute/" target="_blank" rel="external">Flask学习教程 Part1 Chapter2:路由和视图函数</a></p>
+<p>Next: <a href="http://roseou.github.io/2016/05/08/flaskroute/" target="_blank" rel="external">Flask学习教程 Part1 Chapter2:路由和视图函数</a></p>
 
       
     </div>
@@ -864,55 +913,6 @@
 <h3 id="十五、Pickling自定义的对象"><a href="#十五、Pickling自定义的对象" class="headerlink" title="十五、Pickling自定义的对象"></a>十五、Pickling自定义的对象</h3><blockquote>
 <p>__getinitargs__(self)：当类unpickled时调用__init__，可以定义__getinitargs__，该方法返回一个元组的参数，然后传递给__init__。（旧式类）<br>__getnewargs__(self)：进行unpickling时将参数传递到__new__。该方法返回一个元组参数，然后能传递给__new__。 （新式类）<br>__getstate__(self)：代替对象的__dict__属性被保存。<br>__setstate__(self, state)：对象unpickled时，如果__setstate__定义对象状态会传递来代替直接用对象的__dict__属性。</p>
 </blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
-</article>
-
-
-  <article class="post article">
-
-  
-  
-    <h3 class="article-title"><a href="/2015/11/30/python 模块与包/"><span>python 模块与包</span></a></h3>
-  
-
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/11/30/python 模块与包/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-29T16:33:53.000Z">
-          2015-11-30
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="一、模块"><a href="#一、模块" class="headerlink" title="一、模块"></a>一、模块</h3><p>模块是一些自我包含并且有组织的代码片段，它可能是一个包含数据成员和方法的类，也可能是一组相关但彼此独立的操作函数。</p>
-<hr>
-<h3 id="二、模块与文件"><a href="#二、模块与文件" class="headerlink" title="二、模块与文件"></a>二、模块与文件</h3><p>一个文件被看作是一个独立模块，一个模块也可以被看作是一个文件。模块的文件名就是模块名字加扩展名.py,<br>1、模块名称空间：一个名称空间就是一个从名称到对象的关系映射集合。每个模块都定义了它自己的唯一的名称空间，所以在不同模块间不会出现名称交叉。</p>
-<hr>
-<h3 id="三、名称空间"><a href="#三、名称空间" class="headerlink" title="三、名称空间"></a>三、名称空间</h3><p>名称空间是名称（标识符）到对象的映射。<br>1、在执行期间有两或三个活动的名称空间：局部名称空间（不断变化）、全局名称空间、内建名称空间。解释器首先加载内建名称空间，随后加载执行模块的全局名称空间，它会在模块开始执行后变为活动名称空间，这样就有了两个活动的名称空间。<br>2、名称空间与变量作用域：名称空间是纯粹意义上的名字与对象的映射关系，而作用域指出了用户代码可访问这些名字的物理量。<br>3、名称查找：解释器先从局部名称空间找，再从全局名称空间找，然后从内建名称空间里找。若都失败了，就会返回错误。</p>
-<hr>
-<h3 id="四、导入模块"><a href="#四、导入模块" class="headerlink" title="四、导入模块"></a>四、导入模块</h3><p>1、import语句：如果在一个模块的顶层导入，其作用域就是全局的，如果在函数中导入，其作用域就是局部的。<br>2、from-import语句：可在模块里导入指定的模块属性，即把指定名称导入到当前作用域。<br>3、多行导入：从一个模块导入许多属性时，import行会越来越长，直至自动换行，且需要一个\。<br>4、from import （as）：使用自己想要的名字来替换模块的原始名称。<br>5、模块导入的特性：（1）导入模块的顶层代码将直接被执行。<br>（2）无论一个模块被导入多少次，它都只被加载一次。（加载第一次导入）<br>（3）用from-import可把名字导入当前名称空间，所以不需要使用属性/句点属性标知来访问模块的标识符。<br>（4）只从模块导入名字会使那些名字成为局部名称空间的一部分，这可能导致覆盖一个已经存在的具有相同名字的对象。且改变这些变量只影响它局部拷贝而非导入模块的原始名称空间。<br>（5）从ZIP归档文件导入模块。</p>
-<hr>
-<h3 id="五、模块内建函数"><a href="#五、模块内建函数" class="headerlink" title="五、模块内建函数"></a>五、模块内建函数</h3><p>1、import ()：模块导入。<br>2、globals()、locals() ：包含当前全局符号表的名字的字典/包含局部符号表的名字的字典<br>3、reload()：重新导入一个已经导入的模块，其参数必须是模块自身而不是包含模块名的字符串</p>
-<hr>
-<h3 id="六、包"><a href="#六、包" class="headerlink" title="六、包"></a>六、包</h3><p>包是一个有层次的文件目录结构，它定义了一个由模块和子包组成的python应用程序执行环境。包也使用句点属性标知来访问它们的函数。<br>1、绝对导入：导入子包会导致与真正的标准库模块（事实上是它们的名字）发生冲突，会把名字相同的标准库模块隐藏掉。这些名字必须通过Python路径来访问。<br>2、相对导入：只用于from-import语句，明确在子包中某个模块的位置。</p>
 
       
     </div>

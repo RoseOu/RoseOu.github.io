@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/15/script/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-15T14:54:25.000Z">
+          2016-05-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在第一章关于Flask简介中就有提到过Flask很多高级功能都要通过扩展实现，这一节就来介绍一个Flask扩展，Flask-Script。这个扩展为Flask程序添加了一个命令行解析器，并自带了一组常用选项，它还支持自定义命令。</p>
+<p>Flask的开发服务器支持很多启动设置选项，但只能在脚本中作为参数传给app.run()函数，例如域名和端口。这些每次当你想修改这些参数时，都要在代码中修改，十分麻烦。我们可以使用命令行参数传递设置选项，即在运行服务器前在命令行中传入参数。这个时候，我们就要用到Flask-Script。</p>
+<p>首先来安装它：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask-<span class="keyword">script</span></span><br></pre></td></tr></table></figure></p>
+<p>现在我们要把这个命令行解析功能添加到我们的程序中，打开hello.py，修改如下：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask.ext.<span class="keyword">script</span> import Manager</span><br><span class="line"></span><br><span class="line">manager = Manager(app)</span><br><span class="line"></span><br><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == '__main__':</span><br><span class="line">    manager.<span class="built_in">run</span>()</span><br></pre></td></tr></table></figure></p>
+<p>1.Flask的扩展都定义在flask.ext的命名空间下，Flask-Script有一个Manager类,首先我们就从flask.ext.script里导入Manager类。<br>2.然后创造一个Manager类的实例，它叫manager，并把程序实例app作为参数传给Manager类的构造函数。注意manager的实例化一定要在app的实例化之后。<br>3.最后用Manager里的run()函数启动服务器，然后就能解析命令行了。<br>4.注意，这里创建的manager对象可以在其它各个扩展中使用。</p>
+<p>现在我们可以使用一些基本的命令行选项了。我们来运行一下hello.py，它会显出出关于命令行选项用法的消息：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span></span><br><span class="line">usage: hello.<span class="keyword">py</span> [-?] &#123;<span class="keyword">shell</span>,runserver&#125; ...</span><br><span class="line"></span><br><span class="line">positional <span class="keyword">argument</span><span class="variable">s:</span></span><br><span class="line">  &#123;<span class="keyword">shell</span>,runserver&#125;</span><br><span class="line">    <span class="keyword">shell</span>            Runs <span class="keyword">a</span> Python <span class="keyword">shell</span> inside Flask application context.</span><br><span class="line">    runserver        Runs the Flask development server i.<span class="keyword">e</span>. app.run()</span><br><span class="line"></span><br><span class="line">optional <span class="keyword">argument</span><span class="variable">s:</span></span><br><span class="line">  -?, --<span class="keyword">help</span>         show this <span class="keyword">help</span> message <span class="built_in">and</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure></p>
+<p>1.首先它告诉我们它的用法就是在python hello.py后面直接加命令。如 python hello.py shell。<br>2.我们有两个可以用的命令行选项。shell和runserver。shell的作用就是在Flask应用上下文中运行Python shell，runserver就是运行Flask开发服务器：app.run()。<br>3.如果我们输入–help命令就会显示出帮助菜单。</p>
+<p>我们可以试试用shell命令在程序的上下文中启动Python shell会话，我们可以使用这个会话进行维护、测试和调试异常。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py shell</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后再来说说runserver这个用来启动服务器的命令。当我们运行python hello.py runserver 时，将会以调试模式启动Web服务器。基于runserver这个命令选项，我们还有很多选项可用：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py runserver <span class="comment">--help</span></span><br><span class="line">usage: hello.py runserver [-?] [-h HOST] [-p PORT] [<span class="comment">--threaded]</span></span><br><span class="line">                          [<span class="comment">--processes PROCESSES] [--passthrough-errors] [-d]</span></span><br><span class="line">                          [-D] [-r] [-R]</span><br><span class="line"></span><br><span class="line">Runs the Flask development server i.e. app.run()</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -?, <span class="comment">--help            show this help message and exit</span></span><br><span class="line">  -h HOST, <span class="comment">--host HOST</span></span><br><span class="line">  -p PORT, <span class="comment">--port PORT</span></span><br><span class="line">  <span class="comment">--threaded</span></span><br><span class="line">  <span class="comment">--processes PROCESSES</span></span><br><span class="line">  <span class="comment">--passthrough-errors</span></span><br><span class="line">  -d, <span class="comment">--debug           enable the Werkzeug debugger (DO NOT use in production</span></span><br><span class="line">                        code)</span><br><span class="line">  -D, <span class="comment">--no-debug        disable the Werkzeug debugger</span></span><br><span class="line">  -r, <span class="comment">--reload          monitor Python files for changes (not 100&#123;'const':</span></span><br><span class="line">                        True, '<span class="keyword">help</span><span class="string">': '</span>monitor Python files <span class="keyword">for</span> changes (<span class="keyword">not</span></span><br><span class="line">                        <span class="number">100</span>% <span class="keyword">safe</span> <span class="keyword">for</span> production <span class="keyword">use</span>)<span class="string">', '</span>option_strings<span class="string">':</span><br><span class="line">                        ['</span>-r<span class="string">', '</span><span class="comment">--reload'], 'dest': 'use_reloader',</span></span><br><span class="line">                        <span class="string">'required'</span>: <span class="literal">False</span>, <span class="string">'nargs'</span>: <span class="number">0</span>, <span class="string">'choices'</span>: <span class="keyword">None</span>,</span><br><span class="line">                        <span class="string">'default'</span>: <span class="keyword">None</span>, <span class="string">'prog'</span>: <span class="string">'hello.py runserver'</span>,</span><br><span class="line">                        <span class="string">'container'</span>: &lt;argparse._ArgumentGroup <span class="keyword">object</span> <span class="keyword">at</span></span><br><span class="line">                        <span class="number">0x10bdd5090</span>&gt;, <span class="string">'type'</span>: <span class="keyword">None</span>, <span class="string">'metavar'</span>: <span class="keyword">None</span>&#125;afe <span class="keyword">for</span></span><br><span class="line">                        production <span class="keyword">use</span>)</span><br><span class="line">  -R, <span class="comment">--no-reload       do not monitor Python files for changes</span></span><br></pre></td></tr></table></figure></p>
+<p>嗯，真的有很多，我们在这里无法一一去试。之前说过我们可以在运行服务器前在命令行中传入域名和端口等参数，现在我们就来试试。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span> runserver --host <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br></pre></td></tr></table></figure></p>
+<p>‘–host’这个参数用来指定Web服务器监听来自客户端的连接的网络接口。在默认情况下，Flask的开发服务器监听localhost上(即127.0.0.1)的连接，所以只接受来自服务器所在计算机发起的连接。上面这个命令让Web服务器监听公共网络接口上的连接，允许同网中的其它计算机连接服务器。所以，现在Web服务器可以使用<a href="http://0.0.0.0:5000/网络中的任意一台电脑访问，其中‘0.0.0.0’就是服务器所在的计算机的外网IP地址。" target="_blank" rel="external">http://0.0.0.0:5000/网络中的任意一台电脑访问，其中‘0.0.0.0’就是服务器所在的计算机的外网IP地址。</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
