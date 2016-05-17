@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 3.3:(强大的)模板继承 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flask学习教程 Part1 3.3:(强大的)模板继承"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 3.3:(强大的)模板继承</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/17/base/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-17T12:25:35.000Z">
+          2016-05-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>或许你已经看到我的题目知道这一节要讲的是模板继承。模板继承是一种重复使用代码的方法。但是现在我们的模板都太过简单，完全没有重复的地方，然而实际上，一个应用中的不同页面往往长的差不多。现在我们来修改一下我们已有的模板，让它们看起来稍微有点像是来自于一个应用程序的。</p>
+<p>index.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>user.html：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, </span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, Stranger!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>404.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Page Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>500.html：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>500 Internal Server Error<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后我们来看看它们现在是什么样，运行程序。</p>
+<p>访问 <a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a><br><img src="/images/index0.jpg"></p>
+<p>可以看到上面多出了一个标题’- Play With Flask-‘，依次访问其它几个URL也可以看到这个标题，其他的内容都和之前的一样。</p>
+<p>嗯，现在它们终于有一点出自一个程序的样子了。并且明显能看到这些页面有很多代码都重复了（好吧也不是很多），总之如果每一个页面都要写很多重复的代码就会很麻烦。现在我们来用模板继承来简化它。</p>
+<p>简单来说，就是把那些重复的代码写到一个基模板里，它的衍生模板在这个基模板的代码的基础上，加上自己的代码。</p>
+<p>现在我们就来把这些重复代码写到基模板里。在templates文件夹中创建一个base.html文件，写入下面的代码：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> head %&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> title %&#125;</span><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"> - Play With Flask - <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> body %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>1.这个就是我们的基模板啦，之后我们所有的其它模板都将继承于它，称为这个基模板的衍生模板。<br>2.可以看到模板加入了一个block标签。block标签所定义的元素可以在衍生模板中修改。例如这里，head和body元素都可在衍生模板中修改。<br>3.在这个模板中，我们定义了三个块，head、title和body。注意，title块包含在head块中。</p>
+<p>然后我们来修改这个基模板的衍生模板。先是index.html:<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">extends</span></span> "base.html" %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> title %&#125;</span><span class="xml">Index</span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> head %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-variable">&#123;&#123; super() &#125;&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> body %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<p>user.html:<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> title %&#125;</span><span class="xml">User</span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> head %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-variable">&#123;&#123; super() &#125;&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> body %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, </span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, Stranger!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<p>1.衍生模板中有一个extends指令，这个指令声明了这个模板衍生自base.html。<br>2.extends指令之后，基模板中的三个块head、title和body被重新定义，模板引擎Jinja2会将其插入相应的位置。<br>3.在这两个衍生模板中，都新定义了title块，一个定义为index，一个为User。<br>4.在这里，新定义的head块实际上没有改变基模板里的内容，而是使用super()来获取了基模板原来的内容（‘— Play With Flask —’）。<br>5.然后在body块中，index.html和user.html都重新插入了不同的内容。</p>
+<p>现在，运行hello.py，访问 <a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> ：<br><img src="/images/index1.jpg"><br> 可以看到标题里多出了head块里的‘index’。</p>
+<p> 访问 <a href="http://127.0.0.1:5000/user/rose" target="_blank" rel="external">http://127.0.0.1:5000/user/rose</a> ：<br> <img src="/images/user1.jpg"><br> 标题里多出了head块里的‘User’。</p>
+<p> 404.html和500.html的改法也是一样的，这里就不重复再说了，你们可以自己当练习试一下。</p>
+<p> 实际上，这一节中使用模板继承并没有省下多少代码，因为我们的页面太简单，也太丑..不过，这里我也只想你们理解模板继承的原理就够了。下一节我们会为我们的页面添加别的东西，也会因此见识到模板继承的用处有多大。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
