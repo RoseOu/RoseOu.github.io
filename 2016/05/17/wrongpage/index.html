@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 3.2:错误页面 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flask学习教程 Part1 3.2:错误页面"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 3.2:错误页面</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/17/wrongpage/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-17T13:02:38.000Z">
+          2016-05-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>当请求错误时，我们需要有一个页面来显示一些错误信息告诉我们发生了什么错误。Flask中还有一个abort()函数用来处理错误，返回一个显示相应错误消息的页面。以下是一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    abort(<span class="number">400</span>)</span><br></pre></td></tr></table></figure></p>
+<p>当我们访问<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> 时，就会自动返回一个显示400错误消息的页面，这个页面是这样的：<br><img src="/images/badrequest.jpg"><br>它告诉了我们浏览器发送了一个服务器无法理解的请求。</p>
+<p>可是这个页面有点丑，我们可以<strong>自定义错误页面</strong>。这也是这一小节想说的，前面的都是铺垫啊铺垫。</p>
+<p>首先，我们来添加两个处理错误的路由，打开hello.py，加入代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'404.html'</span>), <span class="number">404</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(500)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">internal_server_error</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'500.html'</span>), <span class="number">500</span></span><br><span class="line"><span class="comment">#...</span></span><br></pre></td></tr></table></figure></p>
+<p>1.这两个路由都用到了实例app里的errorhandler()装饰器，这个函数接受数字状态码作参数，来处理相应的错误。<br>2.第一个路由用来处理404错误，当客户端请求未知页面或路由时显示。<br>3.第二个路由用来处理500错误，当有未处理的异常时显示。</p>
+<p>那么，现在我们来自己编写这两个错误页面吧。<br>进入templates文件夹，创建404.html，输入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Page Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再创建500.html，输入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>500 Internal Server Error<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>现在我们来试一试看看。运行程序，请求一个不存在的URl，例如输入<a href="http://127.0.0.1:5000/hello" target="_blank" rel="external">http://127.0.0.1:5000/hello</a> , 就会看到：<br><img src="/images/404.jpg"><br>我们自定义的错误页面显示出来了！！</p>
+<p>可是这个错误页面也还是丑，没关系，之后会写得好看一点的～</p>
+<p>Last: <a href="http://roseou.github.io/2016/05/16/templates/" target="_blank" rel="external">Flask学习教程 Part1 3.1:用Jinja2渲染模板</a><br>Next: <a href="http://roseou.github.io/2016/05/17/base/" target="_blank" rel="external">Flask学习教程 Part1 3.3:(强大的)模板继承</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -54,6 +54,54 @@
 
   
   
+    <h3 class="article-title"><a href="/2016/05/17/wrongpage/"><span>Flask学习教程 Part1 3.2:错误页面</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/17/wrongpage/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-17T13:02:38.000Z">
+          2016-05-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>当请求错误时，我们需要有一个页面来显示一些错误信息告诉我们发生了什么错误。Flask中还有一个abort()函数用来处理错误，返回一个显示相应错误消息的页面。以下是一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    abort(<span class="number">400</span>)</span><br></pre></td></tr></table></figure></p>
+<p>当我们访问<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> 时，就会自动返回一个显示400错误消息的页面，这个页面是这样的：<br><img src="/images/badrequest.jpg"><br>它告诉了我们浏览器发送了一个服务器无法理解的请求。</p>
+<p>可是这个页面有点丑，我们可以<strong>自定义错误页面</strong>。这也是这一小节想说的，前面的都是铺垫啊铺垫。</p>
+<p>首先，我们来添加两个处理错误的路由，打开hello.py，加入代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'404.html'</span>), <span class="number">404</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(500)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">internal_server_error</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'500.html'</span>), <span class="number">500</span></span><br><span class="line"><span class="comment">#...</span></span><br></pre></td></tr></table></figure></p>
+<p>1.这两个路由都用到了实例app里的errorhandler()装饰器，这个函数接受数字状态码作参数，来处理相应的错误。<br>2.第一个路由用来处理404错误，当客户端请求未知页面或路由时显示。<br>3.第二个路由用来处理500错误，当有未处理的异常时显示。</p>
+<p>那么，现在我们来自己编写这两个错误页面吧。<br>进入templates文件夹，创建404.html，输入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Page Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再创建500.html，输入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>500 Internal Server Error<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>现在我们来试一试看看。运行程序，请求一个不存在的URl，例如输入<a href="http://127.0.0.1:5000/hello" target="_blank" rel="external">http://127.0.0.1:5000/hello</a> , 就会看到：<br><img src="/images/404.jpg"><br>我们自定义的错误页面显示出来了！！</p>
+<p>可是这个错误页面也还是丑，没关系，之后会写得好看一点的～</p>
+<p>Last: <a href="http://roseou.github.io/2016/05/16/templates/" target="_blank" rel="external">Flask学习教程 Part1 3.1:用Jinja2渲染模板</a><br>Next: <a href="http://roseou.github.io/2016/05/17/base/" target="_blank" rel="external">Flask学习教程 Part1 3.3:(强大的)模板继承</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
     <h3 class="article-title"><a href="/2016/05/17/base/"><span>Flask学习教程 Part1 3.3:(强大的)模板继承</span></a></h3>
   
 
@@ -88,7 +136,7 @@
 <p>1.这个就是我们的基模板啦，之后我们所有的其它模板都将继承于它，称为这个基模板的衍生模板。<br>2.可以看到模板加入了一个block标签。block标签所定义的元素可以在衍生模板中修改。例如这里，head和body元素都可在衍生模板中修改。<br>3.在这个模板中，我们定义了三个块，head、title和body。注意，title块包含在head块中。</p>
 <p>然后我们来修改这个基模板的衍生模板。先是index.html:<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">extends</span></span> "base.html" %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> title %&#125;</span><span class="xml">Index</span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> head %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-variable">&#123;&#123; super() &#125;&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> body %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
 <p>user.html:<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> title %&#125;</span><span class="xml">User</span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> head %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-variable">&#123;&#123; super() &#125;&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> body %&#125;</span><span class="xml"></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, </span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, Stranger!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span><br><span class="line"></span><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
-<p>1.衍生模板中有一个extends指令，这个指令声明了这个模板衍生自base.html。<br>2.extends指令之后，基模板中的三个块head、title和body被重新定义，模板引擎Jinja2会将其插入相应的位置。<br>3.在这两个衍生模板中，都新定义了title块，一个定义为index，一个为User。<br>4.在这里，新定义的head块实际上没有改变基模板里的内容，而是使用super()来获取了基模板原来的内容（‘— Play With Flask —’）。<br>5.然后在body块中，index.html和user.html都重新插入了不同的内容。</p>
+<p>1.衍生模板中有一个extends指令，这个指令声明了这个模板衍生自base.html。<br>2.基模板中的三个块head、title和body被重新定义，模板引擎Jinja2会将其插入相应的位置。<br>3.在这两个衍生模板中，都新定义了title块，一个插入了‘index’，一个插入了‘User’。<br>4.在这里，新定义的head块实际上没有改变基模板里的内容，而是使用super()来获取了基模板原来的内容（‘— Play With Flask —’）。<br>5.然后在body块中，index.html和user.html都重新插入了不同的内容。</p>
 <p>现在，运行hello.py，访问 <a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> ：<br><img src="/images/index1.jpg"><br> 可以看到标题里多出了head块里的‘index’。</p>
 <p> 访问 <a href="http://127.0.0.1:5000/user/rose" target="_blank" rel="external">http://127.0.0.1:5000/user/rose</a> ：<br> <img src="/images/user1.jpg"><br> 标题里多出了head块里的‘User’。</p>
 <p> 404.html和500.html的改法也是一样的，这里就不重复再说了，你们可以自己当练习试一下。</p>
@@ -202,7 +250,7 @@
 <p>然后再来说说runserver这个用来启动服务器的命令。当我们运行python hello.py runserver 时，将会以调试模式启动Web服务器。基于runserver这个命令选项，我们还有很多选项可用：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py runserver <span class="comment">--help</span></span><br><span class="line">usage: hello.py runserver [-?] [-h HOST] [-p PORT] [<span class="comment">--threaded]</span></span><br><span class="line">                          [<span class="comment">--processes PROCESSES] [--passthrough-errors] [-d]</span></span><br><span class="line">                          [-D] [-r] [-R]</span><br><span class="line"></span><br><span class="line">Runs the Flask development server i.e. app.run()</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -?, <span class="comment">--help            show this help message and exit</span></span><br><span class="line">  -h HOST, <span class="comment">--host HOST</span></span><br><span class="line">  -p PORT, <span class="comment">--port PORT</span></span><br><span class="line">  <span class="comment">--threaded</span></span><br><span class="line">  <span class="comment">--processes PROCESSES</span></span><br><span class="line">  <span class="comment">--passthrough-errors</span></span><br><span class="line">  -d, <span class="comment">--debug           enable the Werkzeug debugger (DO NOT use in production</span></span><br><span class="line">                        code)</span><br><span class="line">  -D, <span class="comment">--no-debug        disable the Werkzeug debugger</span></span><br><span class="line">  -r, <span class="comment">--reload          monitor Python files for changes (not 100&#123;'const':</span></span><br><span class="line">                        True, '<span class="keyword">help</span><span class="string">': '</span>monitor Python files <span class="keyword">for</span> changes (<span class="keyword">not</span></span><br><span class="line">                        <span class="number">100</span>% <span class="keyword">safe</span> <span class="keyword">for</span> production <span class="keyword">use</span>)<span class="string">', '</span>option_strings<span class="string">':</span><br><span class="line">                        ['</span>-r<span class="string">', '</span><span class="comment">--reload'], 'dest': 'use_reloader',</span></span><br><span class="line">                        <span class="string">'required'</span>: <span class="literal">False</span>, <span class="string">'nargs'</span>: <span class="number">0</span>, <span class="string">'choices'</span>: <span class="keyword">None</span>,</span><br><span class="line">                        <span class="string">'default'</span>: <span class="keyword">None</span>, <span class="string">'prog'</span>: <span class="string">'hello.py runserver'</span>,</span><br><span class="line">                        <span class="string">'container'</span>: &lt;argparse._ArgumentGroup <span class="keyword">object</span> <span class="keyword">at</span></span><br><span class="line">                        <span class="number">0x10bdd5090</span>&gt;, <span class="string">'type'</span>: <span class="keyword">None</span>, <span class="string">'metavar'</span>: <span class="keyword">None</span>&#125;afe <span class="keyword">for</span></span><br><span class="line">                        production <span class="keyword">use</span>)</span><br><span class="line">  -R, <span class="comment">--no-reload       do not monitor Python files for changes</span></span><br></pre></td></tr></table></figure></p>
 <p>嗯，真的有很多，我们在这里无法一一去试。之前说过我们可以在运行服务器前在命令行中传入域名和端口等参数，现在我们就来试试。<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ <span class="keyword">python</span> hello.<span class="keyword">py</span> runserver --host <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br></pre></td></tr></table></figure></p>
 <p>‘–host’这个参数用来指定Web服务器监听来自客户端的连接的网络接口。在默认情况下，Flask的开发服务器监听localhost上(即127.0.0.1)的连接，所以只接受来自服务器所在计算机发起的连接。上面这个命令让Web服务器监听公共网络接口上的连接，允许同网中的其它计算机连接服务器。所以，现在Web服务器可以使用<a href="http://0.0.0.0:5000/" target="_blank" rel="external">http://0.0.0.0:5000/</a> 网络中的任意一台电脑访问，其中‘0.0.0.0’就是服务器所在的计算机的外网IP地址。</p>
-<p>Next: <a href="http://roseou.github.io/2016/05/10/templates/" target="_blank" rel="external">Flask学习教程 Part1 3.1:用Jinja2渲染模板</a></p>
+<p>Last: <a href="http://roseou.github.io/2016/05/13/context/" target="_blank" rel="external">Flask学习教程 Part1 2.2:请求与响应</a><br>Next: <a href="http://roseou.github.io/2016/05/10/templates/" target="_blank" rel="external">Flask学习教程 Part1 3.1:用Jinja2渲染模板</a></p>
 
       
     </div>
@@ -241,7 +289,8 @@
   <div class="article-content">
     <div class="entry">
       
-        <h2 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h2><p>什么是上下文？</p>
+        <p>在这一节，会介绍Flask的一些设计理念：上下文、请求调度、请求钩子和响应。</p>
+<h2 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h2><p>首先上下文是什么东西？</p>
 <p>这里我想引用一下《flask web开发》里介绍上下文的一段话：</p>
 <blockquote>
 <p>Flask从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。请求对象就是一个很好的例子，它封装了客户端发送的HTTP请求。</p>
@@ -320,54 +369,7 @@
 <p>不同的响应需要不同的状态码。我们所发出的请求往往不可能全部都成功响应，总会有发生错误的时候，例如当你请求了一个不存在的URL就会返回404状态码，当请求报文存在错误时就会返回400状态码。</p>
 <p>下面我们来看一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Bad Request&lt;/h1&gt;, 400</span></span><br></pre></td></tr></table></figure></p>
 <p>可以看到第一个返回值是响应文本，第二个返回值是400状态码。这样当你请求访问程序根地址时，它就会返回400状态码表示请求无效。（注意：浏览器会像对待状态码200一样对待状态码400）</p>
-<p>Next: <a href="http://roseou.github.io/2016/05/15/script/" target="_blank" rel="external">Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
-</article>
-
-
-  <article class="post article">
-
-  
-  
-    <h3 class="article-title"><a href="/2016/05/11/wrongpage/"><span>Flask学习教程 Part1 3.2:错误页面</span></a></h3>
-  
-
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/05/11/wrongpage/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-05-11T13:02:38.000Z">
-          2016-05-11
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>当请求错误时，我们需要有一个页面来显示一些错误信息告诉我们发生了什么错误。Flask中还有一个abort()函数用来处理错误，返回一个显示相应错误消息的页面。以下是一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    abort(<span class="number">400</span>)</span><br></pre></td></tr></table></figure></p>
-<p>当我们访问<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> 时，就会自动返回一个显示400错误消息的页面，这个页面是这样的：<br><img src="/images/badrequest.jpg"><br>它告诉了我们浏览器发送了一个服务器无法理解的请求。</p>
-<p>可是这个页面有点丑，我们可以<strong>自定义错误页面</strong>。这也是这一小节想说的，前面的都是铺垫啊铺垫。</p>
-<p>首先，我们来添加两个处理错误的路由，打开hello.py，加入代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'404.html'</span>), <span class="number">404</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(500)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">internal_server_error</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'500.html'</span>), <span class="number">500</span></span><br><span class="line"><span class="comment">#...</span></span><br></pre></td></tr></table></figure></p>
-<p>1.这两个路由都用到了实例app里的errorhandler()装饰器，这个函数接受数字状态码作参数，来处理相应的错误。<br>2.第一个路由用来处理404错误，当客户端请求未知页面或路由时显示。<br>3.第二个路由用来处理500错误，当有未处理的异常时显示。</p>
-<p>那么，现在我们来自己编写这两个错误页面吧。<br>进入templates文件夹，创建404.html，输入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Page Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>再创建500.html，输入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>500 Internal Server Error<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>现在我们来试一试看看。运行程序，请求一个不存在的URl，例如输入<a href="http://127.0.0.1:5000/hello" target="_blank" rel="external">http://127.0.0.1:5000/hello</a> , 就会看到：<br><img src="/images/404.jpg"><br>我们自定义的错误页面显示出来了！！</p>
-<p>可是这个错误页面也还是丑，没关系，之后会写得好看一点的～</p>
+<p>Last: <a href="http://roseou.github.io/2016/05/08/routing/" target="_blank" rel="external">Flask学习教程 Part1 2.1:路由和视图函数</a><br>Next: <a href="http://roseou.github.io/2016/05/15/script/" target="_blank" rel="external">Flask学习教程 Part1 2.3:使用Flask-Script扩展支持命令行选项</a></p>
 
       
     </div>
@@ -420,7 +422,7 @@
 <p>现在这个程序运行在本地的服务器上了，那么现在打开浏览器，在地址栏输入<a href="http://127.0.0.1:5000/" target="_blank" rel="external">http://127.0.0.1:5000/</a> ， 然后我们就会看到：<br> <img src="/images/world.jpg"><br>这里访问了’/‘，即程序的根地址，于是调用了index()视图函数，即第一个路由。</p>
 <p>如果我们输入<a href="http://127.0.0.1:5000/user/rose/" target="_blank" rel="external">http://127.0.0.1:5000/user/rose/</a> ， 那么就会看到：<br><img src="/images/user.jpg"><br>这里访问了’/user/rose’，用到了第二个路由，并且给name这个动态参数传入了rose这个值。</p>
 <p>至此，路由和试图函数的部分就介绍完了。实际上，在本章不仅仅介绍了路由和试图函数，而把把一个完整的程序的基本结构都介绍了一遍。</p>
-<p>Next: <a href="http://roseou.github.io/2016/05/13/context/" target="_blank" rel="external">Flask学习教程 Part1 2.2:请求与响应</a></p>
+<p>Last: <a href="http://roseou.github.io/2016/05/08/setup/" target="_blank" rel="external">Flask学习教程 Part1 1:Flask简介及安装</a><br>Next: <a href="http://roseou.github.io/2016/05/13/context/" target="_blank" rel="external">Flask学习教程 Part1 2.2:请求与响应</a></p>
 
       
     </div>
