@@ -54,6 +54,94 @@
 
   
   
+    <h3 class="article-title"><a href="/2016/02/24/RESTful-API小结/"><span>RESTful API 小结</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/24/RESTful-API小结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-24T14:55:43.000Z">
+          2016-02-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="REST（Representational-State-Transfer）"><a href="#REST（Representational-State-Transfer）" class="headerlink" title="REST（Representational State Transfer）"></a>REST（Representational State Transfer）</h1><p><strong>REST全称Representational State Transfer，译为“表现层状态转化”，REST指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。</strong></p>
+<h3 id="1-表现层-Representation"><a href="#1-表现层-Representation" class="headerlink" title="1.表现层 Representation"></a>1.表现层 Representation</h3><p><strong>“表现层”实际指的是“资源”的“表现层”。</strong></p>
+<ul>
+<li>“资源”，就是网络上一个实体或者说一个具体信息，例如一段文本、一张图片、一首歌等，每种“资源”用一个特定的URI指向，因此URI就成了每一个资源的地址或独一无二的识别符，获取这个资源，访问它的URI就可以。（”上网”，就是调用互联网上的资源的URI。）</li>
+<li>“表现层”就是“资源”呈现出来的形式。比如，文本可以用txt格式表现，也可以用HTML格式、XML格式等表示。URI只代表”资源”的位置。它的具体表现形式即表现层，应该在HTTP请求的头信息中用Accept和Content-Type字段指定。</li>
+</ul>
+<h3 id="2-状态转化-State-Transfer"><a href="#2-状态转化-State-Transfer" class="headerlink" title="2.状态转化 State Transfer"></a>2.状态转化 State Transfer</h3><p>客户端和服务器的互动过程中，涉及到数据和状态的变化。HTTP协议，是一个无状态协议。所以，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，对服务器端资源进行操作，必须通过某种手段，让服务器端发生”状态转化”。这种转化建立在表现层之上，所以就是”表现层状态转化”。</p>
+<ul>
+<li>客户端用到的手段，就是HTTP协议里的方法：<blockquote>
+<p>GET：获取一个资源或者一个集合的所有资源<br>POST：在服务器上新建资源<br>PUT：更新服务器上的资源(提供整个修改后的资源)<br>PATCH：更新服务器上的资源(只提供需要修改的部分)<br>DELETE：从服务器上删除一个资源<br>HEAD：获取资源的元信息(结构)<br>OPTIONS：获取使用者可以对资源进行的操作</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>总的来说，就是，客户端使用HTTP协议的几种方法，让服务器端的资源的表现层发生“状态转化”。</strong></p>
+<h3 id="3-REST特征"><a href="#3-REST特征" class="headerlink" title="3.REST特征"></a>3.REST特征</h3><ul>
+<li>采用客户端/服务器模式</li>
+<li>所有必要的信息要在客户端发出的请求中。服务器不能在两次请求之间保存客户端的任何状态。</li>
+<li>服务器发出的响应可以标记为可缓存或不可缓存，出于优化目的，客户端可以使用缓存。</li>
+<li>客户端访问服务器资源时使用的协议必须一致。</li>
+<li>客户端和服务器之间可按需插入代理服务器、缓存或网关。</li>
+<li>客户端可从服务器上下载代码，在客户端的环境中执行。</li>
+</ul>
+<h3 id="4-REST四个基本原则："><a href="#4-REST四个基本原则：" class="headerlink" title="4.REST四个基本原则："></a>4.REST四个基本原则：</h3><ul>
+<li>使用HTTP动词。</li>
+<li>无状态连接，服务器端不应保存过多上下文状态，即每个请求都是独立的。</li>
+<li>为每个资源设置URI。</li>
+<li><p>通过XML JSON进行数据传递。</p>
+<hr>
+</li>
+</ul>
+<h1 id="API-应用程序接口-API-Application-Program-Interface"><a href="#API-应用程序接口-API-Application-Program-Interface" class="headerlink" title="API:应用程序接口(API:Application Program Interface)"></a>API:应用程序接口(API:Application Program Interface)</h1><p><strong>API的实质是一些封装好的函数，它是操作系统提供给应用程序的一个调用接口，调用这个接口能使操作系统去执行应用程序的命令（动作）。可以说它是软件制定的功能访问接口.</strong><br>（例如你自己写了一个类，这个类里有很多函数，如果用户要使用你这个类，但是只知道这个函数的入口参数和返回值即只知道这个函数是做什么用的，对于用户来说你这些函数就是API。）</p>
+<h3 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h3><ul>
+<li>提供应用程序与开发人员基于某软件或硬件的以访问一组例程的能力。</li>
+<li>简化程序员对系统内部的调用。</li>
+<li>实现不同系统之间数据交换。</li>
+<li>实现计算机软件之间的相互通信。</li>
+<li>API的一个主要功能是提供通用功能集。程序员通过调用API函数对应用程序进行开发，可以减轻编程任务。</li>
+</ul>
+<h3 id="API-设计："><a href="#API-设计：" class="headerlink" title="API 设计："></a>API 设计：</h3><ul>
+<li>在系统中是最外层的接口，是供用户直接调用的。</li>
+<li>稳定。</li>
+<li>定义清楚：方法名应该一目了然，参数数据结构良好，文档丰富清晰。</li>
+<li>多形式：可以用java进行export，以库的形式提供，也可以通过REST的方式进行访问等等。</li>
+</ul>
+<h3 id="API的四种类型"><a href="#API的四种类型" class="headerlink" title="API的四种类型:"></a>API的四种类型:</h3><ul>
+<li>远程过程调用(RPC):通过作用在共享数据缓存器上的过程(或任务)实现程序间的通信。</li>
+<li>标准查询语言(SQL):是标准的访问数据的查询语言，通过数据库实现应用程序间的数据共享。</li>
+<li>文件传输:文件传输通过发送格式化文件实现应用程序间数据共享。</li>
+<li>信息交付:指松耦合或紧耦合应用程序间的小型格式化信息，通过程序间的直接通信实现数据共享。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
     <h3 class="article-title"><a href="/2015/12/09/python-魔法方法/"><span>python 魔法方法</span></a></h3>
   
 
