@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 4.1:表单和表单类 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flask学习教程 Part1 4.1:表单和表单类"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 4.1:表单和表单类</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/06/20/form/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-06-20T08:40:42.000Z">
+          2016-06-20
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>表单的功能就是在网页中采集数据，其实表单就相当于我们平时用来提交资料、意见，规范流程执行过程的格式。一个表单有三个基本组成部分:</p>
+<ul>
+<li>表单标签(<form></form>):用于申明表单，定义采集数据的范围，将<form>和</form>里面包含的数据将提交到服务器。</li>
+<li>表单域:用于采集用户输入或选择的数据。包括有文本框、多行文本框、密码框、隐藏域、复选框、单选框和下拉选择框等。</li>
+<li>表单按钮:用于将数据传送到服务器上的CGI脚本或者取消输入，还可以用表单按钮来控制其他定义了处理脚本的处理工作。有提交按钮、复位按钮和一般按钮。</li>
+</ul>
+<p>WTForms是一个Python表单验证、渲染开发包，其中有许多HTML标准字段和内建的验证函数。</p>
+<ul>
+<li><p>这些标准字段本质上是在wtforms中定义的类，有以下这些：</p>
+<blockquote>
+<p>StringField：文本字段<br>TextAreaField：多行文本字段<br>PasswordField：密码文本字段<br>HiddenField：隐藏文本字段<br>DateField：文本字段，值为datetime.date格式<br>DateTimeField：文本字段，值为datetime.datetime格式<br>IntegerField：文本字段，值为整型<br>DecimalField：文本字段，值为decimal.Decimal<br>FloatField：文本字段，值为浮点型<br>BooleanField：复选框，值为True或False<br>RadioField：一组单选框<br>SelectField：下拉列表<br>SelectMultipleField：下拉列表，可选择多个值<br>FileField：文件上传字段<br>SubmitField：表单提交按钮<br>FormField：把表单作为字段嵌入另外一个表单<br>FieldList：一组指定类型的字段</p>
+</blockquote>
+</li>
+<li><p>而验证函数则是用来验证用户填写在表单中并提交的输入值是否符合要求的函数，有以下这些：</p>
+<blockquote>
+<p>Email：验证电子邮件地址<br>EqualTo：比较两个字段的值(常用于要求输入两次密码进行确认的情况)<br>IPAddress：验证IPv4网络地址<br>Length：验证输入字符串的长度<br>NumberRange：验证输入的值在数字范围内<br>Optional：无输入值时跳过其他的验证函数<br>Required：确保字段中有数据(确保用户输入不为空)<br>Regexp：使用正则表达式验证输入值<br>URL：验证URL<br>AnyOf：确保输入值在可选值列表<br>NoneOf：确保输入值不在可选值列表</p>
+</blockquote>
+</li>
+</ul>
+<p>flask里的一个扩展:Flask-WTF，提供了简单的WTForms 集成。那么我们来安装这个flask扩展flask-wtf:<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip <span class="keyword">install</span> flask-wtf</span><br></pre></td></tr></table></figure></p>
+<h2 id="表单类"><a href="#表单类" class="headerlink" title="表单类"></a>表单类</h2><p>使用Flask-WTF时，每一个Web表单都是一个继承自Form的类。表单类定义了表单中的字段，每一个字段都是WTForms中的字段类的实例。那么我们来给我们的hello.py定义一个表单类试试，在hello.py插入以下代码：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">from</span> flask.ext.wtf <span class="keyword">import</span> Form</span><br><span class="line"><span class="title">from</span> wtforms <span class="keyword">import</span> StringField, SubmitField</span><br><span class="line"><span class="title">from</span> wtforms.validators <span class="keyword">import</span> Required</span><br><span class="line"><span class="class"></span><br><span class="line"><span class="keyword">class</span> <span class="type">NameForm</span>(<span class="type">Form</span>):</span><br><span class="line">    name = <span class="type">StringField</span>('<span class="type">What</span> <span class="title">is</span> <span class="title">your</span> <span class="title">name</span>?', <span class="title">validators</span>=[<span class="type">Required</span>()])</span><br><span class="line">    submit = <span class="type">SubmitField</span>('<span class="type">Submit</span>')</span></span><br></pre></td></tr></table></figure></p>
+<p>1.首先,从flask.ext.wtf里导入Form类<br>2.从wtforms导入StringField、SubmitField类<br>3.从wtforms。validators导入Required验证函数<br>4.定义NameForm类，这个类继承自Form类<br>5.NameForm表单类中定义了一个叫name的文本字段，这个name是StringField类的实例。StringField类的构造函数中的可选参数validators指定了一个列表，这个列表由验证函数组成，在接受用户提交的数据之前验证数据。这里这个列表中有Required()验证函数，确保用户提交的字段不为空。<br>6.NameForm中还定义了一个叫submit的表单提交按钮，这个submit是SubmitField类的实例。SubmitField类的构造函数的第一个参数就是把表单渲染成HTML时所使用的标号，这里为‘Submit’。</p>
+<p>这样就定义了一个表单类了~</p>
+<p>Last:<br>Next:</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
