@@ -1,59 +1,79 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
-<!-- Head tag -->
-
 <head>
- 	 <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fighting!">
-    <meta name="keyword"  content="undefined">
-    <title>Flask学习教程 Part1 2.1:路由和视图函数 | hexo-theme-fresh</title>
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/favicon.ico" type="image/ico">
+  <meta charset="utf-8">
+  
+  <title>Flask学习教程 Part1 2.1:路由和视图函数 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
 
-    <!-- css files -->
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/normalize.css">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- font -->
-	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css">
+  <meta property="og:title" content="Flask学习教程 Part1 2.1:路由和视图函数"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
+
 <body>
-	<!-- header -->
-	<header class="header">
-    <section class="banner">
-        <img class="banner-image" src="/img/banner.png" alt="banner">
-        <img class="avatar" src="/img/avatar.png" alt="avatar" >
-    </section>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
 
-    <nav class="nav">
-    	<a href="/">Home </a>
-
-    	<a href="/archives">Archives</a>
-    </nav>
-    	
-    <div class="subtitle"> Just Do Heck!!! </div>
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
     
-</header>
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
 
-	<!-- Main content -->
-	<main class="post">
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
 
-	<article>
-	<h1 class="article-title">
-	   Flask学习教程 Part1 2.1:路由和视图函数
-	</h1>
+  
+  
+    <h3 class="article-title"><span>Flask学习教程 Part1 2.1:路由和视图函数</span></h3>
+  
 
-	<section class="post-time">
-		<span class="post-date">05-08</span>
-	</section>
 
-	<section class="article-entry">
-	    <p>这一章的重点是介绍路由与视图函数，但同时还会介绍一个完整的程序的基本结构。</p>
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/08/routing/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-08T03:47:48.000Z">
+          2016-05-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>这一章的重点是介绍路由与视图函数，但同时还会介绍一个完整的程序的基本结构。</p>
 <p>那么我们来看一个完整的应用hello.py。在上一章中，我们创建了一个playwithflask文件夹，现在请在这个文件夹里创建一个hello.py文件，然后输入以下代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span>                               ＃这里是python定义函数的语法</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello world!&lt;/h1&gt;'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/user/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello, %s!&lt;/h1&gt;'</span> % name    ＃这里是python中使用格式转换符的语法</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
 <p>前端的同学，你们看不懂是吧？没关系，现在来解释一下这段python代码是什么意思，做了什么。</p>
 <p>1.首先，我们之前下载安装了flask，现在就从flask包里导入Flask这个类，因为接下来要用到。这里涉及到python面向对象的知识，Flask类定义在flask里，它有着许多属性和方法（属性可以理解为一些特质，就像人类有眼耳口鼻，方法可以理解为行为，就像人类会说话会走路一样），现在你只要知道这些就够了。</p>
@@ -69,26 +89,34 @@
 <p>至此，路由和试图函数的部分就介绍完了。实际上，在本章不仅仅介绍了路由和试图函数，而把把一个完整的程序的基本结构都介绍了一遍。</p>
 <p>Last: <a href="http://roseou.github.io/2016/05/08/setup/" target="_blank" rel="external">Flask学习教程 Part1 1:Flask简介及安装</a><br>Next: <a href="http://roseou.github.io/2016/05/13/context/" target="_blank" rel="external">Flask学习教程 Part1 2.2:请求与响应</a></p>
 
-	</section>	
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
 </article>
 
-	
-</main>
+  
 
-	<!-- footer -->
-	<footer>
-	<div class="social">
-		<a href="">
-			<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
-		</a>
-		<a href="https://github.com/stephenLYao">
-			<i class="fa fa-github fa-2x" aria-hidden="true"></i>
-		</a>
-		<a href="">
-			<i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
-		</a>
-	</div>
-	<p>@2016.Power by <a rel="nofollow"  href="https://hexo.io">Hexo</a>. Theme <a rel="nofollow" href="https://github.com/stephenLYao/hexo-theme-fresh.git">fresh</p>
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
 </footer>
+    
+  </div>
+</div>
 </body>
 </html>

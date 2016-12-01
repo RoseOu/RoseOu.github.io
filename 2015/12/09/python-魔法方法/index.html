@@ -1,59 +1,79 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
-<!-- Head tag -->
-
 <head>
- 	 <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fighting!">
-    <meta name="keyword"  content="undefined">
-    <title>python 魔法方法 | hexo-theme-fresh</title>
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/favicon.ico" type="image/ico">
+  <meta charset="utf-8">
+  
+  <title>python 魔法方法 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
 
-    <!-- css files -->
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/normalize.css">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- font -->
-	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css">
+  <meta property="og:title" content="python 魔法方法"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
+
 <body>
-	<!-- header -->
-	<header class="header">
-    <section class="banner">
-        <img class="banner-image" src="/img/banner.png" alt="banner">
-        <img class="avatar" src="/img/avatar.png" alt="avatar" >
-    </section>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
 
-    <nav class="nav">
-    	<a href="/">Home </a>
-
-    	<a href="/archives">Archives</a>
-    </nav>
-    	
-    <div class="subtitle"> Just Do Heck!!! </div>
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
     
-</header>
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
 
-	<!-- Main content -->
-	<main class="post">
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
 
-	<article>
-	<h1 class="article-title">
-	   python 魔法方法
-	</h1>
+  
+  
+    <h3 class="article-title"><span>python 魔法方法</span></h3>
+  
 
-	<section class="post-time">
-		<span class="post-date">12-09</span>
-	</section>
 
-	<section class="article-entry">
-	    <p><strong>魔法方法即前后各加两个下划线的名字组成的集合所包含的方法。（如果对象实现了魔法方法中的某一个，那么这个方法会在特殊的情况下被调用） </strong></p>
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/09/python-魔法方法/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-08T16:08:12.000Z">
+          2015-12-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><strong>魔法方法即前后各加两个下划线的名字组成的集合所包含的方法。（如果对象实现了魔法方法中的某一个，那么这个方法会在特殊的情况下被调用） </strong></p>
 <hr>
 <hr>
 <h3 id="一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。"><a href="#一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。" class="headerlink" title="一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。"></a>一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。</h3><hr>
@@ -117,26 +137,34 @@
 <p>__getinitargs__(self)：当类unpickled时调用__init__，可以定义__getinitargs__，该方法返回一个元组的参数，然后传递给__init__。（旧式类）<br>__getnewargs__(self)：进行unpickling时将参数传递到__new__。该方法返回一个元组参数，然后能传递给__new__。 （新式类）<br>__getstate__(self)：代替对象的__dict__属性被保存。<br>__setstate__(self, state)：对象unpickled时，如果__setstate__定义对象状态会传递来代替直接用对象的__dict__属性。</p>
 </blockquote>
 
-	</section>	
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
 </article>
 
-	
-</main>
+  
 
-	<!-- footer -->
-	<footer>
-	<div class="social">
-		<a href="">
-			<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
-		</a>
-		<a href="https://github.com/stephenLYao">
-			<i class="fa fa-github fa-2x" aria-hidden="true"></i>
-		</a>
-		<a href="">
-			<i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
-		</a>
-	</div>
-	<p>@2016.Power by <a rel="nofollow"  href="https://hexo.io">Hexo</a>. Theme <a rel="nofollow" href="https://github.com/stephenLYao/hexo-theme-fresh.git">fresh</p>
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
 </footer>
+    
+  </div>
+</div>
 </body>
 </html>

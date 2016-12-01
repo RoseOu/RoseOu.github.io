@@ -1,59 +1,79 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
-<!-- Head tag -->
-
 <head>
- 	 <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fighting!">
-    <meta name="keyword"  content="undefined">
-    <title>RESTful API 小结 | hexo-theme-fresh</title>
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/favicon.ico" type="image/ico">
+  <meta charset="utf-8">
+  
+  <title>RESTful API 小结 | Rose&#39;s blog | Work hard!</title>
+  <meta name="author" content="Rose Ou">
+  
+  <meta name="description" content="Fighting!">
+  
+  
 
-    <!-- css files -->
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/normalize.css">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- font -->
-	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css">
+  <meta property="og:title" content="RESTful API 小结"/>
+  <meta property="og:site_name" content="Rose&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
+
 <body>
-	<!-- header -->
-	<header class="header">
-    <section class="banner">
-        <img class="banner-image" src="/img/banner.png" alt="banner">
-        <img class="avatar" src="/img/avatar.png" alt="avatar" >
-    </section>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
 
-    <nav class="nav">
-    	<a href="/">Home </a>
-
-    	<a href="/archives">Archives</a>
-    </nav>
-    	
-    <div class="subtitle"> Just Do Heck!!! </div>
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Rose&#39;s blog</a>
+  </h1>
+  <p class="site-description">Work hard!</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
     
-</header>
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+</nav></header>
 
-	<!-- Main content -->
-	<main class="post">
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
 
-	<article>
-	<h1 class="article-title">
-	   RESTful API 小结
-	</h1>
+  
+  
+    <h3 class="article-title"><span>RESTful API 小结</span></h3>
+  
 
-	<section class="post-time">
-		<span class="post-date">02-24</span>
-	</section>
 
-	<section class="article-entry">
-	    <h1 id="REST（Representational-State-Transfer）"><a href="#REST（Representational-State-Transfer）" class="headerlink" title="REST（Representational State Transfer）"></a>REST（Representational State Transfer）</h1><p><strong>REST全称Representational State Transfer，译为“表现层状态转化”，REST指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。</strong></p>
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/24/RESTful-API小结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-24T14:55:43.000Z">
+          2016-02-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="REST（Representational-State-Transfer）"><a href="#REST（Representational-State-Transfer）" class="headerlink" title="REST（Representational State Transfer）"></a>REST（Representational State Transfer）</h1><p><strong>REST全称Representational State Transfer，译为“表现层状态转化”，REST指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。</strong></p>
 <h3 id="1-表现层-Representation"><a href="#1-表现层-Representation" class="headerlink" title="1.表现层 Representation"></a>1.表现层 Representation</h3><p><strong>“表现层”实际指的是“资源”的“表现层”。</strong></p>
 <ul>
 <li>“资源”，就是网络上一个实体或者说一个具体信息，例如一段文本、一张图片、一首歌等，每种“资源”用一个特定的URI指向，因此URI就成了每一个资源的地址或独一无二的识别符，获取这个资源，访问它的URI就可以。（”上网”，就是调用互联网上的资源的URI。）</li>
@@ -104,26 +124,34 @@
 <li>信息交付:指松耦合或紧耦合应用程序间的小型格式化信息，通过程序间的直接通信实现数据共享。</li>
 </ul>
 
-	</section>	
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+          
+        </div>
+        
+    </footer>
+  </div>
 </article>
 
-	
-</main>
+  
 
-	<!-- footer -->
-	<footer>
-	<div class="social">
-		<a href="">
-			<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
-		</a>
-		<a href="https://github.com/stephenLYao">
-			<i class="fa fa-github fa-2x" aria-hidden="true"></i>
-		</a>
-		<a href="">
-			<i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
-		</a>
-	</div>
-	<p>@2016.Power by <a rel="nofollow"  href="https://hexo.io">Hexo</a>. Theme <a rel="nofollow" href="https://github.com/stephenLYao/hexo-theme-fresh.git">fresh</p>
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Rose Ou
+  
+</p>
 </footer>
+    
+  </div>
+</div>
 </body>
 </html>
