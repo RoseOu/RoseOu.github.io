@@ -1,79 +1,59 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+
+<!-- Head tag -->
+
 <head>
-  <meta charset="utf-8">
-  
-  <title>python 模块与包 | Rose&#39;s blog | Work hard!</title>
-  <meta name="author" content="Rose Ou">
-  
-  <meta name="description" content="Fighting!">
-  
-  
+ 	 <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fighting!">
+    <meta name="keyword"  content="undefined">
+    <title>python 模块与包 | hexo-theme-fresh</title>
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/favicon.ico" type="image/ico">
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- css files -->
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/normalize.css">
 
-  <meta property="og:title" content="python 模块与包"/>
-  <meta property="og:site_name" content="Rose&#39;s blog"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <!-- font -->
+	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-<div id="page" class="site">
-  <div id="primary" class="content-area">
+	<!-- header -->
+	<header class="header">
+    <section class="banner">
+        <img class="banner-image" src="/img/banner.png" alt="banner">
+        <img class="avatar" src="/img/avatar.png" alt="avatar" >
+    </section>
 
-    <header id="header" class="inner"><div class="site-branding">
-  <h1 class="site-title">
-    <a href="/">Rose&#39;s blog</a>
-  </h1>
-  <p class="site-description">Work hard!</p>
-</div>
-<nav id="site-navigation" class="main-navigation" role="navigation">
-  <ul>
+    <nav class="nav">
+    	<a href="/">Home </a>
+
+    	<a href="/archives">Archives</a>
+    </nav>
+    	
+    <div class="subtitle"> Just Do Heck!!! </div>
     
-      <li><a href="/">主页</a></li>
-    
-      <li><a href="/archives">归档</a></li>
-    
-  </ul>
-</nav></header>
+</header>
 
-    <article id="content" class="site-content">
-      <main id="main" class="site-main posts-loop" role="main">
-        <article class="post article">
+	<!-- Main content -->
+	<main class="post">
 
-  
-  
-    <h3 class="article-title"><span>python 模块与包</span></h3>
-  
+	<article>
+	<h1 class="article-title">
+	   python 模块与包
+	</h1>
 
+	<section class="post-time">
+		<span class="post-date">11-30</span>
+	</section>
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/11/30/python 模块与包/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-29T16:33:53.000Z">
-          2015-11-30
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="一、模块"><a href="#一、模块" class="headerlink" title="一、模块"></a>一、模块</h3><p>模块是一些自我包含并且有组织的代码片段，它可能是一个包含数据成员和方法的类，也可能是一组相关但彼此独立的操作函数。</p>
+	<section class="article-entry">
+	    <h3 id="一、模块"><a href="#一、模块" class="headerlink" title="一、模块"></a>一、模块</h3><p>模块是一些自我包含并且有组织的代码片段，它可能是一个包含数据成员和方法的类，也可能是一组相关但彼此独立的操作函数。</p>
 <hr>
 <h3 id="二、模块与文件"><a href="#二、模块与文件" class="headerlink" title="二、模块与文件"></a>二、模块与文件</h3><p>一个文件被看作是一个独立模块，一个模块也可以被看作是一个文件。模块的文件名就是模块名字加扩展名.py,<br>1、模块名称空间：一个名称空间就是一个从名称到对象的关系映射集合。每个模块都定义了它自己的唯一的名称空间，所以在不同模块间不会出现名称交叉。</p>
 <hr>
@@ -85,34 +65,26 @@
 <hr>
 <h3 id="六、包"><a href="#六、包" class="headerlink" title="六、包"></a>六、包</h3><p>包是一个有层次的文件目录结构，它定义了一个由模块和子包组成的python应用程序执行环境。包也使用句点属性标知来访问它们的函数。<br>1、绝对导入：导入子包会导致与真正的标准库模块（事实上是它们的名字）发生冲突，会把名字相同的标准库模块隐藏掉。这些名字必须通过Python路径来访问。<br>2、相对导入：只用于from-import语句，明确在子包中某个模块的位置。</p>
 
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
+	</section>	
 </article>
 
-  
+	
+</main>
 
-      </main>
-    </article>
-
-    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
-  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-  </br>
-  
-  &copy; 2016 Rose Ou
-  
-</p>
+	<!-- footer -->
+	<footer>
+	<div class="social">
+		<a href="">
+			<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+		</a>
+		<a href="https://github.com/stephenLYao">
+			<i class="fa fa-github fa-2x" aria-hidden="true"></i>
+		</a>
+		<a href="">
+			<i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
+		</a>
+	</div>
+	<p>@2016.Power by <a rel="nofollow"  href="https://hexo.io">Hexo</a>. Theme <a rel="nofollow" href="https://github.com/stephenLYao/hexo-theme-fresh.git">fresh</p>
 </footer>
-    
-  </div>
-</div>
 </body>
 </html>

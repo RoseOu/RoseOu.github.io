@@ -1,79 +1,59 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+
+<!-- Head tag -->
+
 <head>
-  <meta charset="utf-8">
-  
-  <title>Flask学习教程 Part1 4.1:表单和表单类 | Rose&#39;s blog | Work hard!</title>
-  <meta name="author" content="Rose Ou">
-  
-  <meta name="description" content="Fighting!">
-  
-  
+ 	 <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fighting!">
+    <meta name="keyword"  content="undefined">
+    <title>Flask学习教程 Part1 4.1:表单和表单类 | hexo-theme-fresh</title>
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/favicon.ico" type="image/ico">
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- css files -->
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/normalize.css">
 
-  <meta property="og:title" content="Flask学习教程 Part1 4.1:表单和表单类"/>
-  <meta property="og:site_name" content="Rose&#39;s blog"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <!-- font -->
+	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-<div id="page" class="site">
-  <div id="primary" class="content-area">
+	<!-- header -->
+	<header class="header">
+    <section class="banner">
+        <img class="banner-image" src="/img/banner.png" alt="banner">
+        <img class="avatar" src="/img/avatar.png" alt="avatar" >
+    </section>
 
-    <header id="header" class="inner"><div class="site-branding">
-  <h1 class="site-title">
-    <a href="/">Rose&#39;s blog</a>
-  </h1>
-  <p class="site-description">Work hard!</p>
-</div>
-<nav id="site-navigation" class="main-navigation" role="navigation">
-  <ul>
+    <nav class="nav">
+    	<a href="/">Home </a>
+
+    	<a href="/archives">Archives</a>
+    </nav>
+    	
+    <div class="subtitle"> Just Do Heck!!! </div>
     
-      <li><a href="/">主页</a></li>
-    
-      <li><a href="/archives">归档</a></li>
-    
-  </ul>
-</nav></header>
+</header>
 
-    <article id="content" class="site-content">
-      <main id="main" class="site-main posts-loop" role="main">
-        <article class="post article">
+	<!-- Main content -->
+	<main class="post">
 
-  
-  
-    <h3 class="article-title"><span>Flask学习教程 Part1 4.1:表单和表单类</span></h3>
-  
+	<article>
+	<h1 class="article-title">
+	   Flask学习教程 Part1 4.1:表单和表单类
+	</h1>
 
+	<section class="post-time">
+		<span class="post-date">06-20</span>
+	</section>
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/06/20/form/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-06-20T08:40:42.000Z">
-          2016-06-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>表单的功能就是在网页中采集数据，其实表单就相当于我们平时用来提交资料、意见，规范流程执行过程的格式。一个表单有三个基本组成部分:</p>
+	<section class="article-entry">
+	    <h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>表单的功能就是在网页中采集数据，其实表单就相当于我们平时用来提交资料、意见，规范流程执行过程的格式。一个表单有三个基本组成部分:</p>
 <ul>
 <li>表单标签(<code>&lt;form&gt;&lt;/form&gt;</code>):用于申明表单，定义采集数据的范围，将<code>&lt;form&gt;</code>和<code>&lt;/form&gt;</code>里面包含的数据将提交到服务器。</li>
 <li>表单域:用于采集用户输入或选择的数据。包括有文本框、多行文本框、密码框、隐藏域、复选框、单选框和下拉选择框等。</li>
@@ -103,34 +83,26 @@
 <p>事实上，除了这样直接设置SECRET_KEY的值，我们还可以将密钥保存在文件或环境变量中，然后从文件或环境中导入其配置值。</p>
 <p>Last:<br>Next:</p>
 
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
+	</section>	
 </article>
 
-  
+	
+</main>
 
-      </main>
-    </article>
-
-    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
-  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-  </br>
-  
-  &copy; 2016 Rose Ou
-  
-</p>
+	<!-- footer -->
+	<footer>
+	<div class="social">
+		<a href="">
+			<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+		</a>
+		<a href="https://github.com/stephenLYao">
+			<i class="fa fa-github fa-2x" aria-hidden="true"></i>
+		</a>
+		<a href="">
+			<i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
+		</a>
+	</div>
+	<p>@2016.Power by <a rel="nofollow"  href="https://hexo.io">Hexo</a>. Theme <a rel="nofollow" href="https://github.com/stephenLYao/hexo-theme-fresh.git">fresh</p>
 </footer>
-    
-  </div>
-</div>
 </body>
 </html>

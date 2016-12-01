@@ -1,79 +1,59 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+
+<!-- Head tag -->
+
 <head>
-  <meta charset="utf-8">
-  
-  <title>Flask学习教程 Part1 3.5:静态文件的引用 | Rose&#39;s blog | Work hard!</title>
-  <meta name="author" content="Rose Ou">
-  
-  <meta name="description" content="Fighting!">
-  
-  
+ 	 <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fighting!">
+    <meta name="keyword"  content="undefined">
+    <title>Flask学习教程 Part1 3.5:静态文件的引用 | hexo-theme-fresh</title>
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/favicon.ico" type="image/ico">
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- css files -->
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/normalize.css">
 
-  <meta property="og:title" content="Flask学习教程 Part1 3.5:静态文件的引用"/>
-  <meta property="og:site_name" content="Rose&#39;s blog"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Rose&#39;s blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <!-- font -->
+	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-<div id="page" class="site">
-  <div id="primary" class="content-area">
+	<!-- header -->
+	<header class="header">
+    <section class="banner">
+        <img class="banner-image" src="/img/banner.png" alt="banner">
+        <img class="avatar" src="/img/avatar.png" alt="avatar" >
+    </section>
 
-    <header id="header" class="inner"><div class="site-branding">
-  <h1 class="site-title">
-    <a href="/">Rose&#39;s blog</a>
-  </h1>
-  <p class="site-description">Work hard!</p>
-</div>
-<nav id="site-navigation" class="main-navigation" role="navigation">
-  <ul>
+    <nav class="nav">
+    	<a href="/">Home </a>
+
+    	<a href="/archives">Archives</a>
+    </nav>
+    	
+    <div class="subtitle"> Just Do Heck!!! </div>
     
-      <li><a href="/">主页</a></li>
-    
-      <li><a href="/archives">归档</a></li>
-    
-  </ul>
-</nav></header>
+</header>
 
-    <article id="content" class="site-content">
-      <main id="main" class="site-main posts-loop" role="main">
-        <article class="post article">
+	<!-- Main content -->
+	<main class="post">
 
-  
-  
-    <h3 class="article-title"><span>Flask学习教程 Part1 3.5:静态文件的引用</span></h3>
-  
+	<article>
+	<h1 class="article-title">
+	   Flask学习教程 Part1 3.5:静态文件的引用
+	</h1>
 
+	<section class="post-time">
+		<span class="post-date">05-21</span>
+	</section>
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/05/21/static/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-05-21T01:33:45.000Z">
-          2016-05-21
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>在一个应用程序中，不只是由代码和模块组成，还有一些静态的文件。所以这节就来讲一讲静态文件的引用。</p>
+	<section class="article-entry">
+	    <p>在一个应用程序中，不只是由代码和模块组成，还有一些静态的文件。所以这节就来讲一讲静态文件的引用。</p>
 <p>要引用静态文件，就要给它生成一个URl地址，那么这里就要用到一个url_for()函数。所以先来讲一下这个函数的使用方法。</p>
 <p>url_for()可以使用程序URL映射中保存的信息生成URL。它最简单的用法就是以视图函数名作为参数，返回对应的URL。</p>
 <p>假如我们有一下这个路由：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello World!&lt;/h1&gt;'</span></span><br></pre></td></tr></table></figure></p>
@@ -84,34 +64,26 @@
 <p>这些都做好了，现在来看看这个图标，运行程序，可以看到：<br><img src="/images/icon.jpg"><br>看到那个图标了吧！！</p>
 <p>Last：<br>Next：</p>
 
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          
-          
-        </div>
-        
-    </footer>
-  </div>
+	</section>	
 </article>
 
-  
+	
+</main>
 
-      </main>
-    </article>
-
-    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
-  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-  </br>
-  
-  &copy; 2016 Rose Ou
-  
-</p>
+	<!-- footer -->
+	<footer>
+	<div class="social">
+		<a href="">
+			<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+		</a>
+		<a href="https://github.com/stephenLYao">
+			<i class="fa fa-github fa-2x" aria-hidden="true"></i>
+		</a>
+		<a href="">
+			<i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
+		</a>
+	</div>
+	<p>@2016.Power by <a rel="nofollow"  href="https://hexo.io">Hexo</a>. Theme <a rel="nofollow" href="https://github.com/stephenLYao/hexo-theme-fresh.git">fresh</p>
 </footer>
-    
-  </div>
-</div>
 </body>
 </html>

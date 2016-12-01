@@ -2,6 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/05/15/script/</loc>
+    
+    <lastmod>2016-12-01T14:01:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/07/07/formhtml/</loc>
+    
+    <lastmod>2016-07-07T15:35:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/06/20/form/</loc>
+    
+    <lastmod>2016-07-07T10:17:27.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/17/bootstrap/</loc>
+    
+    <lastmod>2016-05-21T04:07:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/08/routing/</loc>
+    
+    <lastmod>2016-05-21T03:50:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/17/base/</loc>
+    
+    <lastmod>2016-05-21T03:48:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/21/static/</loc>
+    
+    <lastmod>2016-05-21T03:44:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/17/wrongpage/</loc>
+    
+    <lastmod>2016-05-17T14:25:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/16/templates/</loc>
+    
+    <lastmod>2016-05-17T14:22:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/08/setup/</loc>
+    
+    <lastmod>2016-05-17T14:15:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/13/context/</loc>
+    
+    <lastmod>2016-05-17T14:11:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/03/27/bottle/</loc>
     
     <lastmod>2016-04-27T13:24:55.000Z</lastmod>
