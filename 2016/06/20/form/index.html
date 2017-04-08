@@ -179,7 +179,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>表单的功能就是在网页中采集数据，其实表单就相当于我们平时用来提交资料、意见，规范流程执行过程的格式。一个表单有三个基本组成部分:</p>
+                <h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><p>表单的功能就是在网页中采集数据，其实表单就相当于我们平时用来提交资料、意见，规范流程执行过程的格式。一个表单有三个基本组成部分:</p>
 <ul>
 <li>表单标签(<code>&lt;form&gt;&lt;/form&gt;</code>):用于申明表单，定义采集数据的范围，将<code>&lt;form&gt;</code>和<code>&lt;/form&gt;</code>里面包含的数据将提交到服务器。</li>
 <li>表单域:用于采集用户输入或选择的数据。包括有文本框、多行文本框、密码框、隐藏域、复选框、单选框和下拉选择框等。</li>
@@ -199,10 +199,10 @@
 </li>
 </ul>
 <p>flask里的一个扩展:Flask-WTF，提供了简单的WTForms 集成。那么我们来安装这个flask扩展flask-wtf:<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(venv) $ pip <span class="keyword">install</span> flask-wtf</div></pre></td></tr></table></figure></p>
-<h2 id="表单类"><a href="#表单类" class="headerlink" title="表单类"></a>表单类</h2><p>使用Flask-WTF时，每一个Web表单都是一个继承自Form的类。表单类定义了表单中的字段，每一个字段都是WTForms中的字段类的实例。那么我们来给我们的hello.py定义一个表单类试试，在hello.py插入以下代码：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="title">from</span> flask.ext.wtf <span class="keyword">import</span> Form</div><div class="line"><span class="title">from</span> wtforms <span class="keyword">import</span> StringField, SubmitField</div><div class="line"><span class="title">from</span> wtforms.validators <span class="keyword">import</span> Required</div><div class="line"><span class="class"></span></div><div class="line"><span class="keyword">class</span> <span class="type">NameForm</span>(<span class="type">Form</span>):</div><div class="line">    name = <span class="type">StringField</span>('<span class="type">What</span> <span class="title">is</span> <span class="title">your</span> <span class="title">name</span>?', <span class="title">validators</span>=[<span class="type">Required</span>()])</div><div class="line">    submit = <span class="type">SubmitField</span>('<span class="type">Submit</span>')</div></pre></td></tr></table></figure></p>
+<h1 id="表单类"><a href="#表单类" class="headerlink" title="表单类"></a>表单类</h1><p>使用Flask-WTF时，每一个Web表单都是一个继承自Form的类。表单类定义了表单中的字段，每一个字段都是WTForms中的字段类的实例。那么我们来给我们的hello.py定义一个表单类试试，在hello.py插入以下代码：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="title">from</span> flask.ext.wtf <span class="keyword">import</span> Form</div><div class="line"><span class="title">from</span> wtforms <span class="keyword">import</span> StringField, SubmitField</div><div class="line"><span class="title">from</span> wtforms.validators <span class="keyword">import</span> Required</div><div class="line"><span class="class"></span></div><div class="line"><span class="keyword">class</span> <span class="type">NameForm</span>(<span class="type">Form</span>):</div><div class="line">    name = <span class="type">StringField</span>('<span class="type">What</span> <span class="title">is</span> <span class="title">your</span> <span class="title">name</span>?', <span class="title">validators</span>=[<span class="type">Required</span>()])</div><div class="line">    submit = <span class="type">SubmitField</span>('<span class="type">Submit</span>')</div></pre></td></tr></table></figure></p>
 <p>1.首先,从flask.ext.wtf里导入Form类<br>2.从wtforms导入StringField、SubmitField类<br>3.从wtforms。validators导入Required验证函数<br>4.定义NameForm类，这个类继承自Form类<br>5.NameForm表单类中定义了一个叫name的文本字段，这个name是StringField类的实例。StringField类的构造函数中的可选参数validators指定了一个列表，这个列表由验证函数组成，在接受用户提交的数据之前验证数据。这里这个列表中有Required()验证函数，确保用户提交的字段不为空。<br>6.NameForm中还定义了一个叫submit的表单提交按钮，这个submit是SubmitField类的实例。SubmitField类的构造函数的第一个参数就是把表单渲染成HTML时所使用的标号，这里为‘Submit’。</p>
 <p>这样就定义了一个表单类了,这个表单的作用就是填写用户的名字并提交。</p>
-<h2 id="CSRF保护"><a href="#CSRF保护" class="headerlink" title="CSRF保护"></a>CSRF保护</h2><p>这里还要注意一点，在使用WTF的时候，我们还必须要先设置一下app实例里的SECRET_KEY，否则就会引发错误。而这个设置是为了实现CSRF保护。</p>
+<h1 id="CSRF保护"><a href="#CSRF保护" class="headerlink" title="CSRF保护"></a>CSRF保护</h1><p>这里还要注意一点，在使用WTF的时候，我们还必须要先设置一下app实例里的SECRET_KEY，否则就会引发错误。而这个设置是为了实现CSRF保护。</p>
 <p>CSRF保护就是跨站请求伪造保护。默认情况下，Flask-WTF能够保护表单免受<a href="http://baike.baidu.com/link?url=IbwTLzpX997YmK2HIJoVodQDJea9bI8FoytXpW0ixcKW7EB2uwJNQjOtWJ_DjRDA7Ir12GoQ8OoEjcmr9JPuhK" target="_blank" rel="external">CSRF</a>的攻击。</p>
 <p>那么我们来给我们的程序设置一个密钥，Flask-WTF会使用这个密钥生成加密令牌，再用加密令牌验证请求中的表单数据的真伪。修改hello.py如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">app = Flask(__name__)</div><div class="line">app<span class="selector-class">.config</span>[<span class="string">'SECRET_KEY'</span>] = <span class="string">'hard to guess string'</span></div></pre></td></tr></table></figure></p>
 <p>config是实例app中的一个字典(字典是python的一种数据结构类型，由键和对应的值成对组成)，用来储存了框架、扩展和程序本身的配置变量。这里把config中SECRET_KEY键的值设置为hard to guess string。SECRET_KEY这个配置变量就是通用密钥。</p>
@@ -365,7 +365,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; RoseOu&#39;s Blog 2016 
+                    Copyright &copy; RoseOu&#39;s Blog 2017 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
