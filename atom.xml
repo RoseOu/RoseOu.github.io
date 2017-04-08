@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>RoseOu&#39;s Blog</title>
-  <subtitle>Work Hard!</subtitle>
+  <title>RoseOu&#39;s blog</title>
+  <subtitle>Work hard!</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -9,8 +9,8 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>RoseOu</name>
-    <email>Kaijun.cn@gmail.com</email>
+    <name>Rose Ou</name>
+    
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
