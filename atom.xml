@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-28T09:58:58.000Z</updated>
+  <updated>2017-05-09T13:36:50.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>迷宫生成与求解</title>
+    <link href="http://yoursite.com/2017/05/09/%E8%BF%B7%E5%AE%AB%E7%94%9F%E6%88%90%E4%B8%8E%E6%B1%82%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/05/09/迷宫生成与求解/</id>
+    <published>2017-05-09T02:22:22.000Z</published>
+    <updated>2017-05-09T13:36:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要介绍如何通过回溯随机生成单迷宫并通过摸墙算法对生成的迷宫找到通往出口的路线。</p>
+<h2 id="迷宫生成"><a href="#迷宫生成" class="headerlink" title="迷宫生成"></a>迷宫生成</h2><p>首先，回溯算法也叫试探法，其基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。</p>
+<p>这里我所生成的迷宫是单迷宫，也就是说它是简单连通图并且没有回路（即实际上它是树结构）。这样的迷宫，里面不存在一堵独立的墙（即墙周围都是通道），也不存在一个独立被分隔开的单元（即单元周围都是墙）。</p>
+<p>生成迷宫的步骤如下：</p>
+<ol>
+<li>现在所有单元周围都是墙。</li>
+<li>随机选择一个单元作为当前起点，并将起点标记为已访问。</li>
+<li>在这个起点的四面墙中随机选择一面墙。如果被这面墙分隔的两个单元不连通，并且与这面墙相邻的另外一个单元未曾访问过，则拆掉这面墙，并将与这面墙相邻的另外一个单元作为下一个当前起点，并将其标记为已访问。如果当前起点周围所有相邻的单元都已访问过，则回溯到上一个起点再次选择另外一面墙，重复步骤。</li>
+<li>当回溯到最开始所选择的起点时，算法结束，迷宫生成完成。</li>
+</ol>
+<p>C++语言实现：<br>首先，用一个二维数组存放迷宫的连通状态，即存放迷宫每个单元里连通（没有墙）的方向，并将其全部置0，表示迷宫的初始状态为所有单元相互都不连通，即所有单元周围都是墙。<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> **<span class="keyword">grid</span>;   <span class="comment">//存放迷宫连通状态</span></div><div class="line"><span class="keyword">grid</span>=new <span class="keyword">int</span> *[WIDTH];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;WIDTH;i++)&#123;</div><div class="line">	<span class="keyword">grid</span>[i]=new <span class="keyword">int</span>[HEIGHT];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;WIDTH;i++)&#123;     <span class="comment">//全部置0</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;HEIGHT;j++)&#123;</div><div class="line">		<span class="keyword">grid</span>[i][j]=<span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而四个方向我们可以用一个枚举类型表示。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">enum &#123;N=<span class="number">1</span>,E=<span class="number">4</span>,S=<span class="number">2</span>,W=<span class="number">8</span>&#125;;</div></pre></td></tr></table></figure></p>
+<p>之所以用N=1,E=4,S=2,W=8表示而不是简单地用N=1,E=2,S=3,W=4表示，是因为而迷宫中的单元很有可能会有2个方向是连通的，那样存放连通状态的grid在该单元中就要存放2个方向，而1、2、4、8在二进制表示中分别为0001、0010、0100、1000，1不重复出现在相同的位上，只要将两个方向进行“或”操作，就可以同时存储起来。</p>
+<p>然后，随机选择一个单元作为当前起点。<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">srand((<span class="keyword">int</span>)<span class="keyword">time</span>(<span class="number">0</span>));   <span class="comment">//生成随机数种子</span></div><div class="line">sx=<span class="keyword">rand</span>() % WIDTH;     <span class="comment">//随机选择起点(sx,sy)</span></div><div class="line">sy=<span class="keyword">rand</span>() % HEIGHT;</div></pre></td></tr></table></figure></p>
+<p>接下来，在这个起点的四面墙中随机选择一面墙，即从四个方向中随机选择一个方向。通过回溯生成迷宫时，一个单元可能会多次随机选择方向，并且不会重复选择，而在每个单元中最多只会随机选择4次墙，所以我们可以用一个数组directions[4]来存放选择方向的顺序，并且对于每个单元都重置方向顺序，从而达到随机选择方向而又不重复选择。<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> reset_directions(<span class="keyword">int</span> *directions, <span class="keyword">int</span> <span class="keyword">size</span>) &#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;(<span class="keyword">size</span> - <span class="number">1</span>); i++) &#123;</div><div class="line">		<span class="keyword">int</span> r = i + (<span class="keyword">rand</span>() % (<span class="keyword">size</span> - i));</div><div class="line">		<span class="keyword">int</span> temp = directions[i];</div><div class="line">		directions[i] = directions[r];</div><div class="line">		directions[r] = temp;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接着就是拆墙前进、不断重复步骤和回溯。重复和回溯可通过递归实现，拆墙的过程实际上就是将墙相对于单元的方向设置为连通，用数组grid存放作为单元的连通的方向。朝不同方向前进会造成不同的坐标变化，可以用一个数组DX[9]和一个数组DY[9]来存放不同方向的坐标变化（之所以数组大小为9是因为W=8），而后前进到下一个要走单元时，由于下一个要走的单元的连通方向与当前单元的连通方向是相反的，我们可以用一个数组OPPOSITE[9]来存放每个方向的相反方向。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="attr">OPPOSITE[N]</span> = S;    //反方向</div><div class="line"><span class="attr">OPPOSITE[E]</span> = W;</div><div class="line"><span class="attr">OPPOSITE[S]</span> = N;</div><div class="line"><span class="attr">OPPOSITE[W]</span> = E;</div><div class="line"></div><div class="line"><span class="attr">DX[N]</span> = <span class="number">0</span>;</div><div class="line"><span class="attr">DX[E]</span> = <span class="number">1</span>;</div><div class="line"><span class="attr">DX[S]</span> = <span class="number">0</span>;</div><div class="line"><span class="attr">DX[W]</span> = -<span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="attr">DY[N]</span> = -<span class="number">1</span>;</div><div class="line"><span class="attr">DY[E]</span> = <span class="number">0</span>;</div><div class="line"><span class="attr">DY[S]</span> = <span class="number">1</span>;</div><div class="line"><span class="attr">DY[W]</span> = <span class="number">0</span>;</div></pre></td></tr></table></figure></p>
+<p>拆墙前进、不断重复步骤和回溯的算法如下：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> destroy_wall(<span class="keyword">int</span> cx, <span class="keyword">int</span> cy, <span class="keyword">int</span> **<span class="keyword">grid</span>) &#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> dx, dy, nx, ny;</div><div class="line">    <span class="keyword">int</span> directions[<span class="number">4</span>] = &#123;N, E, S, W&#125;;</div><div class="line"></div><div class="line">    reset_directions(directions, <span class="number">4</span>); <span class="comment">//重置方向顺序</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</div><div class="line">        dx = DX[directions[i]];</div><div class="line">        dy = DY[directions[i]];</div><div class="line"></div><div class="line">        nx = cx + dx;  <span class="comment">//下一个要走单元（即当前起点与选择的墙相隔的单元）</span></div><div class="line">        ny = cy + dy;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> ( ((nx &lt; WIDTH) &amp; (nx &gt;= <span class="number">0</span>)) &amp; ((ny &lt; HEIGHT) &amp; (ny &gt;= <span class="number">0</span>)) ) &#123; <span class="comment">//如果下一个单元在grid里，没有超出范围</span></div><div class="line">            <span class="keyword">if</span> (<span class="keyword">grid</span>[nx][ny] == <span class="number">0</span>) &#123;  <span class="comment">//如果下一个要走的单元未被访问</span></div><div class="line">                <span class="keyword">grid</span>[cx][cy] = (<span class="keyword">int</span>)((<span class="keyword">int</span>)<span class="keyword">grid</span>[cx][cy] | (<span class="keyword">int</span>)directions[i]);  <span class="comment">//拆墙，即存放连通的方向</span></div><div class="line">                <span class="keyword">grid</span>[nx][ny] = (<span class="keyword">int</span>)((<span class="keyword">int</span>)<span class="keyword">grid</span>[nx][ny] | (<span class="keyword">int</span>)OPPOSITE[directions[i]]); <span class="comment">//下一个要走的单元的连通方向为当前单元的连通方向的相反方向</span></div><div class="line">                destroy_wall(nx, ny, <span class="keyword">grid</span>);  <span class="comment">//重复步骤</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>C++语言实现完整代码可到我的Github，同时Python语言实现也可到我的Github，其中还有用Pygame做的图形界面实现。</p>
+<p>下面通过分析一个实际生成的迷宫的过程来说明。</p>
+<p>首先，生成的迷宫以及其最终的连通状态grid如下：<br><img src="/images/maze/grid.png"></p>
+<p>生成迷宫的过程如下：<br><img src="/images/maze/process.png"></p>
+<p>过程分析如下：<br><img src="/images/maze/p1.png"><br><img src="/images/maze/p2.png"></p>
+<p>整个迷宫生成回溯的过程如下：<br><img src="/images/maze/迷宫生成3.gif"></p>
+<p><img src="/images/maze/迷宫求解3.gif"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要介绍如何通过回溯随机生成单迷宫并通过摸墙算法对生成的迷宫找到通往出口的路线。&lt;/p&gt;
+&lt;h2 id=&quot;迷宫生成&quot;&gt;&lt;a href=&quot;#迷宫生成&quot; class=&quot;headerlink&quot; title=&quot;迷宫生成&quot;&gt;&lt;/a&gt;迷宫生成&lt;/h2&gt;&lt;p&gt;首先，回溯算法也叫试探法
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>查找算法总结</title>
     <link href="http://yoursite.com/2017/04/28/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"/>
     <id>http://yoursite.com/2017/04/28/查找算法/</id>
     <published>2017-04-28T06:01:58.000Z</published>
-    <updated>2017-04-28T09:58:58.000Z</updated>
+    <updated>2017-04-28T10:07:53.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="一、查找算法的相关概念"><a href="#一、查找算法的相关概念" class="headerlink" title="一、查找算法的相关概念"></a>一、查找算法的相关概念</h2><p><strong>关键字的定义：</strong> 关键字是数据元素中某个数据项的值，用它可以标识一个数据元素。<br><strong>查找的定义：</strong> 用关键字标识数据元素，查找时根据给定的值，在表中确定一个关键字的值等于给定值的记录或数据元素。<br><strong>查找算法的分类：</strong><br>(1).无序查找和有序查找：无序查找即被查找数列有序无序均可.有序查找即被查找数列必须为有序数列。<br>(2).静态查找和动态查找：静态或者动态都是针对查找表而言的。动态表指查找表中有删除和插入操作的表。<br><strong>平均查找长度（ASL）：</strong> 查找过程中先后和给定值进行比较的数据元素的关键字个数的期望值，称为查找算法在查找成功时的平均查找长度。对于含有n个数据元素的查找表，查找成功的平均查找长度为：<strong>ASL=∑Pi*Ci (i=1,2,3,…,n)</strong>。<br>Pi：查找表中第i个数据元素的概率,且∑Pi=1（i=1,2,3,…,n）<br>Ci：找到第i个数据元素（其关键字等于给定值）时和给定值进行过比较的关键字的个数，显然，Ci的值随查找过程的不同而不同。</p>
 <h2 id="二、六种查找算法"><a href="#二、六种查找算法" class="headerlink" title="二、六种查找算法"></a>二、六种查找算法</h2><p>以下所有算法讨论涉及的数据元素统一定义为如下描述的类型：</p>
