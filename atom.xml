@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-12T13:59:07.000Z</updated>
+  <updated>2017-05-12T14:00:47.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://yoursite.com/2017/05/09/%E8%BF%B7%E5%AE%AB%E7%94%9F%E6%88%90%E4%B8%8E%E6%B1%82%E8%A7%A3/"/>
     <id>http://yoursite.com/2017/05/09/迷宫生成与求解/</id>
     <published>2017-05-09T02:22:22.000Z</published>
-    <updated>2017-05-12T13:59:07.000Z</updated>
+    <updated>2017-05-12T14:00:47.000Z</updated>
     
-    <content type="html"><![CDATA[<p>本文主要介绍如何通过回溯随机生成单迷宫并通过摸墙算法对生成的迷宫找到通往出口的路线。<br>以下涉及的全部完整代码可到我的<a href="https://github.com/RoseOu/Daily_Exercise/tree/master/MazeLab" target="_blank" rel="external">Github</a></p>
+    <content type="html"><![CDATA[<p>本文主要介绍如何通过回溯随机生成单迷宫并通过摸墙算法对生成的迷宫找到通往出口的路线。<br>以下的讨论只给出核心代码，完整代码可到我的<a href="https://github.com/RoseOu/Daily_Exercise/tree/master/MazeLab" target="_blank" rel="external">Github</a>。</p>
 <h2 id="迷宫生成"><a href="#迷宫生成" class="headerlink" title="迷宫生成"></a>迷宫生成</h2><p><strong>回溯算法：</strong> 回溯算法也叫试探法，其基本思想是，从一条路往前走，能进则进，不能进则退回来，换一条路再试。</p>
 <p><strong>单迷宫：</strong> 这里我所生成的迷宫是单迷宫，也就是说它是简单连通图并且没有回路（即实际上它是树结构）。这样的迷宫，里面不存在一堵独立的墙（即墙周围都是通道），也不存在一个独立被分隔开的单元（即单元周围都是墙）。</p>
 <p><strong>生成迷宫的步骤：</strong></p>
@@ -69,7 +69,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;本文主要介绍如何通过回溯随机生成单迷宫并通过摸墙算法对生成的迷宫找到通往出口的路线。&lt;br&gt;以下涉及的全部完整代码可到我的&lt;a href=&quot;https://github.com/RoseOu/Daily_Exercise/tree/master/MazeLab&quot; targe
+      &lt;p&gt;本文主要介绍如何通过回溯随机生成单迷宫并通过摸墙算法对生成的迷宫找到通往出口的路线。&lt;br&gt;以下的讨论只给出核心代码，完整代码可到我的&lt;a href=&quot;https://github.com/RoseOu/Daily_Exercise/tree/master/MazeLab&quot;
     
     </summary>
     
