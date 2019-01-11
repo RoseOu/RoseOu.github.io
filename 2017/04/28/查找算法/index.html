@@ -1,4 +1,93 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="google-site-verification" content="-zz_UiN3Z6szo1tjCMg8H66_XeAH2-dL2KLimiLJ0Ak"><meta name="author" content="Rose Ou"><meta name="description" conauthortent="Fighting!"><link rel="alternative" href="/atom.xml" title="RoseOu's blog" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>查找算法总结 - RoseOu's blog</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--><script src="/js/jquery-3.1.1.min.js"></script><!-- Hotjar Tracking Code for ochukai.me --></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">RoseOu's blog</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/archives" class="head-nav__link">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head">  <time datetime="2017-04-28T06:01:58.000Z" class="post__time">四月 28, 2017</time><h1 class="post__title"><a href="/2017/04/28/查找算法/">查找算法总结</a></h1><div class="post__main echo"><h2 id="一、查找算法的相关概念"><a href="#一、查找算法的相关概念" class="headerlink" title="一、查找算法的相关概念"></a>一、查找算法的相关概念</h2><p><strong>关键字的定义：</strong> 关键字是数据元素中某个数据项的值，用它可以标识一个数据元素。<br><strong>查找的定义：</strong> 用关键字标识数据元素，查找时根据给定的值，在表中确定一个关键字的值等于给定值的记录或数据元素。<br><strong>查找算法的分类：</strong><br>(1).无序查找和有序查找：无序查找即被查找数列有序无序均可.有序查找即被查找数列必须为有序数列。<br>(2).静态查找和动态查找：静态或者动态都是针对查找表而言的。动态表指查找表中有删除和插入操作的表。<br><strong>平均查找长度（ASL）：</strong> 查找过程中先后和给定值进行比较的数据元素的关键字个数的期望值，称为查找算法在查找成功时的平均查找长度。对于含有n个数据元素的查找表，查找成功的平均查找长度为：<strong>ASL=∑Pi*Ci (i=1,2,3,…,n)</strong>。<br>Pi：查找表中第i个数据元素的概率,且∑Pi=1（i=1,2,3,…,n）<br>Ci：找到第i个数据元素（其关键字等于给定值）时和给定值进行过比较的关键字的个数，显然，Ci的值随查找过程的不同而不同。</p>
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>查找算法总结 | RoseOu&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Rose Ou">
+    
+    <meta name="description" content="一、查找算法的相关概念关键字的定义： 关键字是数据元素中某个数据项的值，用它可以标识一个数据元素。查找的定义： 用关键字标识数据元素，查找时根据给定的值，在表中确定一个关键字的值等于给定值的记录或数据元素。查找算法的分类：(1).无序查找和有序查找：无序查找即被查找数列有序无序均可.有序查找即被查找">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="RoseOu&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="RoseOu&#39;s blog" title="RoseOu&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="RoseOu&#39;s blog">RoseOu&#39;s blog</a></h1>
+				<h2 class="blog-motto">Work hard!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/28/查找算法/" title="查找算法总结" itemprop="url">查找算法总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Rose Ou">Rose Ou</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-04-28T06:01:58.000Z" itemprop="datePublished">2017-04-28</time>
+    更新日期:<time datetime="2017-04-28T10:07:53.000Z" itemprop="dateModified">2017-04-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、查找算法的相关概念"><span class="toc-number">1.</span> <span class="toc-text">一、查找算法的相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、六种查找算法"><span class="toc-number">2.</span> <span class="toc-text">二、六种查找算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-顺序查找"><span class="toc-number">2.1.</span> <span class="toc-text">1.顺序查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-折半查找"><span class="toc-number">2.2.</span> <span class="toc-text">2.折半查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-分块查找"><span class="toc-number">2.3.</span> <span class="toc-text">3.分块查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-插值查找"><span class="toc-number">2.4.</span> <span class="toc-text">4.插值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-二叉树查找"><span class="toc-number">2.5.</span> <span class="toc-text">5.二叉树查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-哈希查找"><span class="toc-number">2.6.</span> <span class="toc-text">6.哈希查找</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="一、查找算法的相关概念"><a href="#一、查找算法的相关概念" class="headerlink" title="一、查找算法的相关概念"></a>一、查找算法的相关概念</h2><p><strong>关键字的定义：</strong> 关键字是数据元素中某个数据项的值，用它可以标识一个数据元素。<br><strong>查找的定义：</strong> 用关键字标识数据元素，查找时根据给定的值，在表中确定一个关键字的值等于给定值的记录或数据元素。<br><strong>查找算法的分类：</strong><br>(1).无序查找和有序查找：无序查找即被查找数列有序无序均可.有序查找即被查找数列必须为有序数列。<br>(2).静态查找和动态查找：静态或者动态都是针对查找表而言的。动态表指查找表中有删除和插入操作的表。<br><strong>平均查找长度（ASL）：</strong> 查找过程中先后和给定值进行比较的数据元素的关键字个数的期望值，称为查找算法在查找成功时的平均查找长度。对于含有n个数据元素的查找表，查找成功的平均查找长度为：<strong>ASL=∑Pi*Ci (i=1,2,3,…,n)</strong>。<br>Pi：查找表中第i个数据元素的概率,且∑Pi=1（i=1,2,3,…,n）<br>Ci：找到第i个数据元素（其关键字等于给定值）时和给定值进行过比较的关键字的个数，显然，Ci的值随查找过程的不同而不同。</p>
 <h2 id="二、六种查找算法"><a href="#二、六种查找算法" class="headerlink" title="二、六种查找算法"></a>二、六种查找算法</h2><p>以下所有算法讨论涉及的数据元素统一定义为如下描述的类型：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType;  <span class="comment">//关键字类型以int为例</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>&#123;</div><div class="line">    KeyType key;</div><div class="line">&#125; ElemType;</div></pre></td></tr></table></figure>
 <p><strong>注意：</strong> 每个算法只给出核心代码，完整代码请到我的<a href="https://github.com/RoseOu/Daily_Exercise/tree/master/algorithms/search_al" target="_blank" rel="external">Github</a>。</p>
@@ -21,9 +110,202 @@
 <h3 id="6-哈希查找"><a href="#6-哈希查找" class="headerlink" title="6.哈希查找"></a>6.哈希查找</h3><p><strong>介绍：</strong> 在上述的查找中，由于数据元素在线性表中的存储位置是随机的，和关键字无关，因此在查找时，需将给定值和线性表中记录的关键字逐个比较，查找的效率基于历经比较的关键字的个数。设想，若在数据元素的关键字和其存储位置（数组下标）之间建立一个确定的函数关系f，即将关键字为key的记录存储在下标为Hash(key)的位置上，这样在查找关键字等于给定值kval的记录时，仅需直接对给定值进行某种运算，求得记录的存储位置Hash(kval)，而不需要和其他记录的关键字进行比较。按这种方法组织数据，在进行查找时将会有效减少针对关键字的比较次数，也就可以从根本上降低平均查找长度ASL的值。而哈希查找就是通过计算数据元素的存储地址进行查找的一种方法。<br><strong>哈希函数：</strong> Hash(key)称为哈希函数。<br><strong>冲突：</strong> 对不同的关键字key1和key2得到相同的哈希地址（即哈希函数值）Hash(key1)=Hash(key2)的这种现象称为冲突。在设定哈希函数时要考虑不发生冲突，然而实际上不发生冲突的哈希函数极少存在，只能设定对给定的关键字集合冲突尽可能少的哈希函数，在产生冲突时进行再散列，即为那些哈希地址位置已被其他记录占用的记录安排另外的存储位置。因此在建哈希表的时候，不但要设定一个哈希函数，还要设定一个处理冲突的方法。<br><strong>哈希表：</strong> 哈希表是根据设定的哈希函数和处理冲突的方法为一组数据元素建立的一种存储结构。哈希函数又称散列函数，构造哈希表的方法又称散列技术。<br><strong>装填系数：</strong> 假设哈希表的空间大小为m，在表中填入的数据元素数为n，定义a=n/m为哈希表的装填系数，实际应用时，常取a为0.65~0.85.<br><strong>构造哈希函数的方法：</strong><br>（1）除留余数法：取关键字被某个不大于哈希表表长m的数p除后所得余数为哈希地址，即设定哈希函数为Hash(key)=key mod p (p&lt;=m)。通常取p为不大于表长且最接近表长m的素数。如当哈希表表长为1000，可取p=977。<br>（2）平方取中法：取关键字平方后的中间几位为哈希地址，因为一个数的平方值的中间几位和这个数的每一位都相关，则对不同的关键字得到的哈希函数值不易产生冲突。若哈希表表长为1000，则可取关键字平方值的中间3位。比如关键字为1234，那么1234²=1522756，可取227作为地址。<br>（3）折叠法：将关键字分割成位数相同的几部分（最后一部分位数可以不同），然后取这几部分的叠加和（舍去进位）作为哈希地址。当关键字的位数很多且每一位的值都随机出现时，采用这种方法可得到冲突较少的哈希地址。<br>a. 移位叠加：将分割后的每一部分的最低位对齐，然后相加。如key=123456789，H(key)=123+456+789=1368。<br>b. 间界叠加：从一端向另一端沿分割界来回折叠，然后对齐相加。如key=123456789，H(key)=123+654+789=1566。<br><strong>处理冲突的方法：</strong><br>（1）开放地址法<br>从哈希函数求得一个地址序列H[1],H[2],…,H[k]，即哈希表中下标为H[1]，H[2]，H[k-1]的存储空间都已有记录，直至下标H[k]为空（若哈希表不满，必能找到k&lt;=m-1）。即 H[i]=(Hash(key)+d[i]) mod m , Hash(key)为哈希函数，m为哈希表的表长，d[i]为增量序列。<br>增量序列的取法有下列三种：<br>a. d[i]=1,2,3,…,m-1,称为线性探测再散列。这种取法最简单，只要哈希表没填满就总能找到一个空的位置，但容易对之后填入的记录增加冲突。<br>b. d[i]=1², -1², 2², -2²,…,k²,-k²（k&lt;=m/2），称为二次探测再散列。这种取法要求表长m必须是形如4j+3(j=1,2,…)的素数，如7,11,19,23,…等。<br>c. d[i]是一个伪随机序列，称为随机探测再散列。用这种取法时需选择一个伪随机函数产生伪随机数列，且在建表装填和查找时应使用同一个伪随机函数来生成伪随机数列。<br>（2）链地址法<br>将所有key对应的Hash(key)相同的记录存储在同一线性链表中，而哈希表中下标为i的空间存储哈希函数值为i的链表头指针。<br><img src="/images/search_al/linkarr.jpeg"><br><strong>算法流程：</strong> 哈希表的查找过程和建表过程一致，以开放地址处理冲突线性探测再散列为例。假设哈希函数为Hash(x)，则查找过程为：对给定值kval，求得哈希地址为j=Hash(kval)，若哈希表中下标为j的空间为空，则查找不成功，可将关键字等于kval的记录填入；若表中该空间不空且所填记录的关键字等于kval，则查找成功，否则按建表时设定的散列方法重复计算处理冲突后的各个地址，直至表中相应空间为空或者所填记录的关键字等于kval，前者表示查找不成功，后者查找成功。<br><strong>C++描述：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> NULLKEY=<span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>&#123;</div><div class="line">	ElemType *elem;</div><div class="line">	<span class="keyword">int</span> count;</div><div class="line">&#125; HashTable;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hash</span><span class="params">(<span class="keyword">int</span> kval)</span></span>&#123;   <span class="comment">//除留余数法</span></div><div class="line">	<span class="keyword">return</span> kval%NUM;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Next</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> &amp;c)</span></span>&#123;   <span class="comment">//线性探测再散列</span></div><div class="line">	p=(p+<span class="number">1</span>)%LENGTH;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">HashSearch</span><span class="params">(HashTable H, KeyType kval,<span class="keyword">int</span> &amp;p,<span class="keyword">int</span> &amp;c)</span></span>&#123;</div><div class="line">	<span class="comment">//在开放定址哈希表H中查找关键码为kval的元素，</span></div><div class="line">	<span class="comment">//若查找成功，以p指示待查记录在表中位置,并返回p；否则，以p指示插入位置，并返回-1；</span></div><div class="line">	<span class="comment">//以c计算冲突次数，其初值置0，供建表插入时参考</span></div><div class="line">	p=Hash(kval);   <span class="comment">//求得哈希地址</span></div><div class="line">	<span class="keyword">while</span> (H.elem[p].key != NULLKEY &amp;&amp; (H.elem[p].key != kval))&#123; <span class="comment">//位置中有记录且不等于kval，即有冲突</span></div><div class="line">		Next(p,++c);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(H.elem[p].key==kval)&#123;</div><div class="line">		<span class="keyword">return</span> p;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">InsertHash</span><span class="params">(HashTable &amp;H,ElemType e)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> c=<span class="number">0</span>,j=<span class="number">0</span>;</div><div class="line">	<span class="keyword">if</span>(HashSearch(H,e.key,j,c)!=<span class="number">-1</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		H.elem[j]=e;</div><div class="line">		++H.count;</div><div class="line">		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>未完待续~</p>
-</div></header></article><section class="reward"> <a href="#" class="btn-reward">打赏</a><div class="reward-wrapper clearfix"><img src="/img/wechat.png"></div></section><div class="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript></div></div></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016-2017 Rose Ou</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2017/05/09/迷宫生成与求解/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2016/07/07/formhtml/" class="page-menu__link icon-arrow-right"></a></li></menu></footer><script>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],j.src="//"+l+".disqus.com/"+k+".js",i.parentNode.insertBefore(j,i)})(document,"script","ochukai","embed");
-</script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-ga('create','UA-73840162-1');
-ga('send','pageview');
-</script><script src="/js/scroller.js"></script><script src="/js/main.js"></script></body></html>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2017/04/28/查找算法/" data-title="查找算法总结 | RoseOu&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/05/09/迷宫生成与求解/" title="迷宫生成与求解">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  迷宫生成与求解</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/07/formhtml/"  title="Flask学习教程 Part1 4.2:表单处理">
+ <strong>NEXT:</strong><br/> 
+ <span>Flask学习教程 Part1 4.2:表单处理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、查找算法的相关概念"><span class="toc-number">1.</span> <span class="toc-text">一、查找算法的相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、六种查找算法"><span class="toc-number">2.</span> <span class="toc-text">二、六种查找算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-顺序查找"><span class="toc-number">2.1.</span> <span class="toc-text">1.顺序查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-折半查找"><span class="toc-number">2.2.</span> <span class="toc-text">2.折半查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-分块查找"><span class="toc-number">2.3.</span> <span class="toc-text">3.分块查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-插值查找"><span class="toc-number">2.4.</span> <span class="toc-text">4.插值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-二叉树查找"><span class="toc-number">2.5.</span> <span class="toc-text">5.二叉树查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-哈希查找"><span class="toc-number">2.6.</span> <span class="toc-text">6.哈希查找</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="Rose Ou">Rose Ou</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

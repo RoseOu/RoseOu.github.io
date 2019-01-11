@@ -1,4 +1,94 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="google-site-verification" content="-zz_UiN3Z6szo1tjCMg8H66_XeAH2-dL2KLimiLJ0Ak"><meta name="author" content="Rose Ou"><meta name="description" conauthortent="Fighting!"><link rel="alternative" href="/atom.xml" title="RoseOu's blog" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Flask学习教程 Part1 4.2:表单处理 - RoseOu's blog</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--><script src="/js/jquery-3.1.1.min.js"></script><!-- Hotjar Tracking Code for ochukai.me --></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">RoseOu's blog</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/archives" class="head-nav__link">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head">  <time datetime="2016-07-07T08:05:55.000Z" class="post__time">七月 7, 2016</time><h1 class="post__title"><a href="/2016/07/07/formhtml/">Flask学习教程 Part1 4.2:表单处理</a></h1><div class="post__main echo"><h2 id="表单渲染"><a href="#表单渲染" class="headerlink" title="表单渲染"></a>表单渲染</h2><p>在上一节中，我们定义了一个Web表单了，那么现在我们就来将这个表单渲染成HTML，在模板中生成出来看看。</p>
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Flask学习教程 Part1 4.2:表单处理 | RoseOu&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Rose Ou">
+    
+    <meta name="description" content="表单渲染在上一节中，我们定义了一个Web表单了，那么现在我们就来将这个表单渲染成HTML，在模板中生成出来看看。
+修改index.html如下：12345678910&amp;#123;% block page_content %&amp;#125;&amp;lt;div class=&quot;page-header&quot;&amp;gt;  ">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="RoseOu&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="RoseOu&#39;s blog" title="RoseOu&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="RoseOu&#39;s blog">RoseOu&#39;s blog</a></h1>
+				<h2 class="blog-motto">Work hard!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/07/formhtml/" title="Flask学习教程 Part1 4.2:表单处理" itemprop="url">Flask学习教程 Part1 4.2:表单处理</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Rose Ou">Rose Ou</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-07-07T08:05:55.000Z" itemprop="datePublished">2016-07-07</time>
+    更新日期:<time datetime="2016-07-07T15:35:37.000Z" itemprop="dateModified">2016-07-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#表单渲染"><span class="toc-number">1.</span> <span class="toc-text">表单渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在视图函数中处理表单"><span class="toc-number">2.</span> <span class="toc-text">在视图函数中处理表单</span></a></li></ol>
+		</div>
+		
+		<h2 id="表单渲染"><a href="#表单渲染" class="headerlink" title="表单渲染"></a>表单渲染</h2><p>在上一节中，我们定义了一个Web表单了，那么现在我们就来将这个表单渲染成HTML，在模板中生成出来看看。</p>
 <p>修改index.html如下：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">block</span></span> page_content %&#125;</span><span class="xml"></span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, <span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> name %&#125;</span><span class="xml"></span><span class="template-variable">&#123;&#123; name &#125;&#125;</span><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span><span class="xml">Stranger</span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></div><div class="line">    <span class="template-variable">&#123;&#123; form.hidden_tag() &#125;&#125;</span><span class="xml"></span></div><div class="line">    <span class="template-variable">&#123;&#123; form.name.label &#125;&#125;</span><span class="xml"> </span><span class="template-variable">&#123;&#123; form.name() &#125;&#125;</span><span class="xml"></span></div><div class="line">    <span class="template-variable">&#123;&#123; form.submit() &#125;&#125;</span><span class="xml"></span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endblock</span></span> %&#125;</span><span class="xml"></span></div></pre></td></tr></table></figure></p>
 <p>1.首先修改了主页头部所显示的欢迎消息，当我们给name传入值时，就把这个值传入并返回出来，当我们没有给name传入值，就返回Hello，Stranger！<br>2.这里设置了一个参数form，NameForm表单类的实例将会通过这个参数传入模板，从而在模板中生成这个表单。<br>3.method=”POST”说明提交表单使用的是POST方法。<br>4.hidden_tag()是Form类中的一个方法，它在一个隐藏的DIV标签中渲染任何隐藏的字段（包括CSRF字段）。<br>5.form.name.label表示调用所传入的表单实例中name字段的第一个参数值字符串。如果我们传入了NameForm表单类的实例，这里就会显示”What is your name?”。<br>6.form.name()表示调用所传入的表单实例中的name字段。如果我们传入了NameForm表单类的实例，这里就会显示一个输入文本框。<br>7.form.submit()表示调用所传入的表单实例中的submit字段。如果我们传入了NameForm表单类的实例，这里就会显示一个提交按钮，用来提交表单。</p>
 <p>这样子，就能把表单渲染出来了。但是要成功显示表单，还需要修改视图函数。</p>
@@ -9,9 +99,202 @@
 <p>这是用户首次访问网站是浏览器所显示的表单。当用户在表单中输入名字rose，并按Submit按钮提交表单，就可看到：<br><img src="/images/form1.jpg"><br>这时就显示了一个针对用户rose的欢迎消息。</p>
 <p>而如果我们没有输入名字就直接按提交按钮，将会重新渲染表单。</p>
 <p>Last：<br>Next：</p>
-</div></header></article><section class="reward"> <a href="#" class="btn-reward">打赏</a><div class="reward-wrapper clearfix"><img src="/img/wechat.png"></div></section><div class="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript></div></div></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016-2017 Rose Ou</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2017/04/28/查找算法/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2016/06/20/form/" class="page-menu__link icon-arrow-right"></a></li></menu></footer><script>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],j.src="//"+l+".disqus.com/"+k+".js",i.parentNode.insertBefore(j,i)})(document,"script","ochukai","embed");
-</script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-ga('create','UA-73840162-1');
-ga('send','pageview');
-</script><script src="/js/scroller.js"></script><script src="/js/main.js"></script></body></html>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/07/07/formhtml/" data-title="Flask学习教程 Part1 4.2:表单处理 | RoseOu&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/28/查找算法/" title="查找算法总结">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  查找算法总结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/06/20/form/"  title="Flask学习教程 Part1 4.1:表单和表单类">
+ <strong>NEXT:</strong><br/> 
+ <span>Flask学习教程 Part1 4.1:表单和表单类
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#表单渲染"><span class="toc-number">1.</span> <span class="toc-text">表单渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在视图函数中处理表单"><span class="toc-number">2.</span> <span class="toc-text">在视图函数中处理表单</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="Rose Ou">Rose Ou</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

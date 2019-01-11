@@ -1,4 +1,97 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="google-site-verification" content="-zz_UiN3Z6szo1tjCMg8H66_XeAH2-dL2KLimiLJ0Ak"><meta name="author" content="Rose Ou"><meta name="description" conauthortent="Fighting!"><link rel="alternative" href="/atom.xml" title="RoseOu's blog" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>python 魔法方法 - RoseOu's blog</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--><script src="/js/jquery-3.1.1.min.js"></script><!-- Hotjar Tracking Code for ochukai.me --></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">RoseOu's blog</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/archives" class="head-nav__link">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head">  <time datetime="2015-12-08T16:08:12.000Z" class="post__time">十二月 9, 2015</time><h1 class="post__title"><a href="/2015/12/09/python-魔法方法/">python 魔法方法</a></h1><div class="post__main echo"><p><strong>魔法方法即前后各加两个下划线的名字组成的集合所包含的方法。（如果对象实现了魔法方法中的某一个，那么这个方法会在特殊的情况下被调用） </strong></p>
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python 魔法方法 | RoseOu&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Rose Ou">
+    
+    <meta name="description" content="魔法方法即前后各加两个下划线的名字组成的集合所包含的方法。（如果对象实现了魔法方法中的某一个，那么这个方法会在特殊的情况下被调用） 
+
+
+一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。
+二、构造和初始">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="RoseOu&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="RoseOu&#39;s blog" title="RoseOu&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="RoseOu&#39;s blog">RoseOu&#39;s blog</a></h1>
+				<h2 class="blog-motto">Work hard!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/09/python-魔法方法/" title="python 魔法方法" itemprop="url">python 魔法方法</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Rose Ou">Rose Ou</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-12-08T16:08:12.000Z" itemprop="datePublished">2015-12-09</time>
+    更新日期:<time datetime="2016-04-27T13:23:32.000Z" itemprop="dateModified">2016-04-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。"><span class="toc-number">1.</span> <span class="toc-text">一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、构造和初始化"><span class="toc-number">2.</span> <span class="toc-text">二、构造和初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、用于比较的魔术方法"><span class="toc-number">3.</span> <span class="toc-text">三、用于比较的魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、数值处理的魔术方法"><span class="toc-number">4.</span> <span class="toc-text">四、数值处理的魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、普通算数操作符"><span class="toc-number">5.</span> <span class="toc-text">五、普通算数操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、反射算术操作符"><span class="toc-number">6.</span> <span class="toc-text">六、反射算术操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、增量赋值"><span class="toc-number">7.</span> <span class="toc-text">七、增量赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、类型转换"><span class="toc-number">8.</span> <span class="toc-text">八、类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、描述类"><span class="toc-number">9.</span> <span class="toc-text">九、描述类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、属性访问控制"><span class="toc-number">10.</span> <span class="toc-text">十、属性访问控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十一、隐藏在容器背后的魔法"><span class="toc-number">11.</span> <span class="toc-text">十一、隐藏在容器背后的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十二、反射"><span class="toc-number">12.</span> <span class="toc-text">十二、反射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十三、可调用对象"><span class="toc-number">13.</span> <span class="toc-text">十三、可调用对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十四、构建描述符对象"><span class="toc-number">14.</span> <span class="toc-text">十四、构建描述符对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十五、Pickling自定义的对象"><span class="toc-number">15.</span> <span class="toc-text">十五、Pickling自定义的对象</span></a></li></ol>
+		</div>
+		
+		<p><strong>魔法方法即前后各加两个下划线的名字组成的集合所包含的方法。（如果对象实现了魔法方法中的某一个，那么这个方法会在特殊的情况下被调用） </strong></p>
 <hr>
 <hr>
 <h3 id="一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。"><a href="#一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。" class="headerlink" title="一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。"></a>一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。</h3><hr>
@@ -61,9 +154,202 @@
 <h3 id="十五、Pickling自定义的对象"><a href="#十五、Pickling自定义的对象" class="headerlink" title="十五、Pickling自定义的对象"></a>十五、Pickling自定义的对象</h3><blockquote>
 <p>__getinitargs__(self)：当类unpickled时调用__init__，可以定义__getinitargs__，该方法返回一个元组的参数，然后传递给__init__。（旧式类）<br>__getnewargs__(self)：进行unpickling时将参数传递到__new__。该方法返回一个元组参数，然后能传递给__new__。 （新式类）<br>__getstate__(self)：代替对象的__dict__属性被保存。<br>__setstate__(self, state)：对象unpickled时，如果__setstate__定义对象状态会传递来代替直接用对象的__dict__属性。</p>
 </blockquote>
-</div></header></article><section class="reward"> <a href="#" class="btn-reward">打赏</a><div class="reward-wrapper clearfix"><img src="/img/wechat.png"></div></section><div class="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript></div></div></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016-2017 Rose Ou</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2016/02/24/RESTful-API小结/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2015/11/30/python 模块与包/" class="page-menu__link icon-arrow-right"></a></li></menu></footer><script>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],j.src="//"+l+".disqus.com/"+k+".js",i.parentNode.insertBefore(j,i)})(document,"script","ochukai","embed");
-</script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-ga('create','UA-73840162-1');
-ga('send','pageview');
-</script><script src="/js/scroller.js"></script><script src="/js/main.js"></script></body></html>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/12/09/python-魔法方法/" data-title="python 魔法方法 | RoseOu&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/24/RESTful-API小结/" title="RESTful API 小结">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  RESTful API 小结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/30/python 模块与包/"  title="python 模块与包">
+ <strong>NEXT:</strong><br/> 
+ <span>python 模块与包
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、为确保类是新型的，模块最开始要输入赋值语句-metaclass-type，或者直接或间接地子类化内建类object（或其他一些新式类）。"><span class="toc-number">1.</span> <span class="toc-text">一、为确保类是新型的，模块最开始要输入赋值语句__metaclass__=type，或者直接或间接地子类化内建类object（或其他一些新式类）。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、构造和初始化"><span class="toc-number">2.</span> <span class="toc-text">二、构造和初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、用于比较的魔术方法"><span class="toc-number">3.</span> <span class="toc-text">三、用于比较的魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、数值处理的魔术方法"><span class="toc-number">4.</span> <span class="toc-text">四、数值处理的魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、普通算数操作符"><span class="toc-number">5.</span> <span class="toc-text">五、普通算数操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、反射算术操作符"><span class="toc-number">6.</span> <span class="toc-text">六、反射算术操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、增量赋值"><span class="toc-number">7.</span> <span class="toc-text">七、增量赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、类型转换"><span class="toc-number">8.</span> <span class="toc-text">八、类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、描述类"><span class="toc-number">9.</span> <span class="toc-text">九、描述类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、属性访问控制"><span class="toc-number">10.</span> <span class="toc-text">十、属性访问控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十一、隐藏在容器背后的魔法"><span class="toc-number">11.</span> <span class="toc-text">十一、隐藏在容器背后的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十二、反射"><span class="toc-number">12.</span> <span class="toc-text">十二、反射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十三、可调用对象"><span class="toc-number">13.</span> <span class="toc-text">十三、可调用对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十四、构建描述符对象"><span class="toc-number">14.</span> <span class="toc-text">十四、构建描述符对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十五、Pickling自定义的对象"><span class="toc-number">15.</span> <span class="toc-text">十五、Pickling自定义的对象</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="Rose Ou">Rose Ou</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

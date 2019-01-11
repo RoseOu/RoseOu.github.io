@@ -1,4 +1,95 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="google-site-verification" content="-zz_UiN3Z6szo1tjCMg8H66_XeAH2-dL2KLimiLJ0Ak"><meta name="author" content="Rose Ou"><meta name="description" conauthortent="Fighting!"><link rel="alternative" href="/atom.xml" title="RoseOu's blog" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>python 数据结构类型总结 - RoseOu's blog</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--><script src="/js/jquery-3.1.1.min.js"></script><!-- Hotjar Tracking Code for ochukai.me --></head><body style="opacity:0"><header class="head"><h1 class="head-title u-fl"><a href="/">RoseOu's blog</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/archives" class="head-nav__link">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head">  <time datetime="2015-11-04T17:09:12.000Z" class="post__time">十一月 5, 2015</time><h1 class="post__title"><a href="/2015/11/05/python数据类型结构总结/">python 数据结构类型总结</a></h1><div class="post__main echo"><h3 id="字符串："><a href="#字符串：" class="headerlink" title="字符串："></a>字符串：</h3><p>1.用引号来创建字符串,单双引号都可(三引号也可：三引号可以复制复杂的字符串,三引号内一个字符串可占多行,字符串中可包含换行符、制表符和其他特殊字符)。<br>eg.  </p>
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python 数据结构类型总结 | RoseOu&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Rose Ou">
+    
+    <meta name="description" content="字符串：1.用引号来创建字符串,单双引号都可(三引号也可：三引号可以复制复杂的字符串,三引号内一个字符串可占多行,字符串中可包含换行符、制表符和其他特殊字符)。eg.  
+&amp;gt;&amp;gt;&amp;gt;var1 = &amp;apos;Hello!&amp;apos;\n\r  
+&amp;gt;&amp;gt;&amp;gt;var2 = &amp;">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="RoseOu&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="RoseOu&#39;s blog" title="RoseOu&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="RoseOu&#39;s blog">RoseOu&#39;s blog</a></h1>
+				<h2 class="blog-motto">Work hard!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/05/python数据类型结构总结/" title="python 数据结构类型总结" itemprop="url">python 数据结构类型总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Rose Ou">Rose Ou</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-11-04T17:09:12.000Z" itemprop="datePublished">2015-11-05</time>
+    更新日期:<time datetime="2016-04-04T12:42:36.000Z" itemprop="dateModified">2016-04-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串："><span class="toc-number">1.</span> <span class="toc-text">字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表："><span class="toc-number">2.</span> <span class="toc-text">列表：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元祖："><span class="toc-number">3.</span> <span class="toc-text">元祖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典："><span class="toc-number">4.</span> <span class="toc-text">字典：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合："><span class="toc-number">5.</span> <span class="toc-text">集合：</span></a></li></ol>
+		</div>
+		
+		<h3 id="字符串："><a href="#字符串：" class="headerlink" title="字符串："></a>字符串：</h3><p>1.用引号来创建字符串,单双引号都可(三引号也可：三引号可以复制复杂的字符串,三引号内一个字符串可占多行,字符串中可包含换行符、制表符和其他特殊字符)。<br>eg.  </p>
 <pre><code>&gt;&gt;&gt;var1 = &apos;Hello!&apos;\n\r  
 &gt;&gt;&gt;var2 = &quot;Hi!&quot;
 </code></pre><p>2.不支持单字符类型,单字符作为一个字符串使用。<br>3.访问字符串的值,用方括号来截取字符串,通过索引获取字符,索引从0开始。<br>eg.</p>
@@ -38,9 +129,194 @@ list[1:3]:[2,3]
 &gt;&gt;&gt;t  
 set([&apos;H&apos;, &apos;e&apos;, &apos;l&apos;, &apos;o&apos;])  #只有一个l`
 </code></pre><p>3.集合分为可变集合和不可变集合.<br>(1)可变集合：可添加和删除元素,不能用作字典的键,也不能做其他集合的元素<br>(2)不可变集合：与可变集合相反<br>4.更新集合：s.add() ，s.update()，s.remove() （只有可变集合才能更新）<br>del:删除集合<br>5.集合类型操作:in和not in，集合等价与不等价(==, !=)，子集和超集，联合(|)，交集(&amp;)，查补(-)，对称差分(^)<br>6.集合的内建函数和方法</p>
-</div></header></article><section class="reward"> <a href="#" class="btn-reward">打赏</a><div class="reward-wrapper clearfix"><img src="/img/wechat.png"></div></section><div class="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript></div></div></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016-2017 Rose Ou</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2015/11/13/python 面向对象总结/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer><script>(function(h,g,l,k,j,i){j=h.createElement(g),i=h.getElementsByTagName(g)[0],j.src="//"+l+".disqus.com/"+k+".js",i.parentNode.insertBefore(j,i)})(document,"script","ochukai","embed");
-</script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-ga('create','UA-73840162-1');
-ga('send','pageview');
-</script><script src="/js/scroller.js"></script><script src="/js/main.js"></script></body></html>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/11/05/python数据类型结构总结/" data-title="python 数据结构类型总结 | RoseOu&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/13/python 面向对象总结/" title="理解 python 面向对象">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  理解 python 面向对象</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串："><span class="toc-number">1.</span> <span class="toc-text">字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表："><span class="toc-number">2.</span> <span class="toc-text">列表：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元祖："><span class="toc-number">3.</span> <span class="toc-text">元祖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典："><span class="toc-number">4.</span> <span class="toc-text">字典：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合："><span class="toc-number">5.</span> <span class="toc-text">集合：</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="Rose Ou">Rose Ou</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
