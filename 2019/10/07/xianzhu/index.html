@@ -1,0 +1,300 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  
+    <title>提取图像显著性区域 | RoseOu&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Rose Ou">
+    
+    <meta name="description" content="提取图像显著性区域实现的效果如下：  
+一、图像显著性检测这里使用的方法来自以下论文。[1] Zhu W, Liang S, Wei Y, et al. Saliency Optimization from Robust Background Detec- tion[C].//Computer Vi">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="RoseOu&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="RoseOu&#39;s blog" title="RoseOu&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="RoseOu&#39;s blog">RoseOu&#39;s blog</a></h1>
+				<h2 class="blog-motto">Work hard!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/10/07/xianzhu/" title="提取图像显著性区域" itemprop="url">提取图像显著性区域</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Rose Ou">Rose Ou</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-10-07T06:01:58.000Z" itemprop="datePublished">2019-10-07</time>
+    更新日期:<time datetime="2019-10-07T07:09:27.000Z" itemprop="dateModified">2019-10-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#提取图像显著性区域"><span class="toc-number">1.</span> <span class="toc-text">提取图像显著性区域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、图像显著性检测"><span class="toc-number">1.1.</span> <span class="toc-text">一、图像显著性检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、介绍"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、边界连接度"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、边界连接度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）定义"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）边界连接度公式计算"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">（2）边界连接度公式计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、背景加权对比度——使用边界连接度来改善对比度计算"><span class="toc-number">1.1.3.</span> <span class="toc-text">3、背景加权对比度——使用边界连接度来改善对比度计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、结果对比"><span class="toc-number">1.1.4.</span> <span class="toc-text">4、结果对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、关于论文的参考资料："><span class="toc-number">1.1.5.</span> <span class="toc-text">5、关于论文的参考资料：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、图像二值化"><span class="toc-number">1.2.</span> <span class="toc-text">二、图像二值化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、全局阈值（单阈值）"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、全局阈值（单阈值）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）最简单的方法"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">（1）最简单的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）双峰法"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">（2）双峰法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）迭代法"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">（3）迭代法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）otsu法（最大类间方差法-大律法）"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">（4）otsu法（最大类间方差法/大律法）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、自适应阈值（多阈值）"><span class="toc-number">1.2.2.</span> <span class="toc-text">2、自适应阈值（多阈值）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、几种方法的效果"><span class="toc-number">1.2.3.</span> <span class="toc-text">3、几种方法的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、关于图像二值化的参考资料："><span class="toc-number">1.2.4.</span> <span class="toc-text">4、关于图像二值化的参考资料：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、根据二值化后的图像得到显著性区域的包围矩形及其坐标"><span class="toc-number">1.3.</span> <span class="toc-text">三、根据二值化后的图像得到显著性区域的包围矩形及其坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、裁剪图像得到原图像的显著性区域"><span class="toc-number">1.4.</span> <span class="toc-text">四、裁剪图像得到原图像的显著性区域</span></a></li></ol></li></ol>
+		</div>
+		
+		<h1 id="提取图像显著性区域"><a href="#提取图像显著性区域" class="headerlink" title="提取图像显著性区域"></a>提取图像显著性区域</h1><p>实现的效果如下：<br><img src="/images/img/result.png" width="55%" height="55%/">  </p>
+<h2 id="一、图像显著性检测"><a href="#一、图像显著性检测" class="headerlink" title="一、图像显著性检测"></a>一、图像显著性检测</h2><p>这里使用的方法来自以下论文。<br>[1] Zhu W, Liang S, Wei Y, et al. Saliency Optimization from Robust Background Detec- tion[C].//Computer Vision and Pattern Recognition. Columbus, OH, USA:IEEE, 2014:2814- 2821</p>
+<h3 id="1、介绍"><a href="#1、介绍" class="headerlink" title="1、介绍"></a>1、介绍</h3><p>  在显著性检测中，利用背景先验进行检测是一种有效的方式，即认为图像边界是背景或者可以容易地连接到图像边界的图像块是背景。这样的方法很容易引入前景噪声，且当物体只稍微接触到边界时也可能被判定为背景。<br>  文中提出了一个新颖而可靠的背景判定方法：边界连接度。文中提出的判定表明，仅当图像块所属的区域与图像边界紧密连接时，图像块才是背景。<br>  这种方法描述了图像区域相对于图像边界的空间布局，且具有直观的几何解释，因此在图像内容变化方面是稳定的。   </p>
+<h3 id="2、边界连接度"><a href="#2、边界连接度" class="headerlink" title="2、边界连接度"></a>2、边界连接度</h3><h4 id="（1）定义"><a href="#（1）定义" class="headerlink" title="（1）定义"></a>（1）定义</h4><p>  从下图可以观察到，在空间布局上，目标区域与图像边界的连接要比背景区域与图像边界的连接少得多。图像由四个区域组成，从人类的感知来看，绿色区域明显是一个显著目标，因为它更大、更紧凑，而且只略微接触到图像边界。蓝色和白色区域显然是背景，因为它们明显地接触到图像边界。粉红色区域只略微地接触到图像边界，但由于它的大小也很小，看起来更像是一个部分裁剪的对象，因此不是一个显著目标。<br><img src="/images/img/eximg.png" width="45%" height="45%/"><br>  于是，文章提出了一种量化某个区域R与图像边界的连接程度的方法，称为边界连接度。它被定义为<br><img src="/images/img/bndcon.png"><br>   其中Bnd是图像边界块的集合，p是图像块。<br>   边界连接度有直观的几何解释：它是区域R在边界上图像块的周长与区域R的总周长或者说是区域R面积的平方根之比（图上就是区域R在边界上图像块的块数与区域R的总块数的平方根之比）。这里使用面积的平方根来实现比例不变性：在不同的图像补丁分辨率下，该测量保持稳定。如上图，对于背景区域，边界连接度通常较大，而对于目标区域，边界连接度通常较小。<br>   （之所以要取根号，我的理解为，如果图像分辨率不同，那么相应的图像块的面积大小也不同，这样可能会引起误差，比如图上的例子，3/49约等于0.06，34/192约等于0.18，这样看树的连接度低很多，但如果图像被放大了，他们的连接度差别将没那么明显，取根号可以有效防止图像放大带来的副作用。）   </p>
+<h4 id="（2）边界连接度公式计算"><a href="#（2）边界连接度公式计算" class="headerlink" title="（2）边界连接度公式计算"></a>（2）边界连接度公式计算</h4><p>  公式（1）中的定义虽然直观，但难以计算。因为图像分割本身是一个具有挑战性且尚未解决的问题。使用硬分割不仅涉及到算法、参数选择的难题，而且还会沿区域边界引入不希望出现的不连续伪影。<br>  文章指出，准确的硬图像分割是不必要的。文中提出了一种“软”方法，首先使用SLIC方法将图像抽象为一组组几乎规则的超像素块的集合。超级像素结果示例如下图（a）所示。<br><img src="/images/img/slic.png"><br>  然后，连接所有相邻的超像素块，将它们之间的权重dapp指定为它们的平均颜色在CIE-Lab颜色空间中的欧几里德距离，来构造一个无向加权图。(CIE-Lab是CIE的一个颜色系统，表色体系，可用于确定某个颜色的数值信息。)<br>  任意两个超像素块之间的测地线距离dgeo（p；q）定义为：在图上，两个超像素之间沿最短路径累积的权重dapp。（dgeo我理解为两个超像素块的颜色相似度或者说颜色相差度）。方便起见，定义dgeo（p；p）=0。（测地线，即曲面上两点间距离最短的线）<br><img src="/images/img/dgeo.png"><br>  定义每个超级像素块p所属区域的面积为<br><img src="/images/img/area.png"><br>  公式利用高斯权重函数将两个超像素块之间的距离（或者说相似度）映射到（0，1）之间，当两个超像素块更相似，则其映射的值更倾向于1。也就是，公式判断p与每一个pi的相似度，然后将每一个相似度相加，最后就是p所属区域的面积。<br>  同样地，把p所属区域的触碰到图像边界的超像素块的长度定义为<br><img src="/images/img/lenbnd.png"><br>  其中，超像素块若在图像边界上，为1，否则为0。<br>  （这里的长度实际上也是面积，因为是像素块。这里的p应为图像块碰到边界的）<br>  最后，以类似于式（1）来计算边界连接性<br><img src="/images/img/bndcon1.png">   </p>
+<h3 id="3、背景加权对比度——使用边界连接度来改善对比度计算"><a href="#3、背景加权对比度——使用边界连接度来改善对比度计算" class="headerlink" title="3、背景加权对比度——使用边界连接度来改善对比度计算"></a>3、背景加权对比度——使用边界连接度来改善对比度计算</h3><p>  通常，传统的对比度计算为：某像素与所有其他像素的外观距离（即之前说过的相似度）乘以空间距离之和，即<br><img src="/images/img/ctr.png"><br>  其中，<img src="/images/img/wspa.png">。dspa（p,pi）是超像素块p和pi的中心之间的空间距离。<br>  文章引入背景概率wbgi作为一个新的加权项来扩展式（6）。使用超像素块pi的边界连通度来值映射出概率wbgi。当边界连接性较大时，它接近于1；当边界连接性较小时，它接近于0。定义是<br><img src="/images/img/wbgi.png"><br>  增强的对比度，称为背景加权对比度，定义为<br><img src="/images/img/wctr.png">   </p>
+<h3 id="4、结果对比"><a href="#4、结果对比" class="headerlink" title="4、结果对比"></a>4、结果对比</h3><p>  文章将其他论文的算法与本文的算法进行对比，包括SF、MR、GS算法。<br><img src="/images/img/xianzhu.png" width="75%" height="75%/"> </p>
+<p>以上，为论文中的显著性检测的算法。<br>下载了论文的代码，发现它是MATLAB和CPP混编的，而且代码比较久远，其中有许多问题，我一个个debug，最后还是跑了起来，最后得到的结果。<br>得到经过图像显著性检测的灰度图以后，需要进行图像二值化。 </p>
+<h3 id="5、关于论文的参考资料："><a href="#5、关于论文的参考资料：" class="headerlink" title="5、关于论文的参考资料："></a>5、关于论文的参考资料：</h3><p><a href="https://blog.csdn.net/yxz3024/article/details/79913449" target="_blank" rel="noopener">https://blog.csdn.net/yxz3024/article/details/79913449</a><br><a href="https://blog.csdn.net/dayenglish/article/details/51275128#commentsedit" target="_blank" rel="noopener">https://blog.csdn.net/dayenglish/article/details/51275128#commentsedit</a><br><a href="https://www.cnblogs.com/ariel-dreamland/p/9282905.html" target="_blank" rel="noopener">https://www.cnblogs.com/ariel-dreamland/p/9282905.html</a><br><a href="https://blog.csdn.net/zhangwenjuan1995/article/details/95043177" target="_blank" rel="noopener">https://blog.csdn.net/zhangwenjuan1995/article/details/95043177</a>     </p>
+<h2 id="二、图像二值化"><a href="#二、图像二值化" class="headerlink" title="二、图像二值化"></a>二、图像二值化</h2><p>图像的二值化，就是将图像上的像素点的灰度值设置为0或255，使整个图像呈现出只有黑色和白色的视觉效果。我们可以通过设置一个阈值，判断图像的像素点的灰度值大于阈值还是小于阈值，从而判断将其设置为255还是0。那么这个阈值的设置就尤为重要。   </p>
+<h3 id="1、全局阈值（单阈值）"><a href="#1、全局阈值（单阈值）" class="headerlink" title="1、全局阈值（单阈值）"></a>1、全局阈值（单阈值）</h3><h4 id="（1）最简单的方法"><a href="#（1）最简单的方法" class="headerlink" title="（1）最简单的方法"></a>（1）最简单的方法</h4><p>原理：将阈值设置为127，如果像素点的灰度值小于127，则将其灰度值设置为0，如果像素点的灰度值大于127，则将其灰度值设置为255。<br>优点：简单，计算量少速度快。<br>缺点：首先阈值为127没有任何理由可以解释，其次完全不考虑图像的像素分布情况与像素值特征，可能导致部分对象像素或者背景像素丢失。<br>改进：可将阈值改为所有像素点的灰度值的平均值。   </p>
+<h4 id="（2）双峰法"><a href="#（2）双峰法" class="headerlink" title="（2）双峰法"></a>（2）双峰法</h4><p>原理：把图像看作由前景和背景组成，在灰度直方图上，前景和背景都形成一个高峰，在双峰之间的最低谷处就是图像的阈值所在。假如一张图像的直方图如下所示：<br><img src="/images/img/histogram.png" width="55%" height="55%/"><br>从图中我们可以看到有两个顶峰，将顶峰记为H1和H2，他们对应的灰度值分别为T1和T2，那么双峰法的思想就是要找到图像两个顶峰之间的最低值作为阈值。简单来说就是，在一张图像中，灰度值为T1和T2的像素点是最多的，在[T1,T2]的灰度值范围之间，像素点最少的灰度值，就是阈值。<br>优点：该方法适用于直方图有两个顶峰的图像，即背景与前景颜色差别较大的图像。<br>缺点：不适合直方图曲线平坦或者只有一个顶峰的图像。    </p>
+<h4 id="（3）迭代法"><a href="#（3）迭代法" class="headerlink" title="（3）迭代法"></a>（3）迭代法</h4><p>原理：首先初始化一个阈值T0，然后按照某种策略通过迭代不断更新这一阈值，直到满足给定的约束条件为止。通过迭代方法选择阈值的计算方法如下：<br>（1）选择图像所有像素点的灰度值的平均值作为初始阈值T0。<br>（2）对于灰度值小于等于T0的像素点，计算出他们的灰度值的平均值T1；对于灰度值大于T0的像素点，计算出他们的灰度值的平均值T2。<br>（3）新的阈值为T=（T1+T2）/2。<br>（4）比较T和T0，若相等，则返回T，T即为迭代法得到的阈值; 否则设T0=T，重复步骤（1）~（3），直至T和T0相等。<br>优点：用迭代法所获得的阈值进行二值化的图象效果良好，因为基于迭代的阈值能区分出图像的前景和背景的主要区域所在。<br>缺点：但在图像的细微处（即图像的浅色线条）还没有很好的区分度。而对于某些特定图象，微小数据的变化却会引起分割效果的巨大改变。   </p>
+<h4 id="（4）otsu法（最大类间方差法-大律法）"><a href="#（4）otsu法（最大类间方差法-大律法）" class="headerlink" title="（4）otsu法（最大类间方差法/大律法）"></a>（4）otsu法（最大类间方差法/大律法）</h4><p>原理：用阈值将原图像分成前景、背景两类，当取最佳阈值时，背景应该与前景差别最大，在otsu算法中衡量差别的标准就是最大类间方差。基本思想是，从0到255循环选取灰度t作为阈值，根据阈值把图像分为两类，然后计算两类之间的方差，使类间方差达到最大时的阈值，即为所求最佳阈值。<br>otsu的公式推导：记t为前景与背景的分割阈值，前景点数占图像比例为w0，平均灰度为u0；背景点数占图像比例为w1，平均灰度为u1。<br>则图像的总平均灰度为：u=w0*u0+w1*u1。<br>前景和背景图象的方差：g=w0*(u0-u)*(u0-u)+w1*(u1-u)*(u1-u)=w0*w1*(u0-u1)*(u0-u1),此公式为方差公式。<br>当方差g最大时，可以认为此时前景和背景差异最大，此时选取的灰度t是最佳阈值。<br>优点：类间方差法对噪音和目标大小十分敏感，它仅对类间方差为单峰的图像产生较好的分割效果。<br>缺点：当目标与背景的大小比例悬殊时（例如受光照不均、反光或背景复杂等因素影响），类间方差准则函数可能呈现双峰或多峰，此时效果不好，但是类间方差法是用时最少的。    </p>
+<h3 id="2、自适应阈值（多阈值）"><a href="#2、自适应阈值（多阈值）" class="headerlink" title="2、自适应阈值（多阈值）"></a>2、自适应阈值（多阈值）</h3><p>上面所有选取阈值的方法，都是对图像上的每个像素使用相等的阈值。<br>但在实际情况中，当照明不均匀、有突发噪声或者背景变化较大时，对于整幅图像将没有合适的单一阈值，如果仍采用单一的阈值去处理每一个像素，可能会将目标和背景区域错误划分。<br>而自适应阈值，就是将图像中的每个像素设置可能不一样的阈值，根据像素的邻域块的像素值分布来确定该像素位置上的阈值。<br>基本原理：规定一个区域大小，对每个像素确定以其自身为中心的一个区域（即其邻域），计算区域内所有像素值的平均值（或者区域内最大和最小像素值的平均值，或者区域内内所有像素值的高斯卷积），将其作为该像素点的阈值。<br>优点：每个像素的阈值不是都一样的，而是由其周围邻域像素的分布来决定的。亮度较高的图像区域的阈值通常会较高，而亮度较低的图像区域的阈值则会相适应地变小。<br>缺点：计算较为复杂。   </p>
+<h3 id="3、几种方法的效果"><a href="#3、几种方法的效果" class="headerlink" title="3、几种方法的效果"></a>3、几种方法的效果</h3><p><img src="/images/img/yuzhi.png" width="75%" height="75%/">  </p>
+<h3 id="4、关于图像二值化的参考资料："><a href="#4、关于图像二值化的参考资料：" class="headerlink" title="4、关于图像二值化的参考资料："></a>4、关于图像二值化的参考资料：</h3><p><a href="https://blog.csdn.net/u011600592/article/details/75044250" target="_blank" rel="noopener">https://blog.csdn.net/u011600592/article/details/75044250</a><br><a href="https://baike.baidu.com/item/otsu/16252828" target="_blank" rel="noopener">https://baike.baidu.com/item/otsu/16252828</a><br><a href="https://blog.csdn.net/weixin_34163553/article/details/85991870" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34163553/article/details/85991870</a><br><a href="https://blog.csdn.net/qq_44262417/article/details/89283484" target="_blank" rel="noopener">https://blog.csdn.net/qq_44262417/article/details/89283484</a><br><a href="https://blog.csdn.net/wrightman/article/details/39204265" target="_blank" rel="noopener">https://blog.csdn.net/wrightman/article/details/39204265</a><br><a href="https://blog.csdn.net/zhu_hongji/article/details/80967776" target="_blank" rel="noopener">https://blog.csdn.net/zhu_hongji/article/details/80967776</a><br><a href="https://blog.csdn.net/u014737138/article/details/80379309" target="_blank" rel="noopener">https://blog.csdn.net/u014737138/article/details/80379309</a><br><a href="https://blog.csdn.net/whl970831/article/details/99706730" target="_blank" rel="noopener">https://blog.csdn.net/whl970831/article/details/99706730</a><br><a href="https://blog.csdn.net/fly108108/article/details/81104330#4%E3%80%81%C2%A0%E8%BF%AD%E4%BB%A3%E9%98%88%E5%80%BC%E5%88%86%E5%89%B2" target="_blank" rel="noopener">https://blog.csdn.net/fly108108/article/details/81104330#4%E3%80%81%C2%A0%E8%BF%AD%E4%BB%A3%E9%98%88%E5%80%BC%E5%88%86%E5%89%B2</a><br><a href="https://blog.csdn.net/cp32212116/article/details/44487913" target="_blank" rel="noopener">https://blog.csdn.net/cp32212116/article/details/44487913</a><br><a href="https://blog.csdn.net/bravebean/article/details/51374066" target="_blank" rel="noopener">https://blog.csdn.net/bravebean/article/details/51374066</a> </p>
+<h2 id="三、根据二值化后的图像得到显著性区域的包围矩形及其坐标"><a href="#三、根据二值化后的图像得到显著性区域的包围矩形及其坐标" class="headerlink" title="三、根据二值化后的图像得到显著性区域的包围矩形及其坐标"></a>三、根据二值化后的图像得到显著性区域的包围矩形及其坐标</h2><p>使用cv2.boundingRect()方法即可。<br>结果：<br><img src="/images/img/rect.png" width="75%" height="75%/"><br>资料：<br><a href="https://www.cnblogs.com/mrfri/p/8550328.html" target="_blank" rel="noopener">https://www.cnblogs.com/mrfri/p/8550328.html</a>   </p>
+<h2 id="四、裁剪图像得到原图像的显著性区域"><a href="#四、裁剪图像得到原图像的显著性区域" class="headerlink" title="四、裁剪图像得到原图像的显著性区域"></a>四、裁剪图像得到原图像的显著性区域</h2><p>根据获得的包围矩形坐标，利用矩形的索引即可。<br>结果：<br><img src="/images/img/cut.png" width="75%" height="75%/">     </p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/10/07/xianzhu/" data-title="提取图像显著性区域 | RoseOu&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/05/09/迷宫生成与求解/"  title="迷宫生成与求解">
+ <strong>NEXT:</strong><br/> 
+ <span>迷宫生成与求解
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#提取图像显著性区域"><span class="toc-number">1.</span> <span class="toc-text">提取图像显著性区域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、图像显著性检测"><span class="toc-number">1.1.</span> <span class="toc-text">一、图像显著性检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、介绍"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、边界连接度"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、边界连接度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）定义"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">（1）定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）边界连接度公式计算"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">（2）边界连接度公式计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、背景加权对比度——使用边界连接度来改善对比度计算"><span class="toc-number">1.1.3.</span> <span class="toc-text">3、背景加权对比度——使用边界连接度来改善对比度计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、结果对比"><span class="toc-number">1.1.4.</span> <span class="toc-text">4、结果对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、关于论文的参考资料："><span class="toc-number">1.1.5.</span> <span class="toc-text">5、关于论文的参考资料：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、图像二值化"><span class="toc-number">1.2.</span> <span class="toc-text">二、图像二值化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、全局阈值（单阈值）"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、全局阈值（单阈值）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）最简单的方法"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">（1）最简单的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）双峰法"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">（2）双峰法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）迭代法"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">（3）迭代法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）otsu法（最大类间方差法-大律法）"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">（4）otsu法（最大类间方差法/大律法）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、自适应阈值（多阈值）"><span class="toc-number">1.2.2.</span> <span class="toc-text">2、自适应阈值（多阈值）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、几种方法的效果"><span class="toc-number">1.2.3.</span> <span class="toc-text">3、几种方法的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、关于图像二值化的参考资料："><span class="toc-number">1.2.4.</span> <span class="toc-text">4、关于图像二值化的参考资料：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、根据二值化后的图像得到显著性区域的包围矩形及其坐标"><span class="toc-number">1.3.</span> <span class="toc-text">三、根据二值化后的图像得到显著性区域的包围矩形及其坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、裁剪图像得到原图像的显著性区域"><span class="toc-number">1.4.</span> <span class="toc-text">四、裁剪图像得到原图像的显著性区域</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="Rose Ou">Rose Ou</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
